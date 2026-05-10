@@ -82,11 +82,9 @@ body{background:var(--bg);color:var(--txt);font-family:"Noto Sans JP",sans-serif
 .btn-stop.on{display:block;}
 .judge-row{width:100%;max-width:680px;display:none;gap:10px;}
 .judge-row.on{display:flex;}
-.btn-ok{flex:1;padding:12px;border:none;border-radius:10px;font-family:"Bebas Neue",cursive;font-size:1.05rem;letter-spacing:2px;cursor:pointer;background:var(--grn);color:var(--bg);display:none;transition:transform .1s;}
-.btn-ok.on{display:block;}
+.btn-ok{flex:1;padding:18px 12px;border:none;border-radius:10px;font-family:"Bebas Neue",cursive;font-size:1.2rem;letter-spacing:2px;cursor:pointer;background:var(--grn);color:var(--bg);transition:transform .1s;}
 .btn-ok:hover{box-shadow:0 4px 14px rgba(64,208,128,.4);transform:translateY(-1px);}
-.btn-ng{flex:1;padding:12px;border:1px solid var(--red);border-radius:10px;font-family:"Bebas Neue",cursive;font-size:1.05rem;letter-spacing:2px;cursor:pointer;background:var(--sur);color:var(--red);display:none;transition:transform .1s;}
-.btn-ng.on{display:block;}
+.btn-ng{flex:1;padding:18px 12px;border:1px solid var(--red);border-radius:10px;font-family:"Bebas Neue",cursive;font-size:1.2rem;letter-spacing:2px;cursor:pointer;background:var(--sur);color:var(--red);transition:transform .1s;}
 .btn-ng:hover{box-shadow:0 4px 14px rgba(224,80,80,.25);transform:translateY(-1px);}
 .complete{display:none;flex-direction:column;align-items:center;justify-content:center;width:100%;max-width:680px;min-height:280px;text-align:center;}
 .complete.on{display:flex;}
@@ -142,17 +140,17 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
   <div class="stat rm"><div class="v" id="sRem">0</div><div class="l">REMAIN</div></div>
 </div>
 <div class="card-wrap" id="cardWrap">
-  <div class="card" id="mainCard">
+  <div class="card" id="mainCard" onclick="reveal()" style="cursor:pointer">
     <div class="c-tag" id="cTag">#1</div>
     <div class="c-sub" id="cSub"></div>
-    <button class="spk-j" onclick="spkJ()" title="日本語">🔊</button>
-    <div class="hint-lbl">🇯🇵 → 🇺🇸　瞬間英訳</div>
+    <button class="spk-j" onclick="event.stopPropagation();spkJ()" title="日本語">🔊</button>
+    <div class="hint-lbl">🇯🇵 → 🇺🇸　タップ or Space で答えを見る</div>
     <div class="jp" id="jpTxt"></div>
     <div class="en-wrap" id="enWrap"><div class="en" id="enTxt"></div></div>
-    <button class="spk-e" id="spkEBtn" onclick="spkE()" title="英語" style="display:none">🔊</button>
+    <button class="spk-e" id="spkEBtn" onclick="event.stopPropagation();spkE()" title="英語" style="display:none">🔊</button>
   </div>
 </div>
-<button class="btn-rev" id="btnRev" onclick="reveal()">▶ 答えを見る (Space)</button>
+<button class="btn-rev" id="btnRev" onclick="reveal()">▶ 答えを見る（カードをタップ / Space）</button>
 <button class="btn-stop" id="btnStop" onclick="stopAuto()">⏹ AUTO PLAY 停止</button>
 <div class="judge-row" id="judgeRow">
   <button class="btn-ok" id="btnOk" onclick="judge(true)">✓ 言えた！ (→)</button>
@@ -263,8 +261,6 @@ function selApp(app){
   document.getElementById('cardWrap').style.display='none';
   document.getElementById('btnRev').style.display='none';
   document.getElementById('judgeRow').className='judge-row';
-  document.getElementById('btnOk').className='btn-ok';
-  document.getElementById('btnNg').className='btn-ng';
   document.getElementById('complete').className='complete';
   document.getElementById('kbdRow').className='kbd-row';
   stopAuto(); renderGrid();
@@ -310,8 +306,6 @@ function startDeck(d){
   document.getElementById('btnRev').style.display='block';
   document.getElementById('btnStop').className='btn-stop';
   document.getElementById('judgeRow').className='judge-row';
-  document.getElementById('btnOk').className='btn-ok';
-  document.getElementById('btnNg').className='btn-ng';
   document.getElementById('complete').className='complete';
   document.getElementById('kbdRow').className='kbd-row on';
   renderGrid(); renderCard();
@@ -328,9 +322,9 @@ function renderCard(){
   document.getElementById('enWrap').className='en-wrap';
   document.getElementById('spkEBtn').style.display='none';
   document.getElementById('mainCard').className='card';
+  document.getElementById('mainCard').style.cursor='pointer';
   document.getElementById('btnRev').style.display=isAuto?'none':'block';
-  document.getElementById('btnOk').className='btn-ok';
-  document.getElementById('btnNg').className='btn-ng';
+  document.getElementById('judgeRow').className='judge-row';
   updStats();
 }
 function reveal(){
@@ -339,8 +333,8 @@ function reveal(){
   document.getElementById('enWrap').className='en-wrap on';
   document.getElementById('spkEBtn').style.display='block';
   document.getElementById('btnRev').style.display='none';
-  document.getElementById('btnOk').className='btn-ok on';
-  document.getElementById('btnNg').className='btn-ng on';
+  document.getElementById('judgeRow').className='judge-row on';
+  document.getElementById('mainCard').style.cursor='default';
   spkE();
 }
 function judge(ok){
@@ -366,8 +360,6 @@ function showComplete(){
   document.getElementById('cardWrap').style.display='none';
   document.getElementById('btnRev').style.display='none';
   document.getElementById('judgeRow').className='judge-row';
-  document.getElementById('btnOk').className='btn-ok';
-  document.getElementById('btnNg').className='btn-ng';
   document.getElementById('cScore').textContent=`正解 ${okCnt} / ${t}`;
   document.getElementById('cRate').textContent=rate+'%';
   document.getElementById('complete').className='complete on';
@@ -388,8 +380,7 @@ function retryWrong(){
   document.getElementById('complete').className='complete';
   document.getElementById('cardWrap').style.display='block';
   document.getElementById('btnRev').style.display='block';
-  document.getElementById('btnOk').className='btn-ok';
-  document.getElementById('btnNg').className='btn-ng';
+  document.getElementById('judgeRow').className='judge-row';
   renderCard();
 }
 
@@ -410,10 +401,10 @@ function clearCD(){clearInterval(cdTimer);document.getElementById('cdBar').style
 // AUTO PLAY
 function toggleAuto(){
   isAuto=document.getElementById('autoTgl').checked;
-  if(isAuto){document.getElementById('btnRev').style.display='none';document.getElementById('btnStop').className='btn-stop on';document.getElementById('btnOk').className='btn-ok';document.getElementById('btnNg').className='btn-ng';runAuto();}
+  if(isAuto){document.getElementById('btnRev').style.display='none';document.getElementById('btnStop').className='btn-stop on';document.getElementById('judgeRow').className='judge-row';runAuto();}
   else stopAuto();
 }
-function stopAuto(){isAuto=false;document.getElementById('autoTgl').checked=false;clearTimeout(aTimer);clearCD();SY.cancel();document.getElementById('btnStop').className='btn-stop';document.getElementById('autoSt').className='auto-status';if(deck.length&&idx<deck.length){if(!revealed)document.getElementById('btnRev').style.display='block';else{document.getElementById('btnOk').className='btn-ok on';document.getElementById('btnNg').className='btn-ng on';}}}
+function stopAuto(){isAuto=false;document.getElementById('autoTgl').checked=false;clearTimeout(aTimer);clearCD();SY.cancel();document.getElementById('btnStop').className='btn-stop';document.getElementById('autoSt').className='auto-status';if(deck.length&&idx<deck.length){if(!revealed)document.getElementById('btnRev').style.display='block';else{document.getElementById('judgeRow').className='judge-row on';}}}
 function runAuto(){
   if(!isAuto)return;
   if(idx>=deck.length){showComplete();return;}
