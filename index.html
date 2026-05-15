@@ -102,6 +102,17 @@ body{background:var(--bg);color:var(--txt);font-family:"Noto Sans JP",sans-serif
 .kbd-row.on{display:flex;}
 .ki{display:flex;align-items:center;gap:5px;font-family:"JetBrains Mono",monospace;font-size:.58rem;color:var(--dim);}
 kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:2px 5px;font-size:.58rem;}
+
+/* ② TIME BOMB */
+.bomb-row{display:flex;align-items:center;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid var(--bdr);flex-wrap:wrap;}
+.bomb-label{font-family:"JetBrains Mono",monospace;font-size:.6rem;color:var(--dim);}
+.bomb-timer-wrap{position:absolute;bottom:0;left:0;right:0;height:5px;background:var(--bdr);border-radius:0 0 16px 16px;overflow:hidden;display:none;}
+.bomb-timer-wrap.on{display:block;}
+.bomb-timer-bar{height:100%;width:100%;background:linear-gradient(90deg,var(--grn),var(--acc),var(--red));border-radius:0 0 16px 16px;transition:width .1s linear;}
+@keyframes bomb-flash{0%,100%{background:var(--card);}50%{background:rgba(224,80,80,0.4);}}
+.card.bomb-explode{animation:bomb-flash 0.12s ease 4;}
+/* ③ CONTRAST */
+.contrast-info{font-family:"JetBrains Mono",monospace;font-size:.58rem;color:var(--blu);margin-top:4px;}
 </style>
 </head>
 <body>
@@ -129,6 +140,37 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
     <div class="a-dot"></div><span class="a-txt" id="aTxt">AUTO PLAY 実行中</span>
     <div class="cd-wrap"><div class="cd-bar" id="cdBar" style="width:100%"></div></div>
   </div>
+
+<!-- FEATURE PANEL -->
+<div class="feat-panel" id="featPanel">
+  <div class="feat-hdr">
+    <span class="feat-lbl">⚡ ADVANCED FEATURES（Time Bomb / Contrast Play）</span>
+  </div>
+
+  <!-- ② TIME BOMB -->
+  <div style="border-top:1px solid var(--bdr);padding-top:10px;margin-bottom:10px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+      <span class="feat-lbl">💣 TIME BOMB MODE</span>
+      <label class="tgl"><input type="checkbox" id="bombTgl" onchange="toggleBomb()"><div class="tgl-track"></div><div class="tgl-thumb"></div></label>
+    </div>
+    <div class="bomb-row">
+      <span class="bomb-label">⏱️ 制限時間</span>
+      <div class="t-row" style="flex:1;">
+        <input type="range" id="bombSec" min="1" max="5" step=".5" value="2.5" oninput="updV('bombSec','bombSecVal','s')">
+        <span class="t-val" id="bombSecVal">2.5s</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ CONTRAST PLAY -->
+  <div style="border-top:1px solid var(--bdr);padding-top:10px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <span class="feat-lbl">⚡ CONTRAST PLAY（AUTO時: 1.5x→1.0x）</span>
+      <label class="tgl"><input type="checkbox" id="contrastTgl"><div class="tgl-track"></div><div class="tgl-thumb"></div></label>
+    </div>
+    <div class="contrast-info" id="contrastInfo" style="display:none;margin-top:6px;">🇺🇸 1.5倍速 → 1.0倍速で2回再生します</div>
+  </div>
+</div>
 </div>
 <div class="prog-wrap" id="progWrap">
   <div class="prog-info"><span>PROGRESS</span><span class="prog-num" id="pNum">1/0</span></div>
@@ -147,6 +189,7 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
     <div class="hint-lbl">🇯🇵 → 🇺🇸　タップ or Space で答えを見る</div>
     <div class="jp" id="jpTxt"></div>
     <div class="en-wrap" id="enWrap"><div class="en" id="enTxt"></div></div>
+    <div class="bomb-timer-wrap" id="bombWrap"><div class="bomb-timer-bar" id="bombBar"></div></div>
     <button class="spk-e" id="spkEBtn" onclick="event.stopPropagation();spkE()" title="英語" style="display:none">🔊</button>
   </div>
 </div>
@@ -308,6 +351,7 @@ function startDeck(d){
   clearCD();stopAllAudio();clearTimeout(aTimer);
   isAuto=false;document.getElementById('autoTgl').checked=false;
   document.getElementById('autoPanel').style.display='block';
+  document.getElementById('featPanel').className='feat-panel on';
   document.getElementById('progWrap').style.display='block';
   document.getElementById('statsRow').style.display='flex';
   document.getElementById('cardWrap').style.display='block';
@@ -322,6 +366,7 @@ function startDeck(d){
 function renderCard(){
   if(idx>=deck.length){showComplete();return;}
   revealed=false;
+  clearBomb();
   const c=deck[idx];
   document.getElementById('jpTxt').textContent=c.ja;
   document.getElementById('enTxt').textContent=c.en;
@@ -334,9 +379,12 @@ function renderCard(){
   document.getElementById('btnRev').style.display=isAuto?'none':'block';
   document.getElementById('judgeRow').className='judge-row';
   updStats();
+  // Time Bomb 起動（手動モードのみ）
+  if(bombOn&&!isAuto) startBomb();
 }
 function reveal(){
   if(revealed||isAuto)return;
+  clearBomb();
   revealed=true;
   document.getElementById('enWrap').className='en-wrap on';
   document.getElementById('spkEBtn').style.display='block';
@@ -361,7 +409,7 @@ function updStats(){
   document.getElementById('sRem').textContent=t-d;
 }
 function showComplete(){
-  window.speechSynthesis.cancel();clearTimeout(aTimer);clearCD();
+  window.speechSynthesis.cancel();clearTimeout(aTimer);clearCD();clearBomb();
   isAuto=false;document.getElementById('autoTgl').checked=false;
   document.getElementById('btnStop').className='btn-stop';
   const t=deck.length,rate=Math.round(okCnt/t*100);
@@ -395,12 +443,39 @@ function retryWrong(){
 // VOICE
 const SY=window.speechSynthesis;
 let vJ=null,vE=null;
-function loadV(){const v=SY.getVoices();vJ=v.find(x=>x.lang==='ja-JP')||v.find(x=>x.lang.startsWith('ja'));vE=v.find(x=>x.lang==='en-US')||v.find(x=>x.lang==='en-GB')||v.find(x=>x.lang.startsWith('en'));}
+function loadV(){
+  const v=SY.getVoices();
+  // 日本語：iOS高品質音声を優先（Kyoko=女性, Otoya=男性）
+  const jpPref=['Kyoko','Otoya','O-Ren','Hattori'];
+  vJ=v.find(x=>jpPref.some(n=>x.name.includes(n)))
+    ||v.find(x=>x.lang==='ja-JP'&&x.localService)
+    ||v.find(x=>x.lang==='ja-JP')
+    ||v.find(x=>x.lang.startsWith('ja'));
+  // 英語：iOS Samantha等の高品質音声を優先
+  const enPref=['Samantha','Karen','Daniel','Moira','Veena'];
+  vE=v.find(x=>enPref.some(n=>x.name.includes(n)))
+    ||v.find(x=>x.lang==='en-US'&&x.localService)
+    ||v.find(x=>x.lang==='en-US')
+    ||v.find(x=>x.lang==='en-GB')
+    ||v.find(x=>x.lang.startsWith('en'));
+  console.log('JP voice:', vJ?.name, '/ EN voice:', vE?.name);
+}
 loadV();if(SY.onvoiceschanged!==undefined)SY.onvoiceschanged=loadV;
-function spk(t,l,r,cb){SY.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=l;u.rate=r||1;if(l==='ja-JP'&&vJ)u.voice=vJ;if(l==='en-US'&&vE)u.voice=vE;if(cb)u.onend=cb;SY.speak(u);}
-function stopAllAudio(){SY.cancel();}
+function spk(t,l,r,cb){
+  SY.cancel();
+  const u=new SpeechSynthesisUtterance(t);
+  u.lang=l; u.rate=r||1; u.volume=1;
+  // 日本語は少しゆっくり・自然なピッチに
+  if(l==='ja-JP'){u.pitch=1.1; u.rate=(r||1)*0.9;}
+  else {u.pitch=1;}
+  if(l==='ja-JP'&&vJ) u.voice=vJ;
+  if(l.startsWith('en')&&vE) u.voice=vE;
+  if(cb) u.onend=cb;
+  setTimeout(()=>SY.speak(u),50);
+}
 function spkJ(){const c=deck[idx];if(!c)return;document.getElementById('mainCard').classList.add('sj');spk(c.ja,'ja-JP',1,()=>document.getElementById('mainCard').classList.remove('sj'));}
 function spkE(){const c=deck[idx];if(!c)return;const r=parseFloat(document.getElementById('spRate').value);document.getElementById('mainCard').classList.add('se');spk(c.en,'en-US',r,()=>document.getElementById('mainCard').classList.remove('se'));}
+function stopAllAudio(){SY.cancel();}
 
 // TIMER
 function updV(id,vid,sfx){const v=parseFloat(document.getElementById(id).value);document.getElementById(vid).textContent=sfx?v+sfx:v.toFixed(1);}
@@ -420,7 +495,6 @@ function runAuto(){
   const c=deck[idx];
   const dJE=parseFloat(document.getElementById('dJE').value)*1000;
   const dNx=parseFloat(document.getElementById('dNx').value)*1000;
-  const r=parseFloat(document.getElementById('spRate').value);
   document.getElementById('mainCard').classList.add('sj');
   startCD(2500,'🇯🇵 日本語読み上げ中...');
   spk(c.ja,'ja-JP',1,()=>{
@@ -433,8 +507,9 @@ function runAuto(){
       document.getElementById('enWrap').className='en-wrap on';
       document.getElementById('spkEBtn').style.display='block';
       document.getElementById('mainCard').classList.add('se');
-      startCD(3000,'🇺🇸 英語読み上げ中...');
-      spk(c.en,'en-US',r,()=>{
+      const useContrast=document.getElementById('contrastTgl').checked;
+      startCD(useContrast?6000:3000, useContrast?'⚡ 1.5x → 1.0x コントラスト再生中...':'🇺🇸 英語読み上げ中...');
+      spkContrast(c.en,()=>{
         document.getElementById('mainCard').classList.remove('se');
         if(!isAuto)return;
         startCD(dNx,`⏭ ${document.getElementById('dNx').value}秒後に次へ...`);
@@ -444,7 +519,82 @@ function runAuto(){
   });
 }
 
-// KEYBOARD
+
+// ===================== ② TIME BOMB =====================
+let bombOn=false, bombTimer=null, bombInterval=null;
+
+function toggleBomb(){
+  bombOn=document.getElementById('bombTgl').checked;
+}
+function startBomb(){
+  if(!bombOn||isAuto)return;
+  const sec=parseFloat(document.getElementById('bombSec').value)*1000;
+  const bar=document.getElementById('bombBar');
+  const wrap=document.getElementById('bombWrap');
+  wrap.className='bomb-timer-wrap on';
+  bar.style.width='100%';
+  bar.style.transition='none';
+  setTimeout(()=>{
+    bar.style.transition=`width ${sec}ms linear`;
+    bar.style.width='0%';
+  },50);
+  bombTimer=setTimeout(()=>{
+    if(revealed)return; // すでに答えを見た場合はスキップ
+    // 時間切れ！強制爆発
+    const card=document.getElementById('mainCard');
+    card.classList.add('bomb-explode');
+    wrap.className='bomb-timer-wrap';
+    SY.cancel();
+    // 答えを表示してから読み上げ
+    revealed=true;
+    document.getElementById('enWrap').className='en-wrap on';
+    document.getElementById('mainCard').style.cursor='default';
+    const r=parseFloat(document.getElementById('spRate').value);
+    const bombCard=deck[idx];
+    setTimeout(()=>{
+      card.classList.remove('bomb-explode');
+      ngCnt++;
+      wrong.push(bombCard);
+      document.getElementById('sWrg').textContent=ngCnt;
+      // 答えを読み上げてから次へ
+      spk(bombCard.en,'en-US',r,()=>{
+        setTimeout(()=>{idx++;renderCard();},800);
+      });
+    },500);
+  },sec);
+}
+function clearBomb(){
+  clearTimeout(bombTimer);
+  clearInterval(bombInterval);
+  const bw=document.getElementById('bombWrap');
+  const bb=document.getElementById('bombBar');
+  if(bw) bw.className='bomb-timer-wrap';
+  if(bb) bb.style.width='100%';
+}
+
+// ===================== ③ CONTRAST PLAY =====================
+function spkContrast(text, onEnd){
+  const r=parseFloat(document.getElementById('spRate').value);
+  const useContrast=document.getElementById('contrastTgl').checked;
+  if(!useContrast){
+    spk(text,'en-US',r,onEnd);
+    return;
+  }
+  // 1.5倍速 → 1.0倍速
+  spk(text,'en-US',1.5,()=>{
+    setTimeout(()=>spk(text,'en-US',1.0,onEnd),300);
+  });
+}
+
+// contrastTgl onchange
+document.addEventListener('DOMContentLoaded',()=>{
+  const ct=document.getElementById('contrastTgl');
+  if(ct) ct.addEventListener('change',()=>{
+    document.getElementById('contrastInfo').style.display=ct.checked?'block':'none';
+  });
+});
+
+// ===================== KEYBOARD =====================
 document.addEventListener('keydown',e=>{
   if(e.target.tagName==='INPUT')return;
   if(e.code==='Space'){e.preventDefault();reveal();}
