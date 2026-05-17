@@ -107,6 +107,16 @@ body{background:var(--bg);color:var(--txt);font-family:"Noto Sans JP",sans-serif
 .ki{display:flex;align-items:center;gap:5px;font-family:"JetBrains Mono",monospace;font-size:.58rem;color:var(--dim);}
 kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:2px 5px;font-size:.58rem;}
 
+
+/* VOICE SELECTOR */
+.voice-panel{width:100%;max-width:680px;background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:13px 16px;margin-bottom:14px;}
+.voice-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.voice-row:last-child{margin-bottom:0;}
+.voice-lbl{font-family:"JetBrains Mono",monospace;font-size:.65rem;color:var(--dim);min-width:24px;}
+.voice-sel{flex:1;background:var(--card);border:1px solid var(--bdr);border-radius:7px;color:var(--txt);font-family:"JetBrains Mono",monospace;font-size:.65rem;padding:6px 8px;outline:none;cursor:pointer;}
+.voice-sel:focus{border-color:var(--acc);}
+.voice-test{padding:6px 10px;background:var(--card);border:1px solid var(--bdr);border-radius:7px;color:var(--dim);font-family:"JetBrains Mono",monospace;font-size:.62rem;cursor:pointer;white-space:nowrap;}
+.voice-test:hover{border-color:var(--acc);color:var(--acc);}
 /* ② TIME BOMB */
 .bomb-row{display:flex;align-items:center;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid var(--bdr);flex-wrap:wrap;}
 .bomb-label{font-family:"JetBrains Mono",monospace;font-size:.6rem;color:var(--dim);}
@@ -122,6 +132,22 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 <body>
 <div class="logo">EXECUTIVE BOOTCAMP</div>
 <div class="logo-sub">FLASHCARD SYSTEM v4.0</div>
+
+<!-- VOICE SELECTOR -->
+<div class="voice-panel" id="voicePanel">
+  <div style="font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:2px;color:var(--dim);text-transform:uppercase;margin-bottom:10px;">🎙️ VOICE SETTINGS</div>
+  <div class="voice-row">
+    <span class="voice-lbl">🇯🇵</span>
+    <select class="voice-sel" id="voiceJP" onchange="setVoice('jp')"></select>
+    <button class="voice-test" onclick="testVoice('jp')">TEST</button>
+  </div>
+  <div class="voice-row">
+    <span class="voice-lbl">🇺🇸</span>
+    <select class="voice-sel" id="voiceEN" onchange="setVoice('en')"></select>
+    <button class="voice-test" onclick="testVoice('en')">TEST</button>
+  </div>
+</div>
+
 <div class="app-row">
   <button class="app-btn" id="btnDon" onclick="selApp('dondondo')">📚 どんどん</button>
   <button class="app-btn" id="btnDai" onclick="selApp('daitokku')">💬 大特訓</button>
@@ -512,7 +538,69 @@ function loadV(){
     ||v.find(x=>x.lang.startsWith('en'));
   console.log('JP voice:', vJ?.name, '/ EN voice:', vE?.name);
 }
-loadV();if(SY.onvoiceschanged!==undefined)SY.onvoiceschanged=loadV;
+loadV();
+if(SY.onvoiceschanged!==undefined){
+  SY.onvoiceschanged=()=>{loadV();buildVoiceSelectors();};
+}
+setTimeout(buildVoiceSelectors,500);
+
+function buildVoiceSelectors(){
+  const v=SY.getVoices();
+  const selJP=document.getElementById('voiceJP');
+  const selEN=document.getElementById('voiceEN');
+  if(!selJP||!selEN) return;
+
+  // 日本語音声リスト
+  const jpVoices=v.filter(x=>x.lang.startsWith('ja'));
+  selJP.innerHTML='';
+  jpVoices.forEach(voice=>{
+    const opt=document.createElement('option');
+    opt.value=voice.name;
+    opt.textContent=voice.name+(voice.localService?' ★':'');
+    if(vJ&&voice.name===vJ.name) opt.selected=true;
+    selJP.appendChild(opt);
+  });
+  if(jpVoices.length===0){
+    const opt=document.createElement('option');
+    opt.textContent='日本語音声なし';
+    selJP.appendChild(opt);
+  }
+
+  // 英語音声リスト
+  const enVoices=v.filter(x=>x.lang.startsWith('en'));
+  selEN.innerHTML='';
+  enVoices.forEach(voice=>{
+    const opt=document.createElement('option');
+    opt.value=voice.name;
+    opt.textContent=voice.name+(voice.localService?' ★':'');
+    if(vE&&voice.name===vE.name) opt.selected=true;
+    selEN.appendChild(opt);
+  });
+}
+function setVoice(lang){
+  const v=SY.getVoices();
+  if(lang==='jp'){
+    const name=document.getElementById('voiceJP').value;
+    vJ=v.find(x=>x.name===name)||vJ;
+  } else {
+    const name=document.getElementById('voiceEN').value;
+    vE=v.find(x=>x.name===name)||vE;
+  }
+}
+function testVoice(lang){
+  SY.cancel();
+  const u=new SpeechSynthesisUtterance();
+  if(lang==='jp'){
+    u.text='これはテストです。日本語の音声を確認してください。';
+    u.lang='ja-JP'; if(vJ) u.voice=vJ;
+  } else {
+    u.text='This is a test. Please check the English voice quality.';
+    u.lang='en-US'; if(vE) u.voice=vE;
+  }
+  u.rate=1; u.pitch=1;
+  setTimeout(()=>SY.speak(u),50);
+}
+
 function spk(t,l,r,cb){
   SY.cancel();
   const u=new SpeechSynthesisUtterance(t);
