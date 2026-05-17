@@ -191,6 +191,10 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
         <span class="t-val" id="bombSecVal">2.5s</span>
       </div>
     </div>
+    <div class="bomb-row" style="margin-top:6px;">
+      <span class="bomb-label" style="flex:1;">🇯🇵 日本語を読み上げてからカウント開始</span>
+      <label class="tgl"><input type="checkbox" id="bombJPTgl" checked><div class="tgl-track"></div><div class="tgl-thumb"></div></label>
+    </div>
   </div>
 
   <!-- ③ CONTRAST PLAY -->
@@ -666,42 +670,59 @@ let bombOn=false, bombTimer=null, bombInterval=null;
 function toggleBomb(){
   bombOn=document.getElementById('bombTgl').checked;
 }
+
 function startBomb(){
   if(!bombOn||isAuto)return;
   const sec=parseFloat(document.getElementById('bombSec').value)*1000;
-  const bar=document.getElementById('bombBar');
-  const wrap=document.getElementById('bombWrap');
-  wrap.className='bomb-timer-wrap on';
-  bar.style.width='100%';
-  bar.style.transition='none';
-  setTimeout(()=>{
-    bar.style.transition=`width ${sec}ms linear`;
-    bar.style.width='0%';
-  },50);
-  bombTimer=setTimeout(()=>{
-    if(revealed)return; // すでに答えを見た場合はスキップ
-    // 時間切れ！強制爆発
-    const card=document.getElementById('mainCard');
-    card.classList.add('bomb-explode');
-    wrap.className='bomb-timer-wrap';
-    SY.cancel();
-    // 答えを表示してから読み上げ
-    revealed=true;
-    document.getElementById('enWrap').className='en-wrap on';
-    document.getElementById('mainCard').style.cursor='default';
-    const r=parseFloat(document.getElementById('spRate').value);
-    const bombCard=deck[idx];
+  const readJP=document.getElementById('bombJPTgl').checked;
+
+  const doStartTimer=()=>{
+    const bar=document.getElementById('bombBar');
+    const wrap=document.getElementById('bombWrap');
+    wrap.className='bomb-timer-wrap on';
+    bar.style.width='100%';
+    bar.style.transition='none';
     setTimeout(()=>{
-      card.classList.remove('bomb-explode');
-      ngCnt++;
-      wrong.push(bombCard);
-      document.getElementById('sWrg').textContent=ngCnt;
-      // 答えを読み上げてから次へ
-      spk(bombCard.en,'en-US',r,()=>{
-        setTimeout(()=>{idx++;renderCard();},800);
-      });
-    },500);
-  },sec);
+      bar.style.transition=`width ${sec}ms linear`;
+      bar.style.width='0%';
+    },50);
+    bombTimer=setTimeout(()=>{
+      if(revealed)return;
+      // 時間切れ！強制爆発
+      const card=document.getElementById('mainCard');
+      card.classList.add('bomb-explode');
+      wrap.className='bomb-timer-wrap';
+      SY.cancel();
+      revealed=true;
+      document.getElementById('enWrap').className='en-wrap on';
+      document.getElementById('mainCard').style.cursor='default';
+      const r=parseFloat(document.getElementById('spRate').value);
+      const bombCard=deck[idx];
+      setTimeout(()=>{
+        card.classList.remove('bomb-explode');
+        ngCnt++;
+        wrong.push(bombCard);
+        document.getElementById('sWrg').textContent=ngCnt;
+        spk(bombCard.en,'en-US',r,()=>{
+          setTimeout(()=>{idx++;renderCard();},800);
+        });
+      },500);
+    },sec);
+  };
+
+  if(readJP){
+    // 日本語を読み上げてからタイマー開始
+    const c=deck[idx];
+    if(!c)return;
+    document.getElementById('mainCard').classList.add('sj');
+    spk(c.ja,'ja-JP',1,()=>{
+      document.getElementById('mainCard').classList.remove('sj');
+      if(!revealed) doStartTimer();
+    });
+  } else {
+    // 即タイマー開始
+    doStartTimer();
+  }
 }
 function clearBomb(){
   clearTimeout(bombTimer);
