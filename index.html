@@ -117,6 +117,36 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 .voice-sel:focus{border-color:var(--acc);}
 .voice-test{padding:6px 10px;background:var(--card);border:1px solid var(--bdr);border-radius:7px;color:var(--dim);font-family:"JetBrains Mono",monospace;font-size:.62rem;cursor:pointer;white-space:nowrap;}
 .voice-test:hover{border-color:var(--acc);color:var(--acc);}
+
+/* CUSTOM FILTER */
+.filter-panel{width:100%;max-width:680px;background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:14px 16px;margin-bottom:14px;display:none;}
+.filter-panel.on{display:block;}
+.filter-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.filter-title{font-family:"JetBrains Mono",monospace;font-size:.68rem;letter-spacing:2px;color:var(--acc);text-transform:uppercase;}
+.filter-close{background:none;border:none;color:var(--dim);cursor:pointer;font-size:.9rem;padding:2px 6px;}
+.filter-close:hover{color:var(--txt);}
+.filter-group{margin-bottom:14px;}
+.filter-group-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;padding-bottom:6px;border-bottom:1px solid var(--bdr);}
+.filter-group-lbl{font-family:"JetBrains Mono",monospace;font-size:.65rem;letter-spacing:2px;color:#4090e0;text-transform:uppercase;}
+.filter-ctrl-btns{display:flex;gap:5px;}
+.f-ctrl{padding:3px 8px;background:var(--card);border:1px solid var(--bdr);border-radius:5px;color:var(--dim);font-family:"JetBrains Mono",monospace;font-size:.58rem;cursor:pointer;transition:all .15s;}
+.f-ctrl:hover{border-color:var(--acc);color:var(--acc);}
+.filter-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:5px;}
+.filter-item{display:flex;align-items:flex-start;gap:7px;padding:6px 8px;background:var(--card);border:1px solid var(--bdr);border-radius:6px;cursor:pointer;transition:all .15s;}
+.filter-item:hover{border-color:var(--dim);}
+.filter-item.checked{background:rgba(64,144,224,.1);border-color:#4090e0;}
+.filter-item input[type=checkbox]{accent-color:#4090e0;width:13px;height:13px;cursor:pointer;flex-shrink:0;margin-top:1px;}
+.filter-item-lbl{font-family:"JetBrains Mono",monospace;font-size:.58rem;color:var(--txt);line-height:1.4;cursor:pointer;}
+.filter-count-row{display:flex;align-items:center;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--bdr);}
+.filter-count{font-family:"JetBrains Mono",monospace;font-size:.65rem;color:var(--dim);flex:1;}
+.filter-count span{color:var(--acc);font-weight:700;}
+.filter-start-btns{display:flex;gap:8px;}
+.filter-start-btn{padding:9px 16px;border:none;border-radius:8px;font-family:"Bebas Neue",cursive;font-size:.95rem;letter-spacing:2px;cursor:pointer;transition:transform .1s,box-shadow .2s;}
+.filter-start-btn.seq{background:#4090e0;color:var(--bg);}
+.filter-start-btn.seq:hover{box-shadow:0 3px 14px rgba(64,144,224,.4);transform:translateY(-1px);}
+.filter-start-btn.rnd{background:var(--card);color:var(--acc);border:1px solid var(--acc);}
+.filter-start-btn.rnd:hover{box-shadow:0 3px 14px rgba(240,192,64,.3);transform:translateY(-1px);}
+.filter-start-btn:disabled{opacity:.3;cursor:not-allowed;transform:none;}
 /* ② TIME BOMB */
 .bomb-row{display:flex;align-items:center;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid var(--bdr);flex-wrap:wrap;}
 .bomb-label{font-family:"JetBrains Mono",monospace;font-size:.6rem;color:var(--dim);}
@@ -157,6 +187,23 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
   <div class="deck-title" id="deckTitle">デッキを選択</div>
   <div class="deck-grid" id="deckGrid"></div>
 </div>
+
+<!-- CUSTOM FILTER PANEL -->
+<div class="filter-panel" id="filterPanel">
+  <div class="filter-hdr">
+    <span class="filter-title">🎯 カスタムフィルター（文法項目選択）</span>
+    <button class="filter-close" onclick="hideFilter()">✕ 閉じる</button>
+  </div>
+  <div id="filterBody"></div>
+  <div class="filter-count-row">
+    <div class="filter-count">選択中：<span id="filterCountTxt">0</span>項目 / <span id="filterCardCountTxt">0</span>枚</div>
+    <div class="filter-start-btns">
+      <button class="filter-start-btn seq" id="filterStartSeq" onclick="startCustomDeck(false)" disabled>▶ 順番通り</button>
+      <button class="filter-start-btn rnd" id="filterStartRnd" onclick="startCustomDeck(true)" disabled>🔀 シャッフル</button>
+    </div>
+  </div>
+</div>
+
 <div class="auto-panel" id="autoPanel">
   <div class="auto-hdr">
     <span class="auto-lbl">🤖 AUTO PLAY + VOICE</span>
@@ -297,6 +344,133 @@ function daitokuDecks(){
   return decks;
 }
 
+
+// ===================== CUSTOM FILTER =====================
+const FILTER_GROUPS = [
+  {id:'c1', label:'📘 中1', source:'C1'},
+  {id:'c2', label:'📗 中2', source:'C2'},
+  {id:'c3', label:'📙 中3', source:'C3'},
+];
+let filterChecked = new Set(); // チェック済みkey: "c1-1", "c2-10" など
+
+function getFilterItems(){
+  const items = [];
+  const getUnits = (arr, prefix) => {
+    const map = {};
+    arr.forEach(c=>{ if(!map[c.num]) map[c.num]=c.title; });
+    return Object.entries(map).sort((a,b)=>+a[0]-+b[0])
+      .map(([num,title])=>({key:`${prefix}-${num}`, num:+num, title, prefix, label:`${prefix.replace('c','中')}-${num}：${title}`}));
+  };
+  items.push({group:'c1', items:getUnits(C1,'c1')});
+  items.push({group:'c2', items:getUnits(C2,'c2')});
+  items.push({group:'c3', items:getUnits(C3,'c3')});
+  return items;
+}
+
+function buildFilterUI(){
+  const body = document.getElementById('filterBody');
+  body.innerHTML = '';
+  const groups = getFilterItems();
+  groups.forEach(({group, items}) => {
+    const grpInfo = FILTER_GROUPS.find(g=>g.id===group);
+    const div = document.createElement('div');
+    div.className = 'filter-group';
+    const hdr = document.createElement('div');
+    hdr.className = 'filter-group-hdr';
+    hdr.innerHTML = `<span class="filter-group-lbl">${grpInfo.label}（${items.length}項目）</span>
+      <div class="filter-ctrl-btns">
+        <button class="f-ctrl" onclick="filterSelectGroup('${group}',true)">全選択</button>
+        <button class="f-ctrl" onclick="filterSelectGroup('${group}',false)">全解除</button>
+      </div>`;
+    const grid = document.createElement('div');
+    grid.className = 'filter-items';
+    items.forEach(item => {
+      const el = document.createElement('div');
+      el.className = 'filter-item' + (filterChecked.has(item.key)?' checked':'');
+      el.id = 'fi-'+item.key;
+      el.innerHTML = `<input type="checkbox" id="fc-${item.key}" ${filterChecked.has(item.key)?'checked':''} onchange="toggleFilter('${item.key}')">
+        <label class="filter-item-lbl" for="fc-${item.key}">${item.label}</label>`;
+      grid.appendChild(el);
+    });
+    div.appendChild(hdr);
+    div.appendChild(grid);
+    body.appendChild(div);
+  });
+  updateFilterCount();
+}
+
+function toggleFilter(key){
+  if(filterChecked.has(key)) filterChecked.delete(key);
+  else filterChecked.add(key);
+  const el = document.getElementById('fi-'+key);
+  if(el) el.className = 'filter-item' + (filterChecked.has(key)?' checked':'');
+  updateFilterCount();
+}
+
+function filterSelectGroup(group, select){
+  const groups = getFilterItems();
+  const g = groups.find(x=>x.group===group);
+  if(!g) return;
+  g.items.forEach(item=>{
+    if(select) filterChecked.add(item.key);
+    else filterChecked.delete(item.key);
+    const el = document.getElementById('fi-'+item.key);
+    const cb = document.getElementById('fc-'+item.key);
+    if(el) el.className = 'filter-item'+(select?' checked':'');
+    if(cb) cb.checked = select;
+  });
+  updateFilterCount();
+}
+
+function updateFilterCount(){
+  const cards = getFilteredCards();
+  const cnt = filterChecked.size;
+  document.getElementById('filterCountTxt').textContent = cnt;
+  document.getElementById('filterCardCountTxt').textContent = cards.length;
+  const disabled = cards.length === 0;
+  document.getElementById('filterStartSeq').disabled = disabled;
+  document.getElementById('filterStartRnd').disabled = disabled;
+}
+
+function getFilteredCards(){
+  if(filterChecked.size === 0) return [];
+  const all = [];
+  const srcMap = {c1: C1, c2: C2, c3: C3};
+  filterChecked.forEach(key=>{
+    const [prefix, numStr] = key.split('-');
+    const num = +numStr;
+    const src = srcMap[prefix];
+    if(src) all.push(...src.filter(c=>c.num===num));
+  });
+  return all;
+}
+
+function showFilter(){
+  const fp=document.getElementById('filterPanel');
+  if(fp){fp.className='filter-panel on';buildFilterUI();}
+}
+
+function hideFilter(){
+  const fp=document.getElementById('filterPanel');
+  if(fp) fp.className='filter-panel';
+}
+
+function startCustomDeck(shuffle){
+  let cards = getFilteredCards();
+  if(cards.length === 0) return;
+  if(shuffle) cards = [...cards].sort(()=>Math.random()-.5);
+  const label = shuffle ? '🎯 カスタム（シャッフル）' : '🎯 カスタム（順番通り）';
+  const d = {
+    key: 'custom',
+    label,
+    sub: `${filterChecked.size}項目 / ${cards.length}枚`,
+    cards,
+    shuf: shuffle
+  };
+  hideFilter();
+  startDeck(d);
+}
+
 function dondoDecks(){
   const WEEKS=[
     {key:'w1', label:'Week 1 / 中1 P1-6',       sub:'中1 Unit 1-6',   cards:c1u(r(1,6)),                    shuf:false},
@@ -321,17 +495,23 @@ function dondoDecks(){
     {key:'w20',label:'Week 20 / 総復習・卒業',   sub:'中1+2+3 全シャッフル', cards:shuf([...C1,...C2,...C3]), shuf:true},
   ];
   const SHUFFLE=[
-    {key:'ws1',label:'Week 1 シャッフル',  sub:'中1 Unit 1-6',   cards:shuf(c1u(r(1,6)))},
-    {key:'ws2',label:'Week 2 シャッフル',  sub:'中1 Unit 7-12',  cards:shuf(c1u(r(7,12)))},
-    {key:'ws3',label:'Week 3 シャッフル',  sub:'中1 Unit 13-18', cards:shuf(c1u(r(13,18)))},
-    {key:'ws6',label:'Week 6 シャッフル',  sub:'中2 Unit 2-7',   cards:shuf(c2u(r(2,7)))},
-    {key:'ws7',label:'Week 7 シャッフル',  sub:'中2 Unit 8-13',  cards:shuf(c2u(r(8,13)))},
-    {key:'ws9',label:'Week 9 シャッフル',  sub:'中2 Unit 14-19', cards:shuf(c2u(r(14,19)))},
-    {key:'ws10',label:'Week 10 シャッフル',sub:'中2 Unit 20-25', cards:shuf(c2u(r(20,25)))},
-    {key:'ws11',label:'Week 11 シャッフル',sub:'中2 Unit 26-31', cards:shuf(c2u(r(26,31)))},
-    {key:'ws14',label:'Week 14 シャッフル',sub:'中3 Unit 4-9',   cards:shuf(c3u(r(4,9)))},
-    {key:'ws15',label:'Week 15 シャッフル',sub:'中3 Unit 10-15', cards:shuf(c3u(r(10,15)))},
-    {key:'ws17',label:'Week 17 シャッフル',sub:'中3 Unit 16-22', cards:shuf(c3u(r(16,22)))},
+    {key:'ws1', label:'Week 1 シャッフル',  sub:'中1 Unit 1-6',             cards:shuf(c1u(r(1,6)))},
+    {key:'ws2', label:'Week 2 シャッフル',  sub:'中1 Unit 7-12',             cards:shuf(c1u(r(7,12)))},
+    {key:'ws3', label:'Week 3 シャッフル',  sub:'中1 Unit 13-18',            cards:shuf(c1u(r(13,18)))},
+    {key:'ws4', label:'Week 4 シャッフル',  sub:'中1 Unit 1-18（復習）',      cards:shuf(c1u(r(1,18)))},
+    {key:'ws5', label:'Week 5 シャッフル',  sub:'中1 U19＋中2 U1',           cards:shuf([...c1u([19]),...c2u([1])])},
+    {key:'ws6', label:'Week 6 シャッフル',  sub:'中2 Unit 2-7',              cards:shuf(c2u(r(2,7)))},
+    {key:'ws7', label:'Week 7 シャッフル',  sub:'中2 Unit 8-13',             cards:shuf(c2u(r(8,13)))},
+    {key:'ws8', label:'Week 8 シャッフル',  sub:'中1 U19＋中2 U1-13（復習）', cards:shuf([...c1u([19]),...c2u(r(1,13))])},
+    {key:'ws9', label:'Week 9 シャッフル',  sub:'中2 Unit 14-19',            cards:shuf(c2u(r(14,19)))},
+    {key:'ws10',label:'Week 10 シャッフル', sub:'中2 Unit 20-25',            cards:shuf(c2u(r(20,25)))},
+    {key:'ws11',label:'Week 11 シャッフル', sub:'中2 Unit 26-31',            cards:shuf(c2u(r(26,31)))},
+    {key:'ws12',label:'Week 12 シャッフル', sub:'中2 Unit 14-31（復習）',     cards:shuf(c2u(r(14,31)))},
+    {key:'ws13',label:'Week 13 シャッフル', sub:'中2 U32-34＋中3 U1-3',      cards:shuf([...c2u(r(32,34)),...c3u(r(1,3))])},
+    {key:'ws14',label:'Week 14 シャッフル', sub:'中3 Unit 4-9',              cards:shuf(c3u(r(4,9)))},
+    {key:'ws15',label:'Week 15 シャッフル', sub:'中3 Unit 10-15',            cards:shuf(c3u(r(10,15)))},
+    {key:'ws16',label:'Week 16 シャッフル', sub:'中2 U32-34＋中3 U1-15（復習）', cards:shuf([...c2u(r(32,34)),...c3u(r(1,15))])},
+    {key:'ws17',label:'Week 17 シャッフル', sub:'中3 Unit 16-22',            cards:shuf(c3u(r(16,22)))},
   ];
   return {WEEKS,SHUFFLE};
 }
@@ -372,7 +552,7 @@ function selApp(app){
   document.getElementById('judgeRow').className='judge-row';
   document.getElementById('complete').className='complete';
   document.getElementById('kbdRow').className='kbd-row';
-  stopAuto(); renderGrid();
+  stopAuto(); hideFilter(); renderGrid();
 }
 
 function renderGrid(){
@@ -382,6 +562,13 @@ function renderGrid(){
     daitokuDecks().forEach(d=>g.appendChild(mkBtn(d)));
   } else if(curApp==='dondondo'){
     const {WEEKS,SHUFFLE}=dondoDecks();
+    // カスタムフィルターボタン
+    const customBtn=document.createElement('button');
+    customBtn.className='deck-btn'+(curKey==='custom'?' sel-b':'');
+    customBtn.style.cssText='grid-column:1/-1;background:rgba(64,144,224,.08);border-color:#4090e0;color:#4090e0;text-align:center;padding:10px;';
+    customBtn.innerHTML='🎯 カスタムフィルター（文法項目を絞り込んで出題）<span class="deck-badge" style="text-align:center;display:block;margin-top:2px;">中1全23項目 / 中2全34項目 / 中3全22項目から自由に選択</span>';
+    customBtn.onclick=showFilter;
+    g.appendChild(customBtn);
     // スケジュール週
     const lbl1=document.createElement('div'); lbl1.className='sec-label'; lbl1.textContent='📅 スケジュール順'; g.appendChild(lbl1);
     WEEKS.forEach(d=>g.appendChild(mkBtn(d)));
