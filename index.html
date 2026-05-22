@@ -680,6 +680,7 @@ function startDeck(d){
 
 function renderCard(){
   if(idx>=deck.length){showComplete();return;}
+  SY.cancel(); // 前のカードの音声を即停止
   revealed=false;
   clearBomb();
   const c=deck[idx];
@@ -726,6 +727,8 @@ function replay(){
 }
 function judge(ok){
   if(!revealed||isAuto)return;
+  SY.cancel(); // 再生中の音声を即停止
+  document.getElementById('mainCard').classList.remove('se');
   const el=document.getElementById('mainCard');
   if(ok){okCnt++;el.classList.add('fc');}
   else{ngCnt++;wrong.push(deck[idx]);el.classList.add('fw');}
@@ -871,7 +874,12 @@ function spk(t,l,r,cb){
   setTimeout(()=>SY.speak(u),50);
 }
 function spkJ(){const c=deck[idx];if(!c)return;document.getElementById('mainCard').classList.add('sj');spk(c.ja,'ja-JP',1,()=>document.getElementById('mainCard').classList.remove('sj'));}
-function spkE(){const c=deck[idx];if(!c)return;const r=parseFloat(document.getElementById('spRate').value);document.getElementById('mainCard').classList.add('se');spk(c.en,'en-US',r,()=>document.getElementById('mainCard').classList.remove('se'));}
+function spkE(){
+  const c=deck[idx];if(!c)return;
+  document.getElementById('mainCard').classList.add('se');
+  const onEnd=()=>document.getElementById('mainCard').classList.remove('se');
+  spkContrast(c.en, onEnd);
+}
 function stopAllAudio(){SY.cancel();}
 
 // TIMER
