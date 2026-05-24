@@ -151,6 +151,50 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 .filter-start-btn.rnd{background:var(--card);color:var(--acc);border:1px solid var(--acc);}
 .filter-start-btn.rnd:hover{box-shadow:0 3px 14px rgba(240,192,64,.3);transform:translateY(-1px);}
 .filter-start-btn:disabled{opacity:.3;cursor:not-allowed;transform:none;}
+
+/* ===== USER BAR ===== */
+.user-bar{width:100%;max-width:680px;display:flex;align-items:center;gap:10px;padding:8px 14px;background:var(--sur);border:1px solid var(--bdr);border-radius:10px;margin-bottom:14px;}
+.user-bar.hidden{display:none;}
+.user-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--red));display:flex;align-items:center;justify-content:center;font-family:"Bebas Neue",cursive;font-size:.8rem;color:var(--bg);flex-shrink:0;}
+.user-email{font-family:"JetBrains Mono",monospace;font-size:.65rem;color:var(--txt);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.user-stats{font-family:"JetBrains Mono",monospace;font-size:.6rem;color:var(--dim);white-space:nowrap;}
+.user-stats .ok-c{color:var(--grn);}
+.user-stats .ng-c{color:var(--red);}
+.btn-logout{padding:4px 10px;background:none;border:1px solid var(--bdr);border-radius:6px;color:var(--dim);font-family:"JetBrains Mono",monospace;font-size:.6rem;cursor:pointer;white-space:nowrap;transition:all .15s;}
+.btn-logout:hover{border-color:var(--red);color:var(--red);}
+.btn-login-top{padding:5px 12px;background:var(--acc);border:none;border-radius:7px;color:var(--bg);font-family:"Bebas Neue",cursive;font-size:.85rem;letter-spacing:2px;cursor:pointer;transition:transform .1s;}
+.btn-login-top:hover{transform:translateY(-1px);}
+
+/* ===== AUTH MODAL ===== */
+.auth-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;}
+.auth-overlay.on{display:flex;}
+.auth-modal{width:100%;max-width:400px;background:var(--sur);border:1px solid var(--bdr);border-radius:16px;padding:28px 24px;}
+.auth-logo{font-family:"Bebas Neue",cursive;font-size:1.4rem;letter-spacing:3px;color:var(--acc);text-align:center;margin-bottom:6px;}
+.auth-sub{font-family:"JetBrains Mono",monospace;font-size:.62rem;color:var(--dim);text-align:center;margin-bottom:20px;letter-spacing:1px;}
+.auth-tabs{display:flex;gap:0;margin-bottom:20px;background:var(--card);border-radius:8px;padding:3px;}
+.auth-tab{flex:1;padding:8px;border:none;border-radius:6px;font-family:"JetBrains Mono",monospace;font-size:.68rem;cursor:pointer;background:none;color:var(--dim);letter-spacing:1px;transition:all .2s;}
+.auth-tab.active{background:var(--acc);color:var(--bg);font-weight:700;}
+.auth-field{margin-bottom:12px;}
+.auth-field label{display:block;font-family:"JetBrains Mono",monospace;font-size:.62rem;color:var(--dim);margin-bottom:5px;letter-spacing:1px;}
+.auth-field input{width:100%;padding:10px 12px;background:var(--card);border:1px solid var(--bdr);border-radius:8px;color:var(--txt);font-family:"JetBrains Mono",monospace;font-size:.75rem;outline:none;transition:border-color .2s;}
+.auth-field input:focus{border-color:var(--acc);}
+.auth-error{font-family:"JetBrains Mono",monospace;font-size:.6rem;color:var(--red);margin-bottom:10px;min-height:16px;text-align:center;}
+.btn-auth-submit{width:100%;padding:12px;background:var(--acc);border:none;border-radius:9px;color:var(--bg);font-family:"Bebas Neue",cursive;font-size:1.1rem;letter-spacing:3px;cursor:pointer;margin-bottom:10px;transition:transform .1s,box-shadow .2s;}
+.btn-auth-submit:hover{box-shadow:0 4px 18px rgba(240,192,64,.4);transform:translateY(-1px);}
+.btn-auth-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.btn-guest{width:100%;padding:10px;background:none;border:1px solid var(--bdr);border-radius:9px;color:var(--dim);font-family:"JetBrains Mono",monospace;font-size:.65rem;cursor:pointer;transition:all .2s;letter-spacing:1px;}
+.btn-guest:hover{border-color:var(--dim);color:var(--txt);}
+
+/* ===== HISTORY BADGE (card corner) ===== */
+.hist-badge{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;font-family:"JetBrains Mono",monospace;font-size:.6rem;opacity:.7;}
+.hist-ok{color:var(--grn);}
+.hist-ng{color:var(--red);}
+
+/* ===== HISTORY RESET (feature panel) ===== */
+.hist-reset-row{border-top:1px solid var(--bdr);padding-top:10px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;}
+.hist-reset-lbl{font-family:"JetBrains Mono",monospace;font-size:.62rem;color:var(--dim);}
+.btn-hist-reset{padding:6px 14px;background:none;border:1px solid var(--red);border-radius:7px;color:var(--red);font-family:"JetBrains Mono",monospace;font-size:.6rem;cursor:pointer;transition:all .2s;}
+.btn-hist-reset:hover{background:rgba(224,80,80,.1);}
 /* ② TIME BOMB */
 .bomb-row{display:flex;align-items:center;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid var(--bdr);flex-wrap:wrap;}
 .bomb-label{font-family:"JetBrains Mono",monospace;font-size:.6rem;color:var(--dim);}
@@ -162,10 +206,14 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 /* ③ CONTRAST */
 .contrast-info{font-family:"JetBrains Mono",monospace;font-size:.58rem;color:var(--blu);margin-top:4px;}
 </style>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
 <div class="logo">EXECUTIVE BOOTCAMP</div>
-<div class="logo-sub">FLASHCARD SYSTEM v4.0</div>
+<div class="logo-sub">FLASHCARD SYSTEM v5.0</div>
 
 <!-- VOICE SELECTOR -->
 <div class="voice-panel" id="voicePanel">
@@ -182,6 +230,18 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
   </div>
 </div>
 
+
+<!-- USER BAR -->
+<div class="user-bar hidden" id="userBar">
+  <div class="user-avatar" id="userAvatar">?</div>
+  <span class="user-email" id="userEmail">ゲスト</span>
+  <span class="user-stats" id="userStats"></span>
+  <button class="btn-logout" onclick="doSignOut()">ログアウト</button>
+</div>
+<div style="width:100%;max-width:680px;display:flex;justify-content:flex-end;margin-bottom:10px;" id="loginBtnWrap">
+  <button class="btn-login-top" onclick="showAuthModal()">🔑 ログイン / 登録</button>
+</div>
+
 <div class="app-row">
   <button class="app-btn" id="btnDon" onclick="selApp('dondondo')">📚 どんどん</button>
   <button class="app-btn" id="btnDai" onclick="selApp('daitokku')">💬 大特訓</button>
@@ -190,6 +250,14 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 <div class="deck-panel" id="deckPanel">
   <div class="deck-title" id="deckTitle">デッキを選択</div>
   <div class="deck-grid" id="deckGrid"></div>
+  <!-- HISTORY RESET -->
+  <div class="hist-reset-row" id="histResetRow">
+    <div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--dim);letter-spacing:1px;">📊 学習履歴</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--dim);margin-top:2px;" id="histSummary">ログインすると履歴が保存されます</div>
+    </div>
+    <button class="btn-hist-reset" onclick="confirmResetHistory()">🗑️ 履歴リセット</button>
+  </div>
 </div>
 
 <!-- CUSTOM FILTER MODAL -->
@@ -280,6 +348,7 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
     <div class="jp" id="jpTxt"></div>
     <div class="en-wrap" id="enWrap"><div class="en" id="enTxt"></div></div>
     <div class="bomb-timer-wrap" id="bombWrap"><div class="bomb-timer-bar" id="bombBar"></div></div>
+    <div class="hist-badge" id="histBadge" style="display:none"><span class="hist-ok" id="histOk"></span><span class="hist-ng" id="histNg"></span></div>
     <button class="spk-e" id="spkEBtn" onclick="event.stopPropagation();spkE()" title="英語" style="display:none">🔊</button>
   </div>
 </div>
@@ -336,15 +405,12 @@ function r(s,e){const a=[];for(let i=s;i<=e;i++)a.push(i);return a;}
 function daitokuDecks(){
   const units=[...new Set(DAITOKKU.map(c=>c.unit))].sort((a,b)=>a-b);
   const decks=[];
-  // 個別Unit
   units.forEach(u=>{
     const cards=DAITOKKU.filter(c=>c.unit===u);
     decks.push({key:`du${u}`,label:`Unit ${u}`,sub:`${cards.length}文`,cards,shuf:false});
   });
-  // 全Unit・シャッフル
   decks.push({key:'duall',label:'全Unit（順番通り）',sub:`${DAITOKKU.length}文`,cards:[...DAITOKKU],shuf:false});
   decks.push({key:'dusall',label:'🔀 全Unit シャッフル',sub:`${DAITOKKU.length}文`,cards:[...DAITOKKU].sort(()=>Math.random()-.5),shuf:true});
-  // Unit別シャッフル
   units.forEach(u=>{
     const cards=DAITOKKU.filter(c=>c.unit===u);
     decks.push({key:`dus${u}`,label:`🔀 Unit ${u} シャッフル`,sub:`${cards.length}文`,cards:[...cards].sort(()=>Math.random()-.5),shuf:true});
@@ -352,14 +418,13 @@ function daitokuDecks(){
   return decks;
 }
 
-
 // ===================== CUSTOM FILTER =====================
 const FILTER_GROUPS = [
   {id:'c1', label:'📘 中1', source:'C1'},
   {id:'c2', label:'📗 中2', source:'C2'},
   {id:'c3', label:'📙 中3', source:'C3'},
 ];
-let filterChecked = new Set(); // チェック済みkey: "c1-1", "c2-10" など
+let filterChecked = new Set();
 
 function getFilterItems(){
   const items = [];
@@ -374,26 +439,22 @@ function getFilterItems(){
     items.push({group:'c2', label:'📗 中2（34項目）', items:getUnits(C2,'c2')});
     items.push({group:'c3', label:'📙 中3（22項目）', items:getUnits(C3,'c3')});
   } else if(curApp==='daitokku'){
-    // 大特訓：Unit 1-80を10単位ごとにグループ化
     const allUnits=[...new Set(DAITOKKU.map(c=>c.unit))].sort((a,b)=>a-b);
     const groupSize=10;
     for(let g=0;g<allUnits.length;g+=groupSize){
       const chunk=allUnits.slice(g,g+groupSize);
       const gLabel=`Unit ${chunk[0]}-${chunk[chunk.length-1]}`;
       const chunkItems=chunk.map(u=>{
-        const sample=DAITOKKU.find(c=>c.unit===u);
         return {key:`du-${u}`, num:u, label:`Unit ${u}`};
       });
       items.push({group:`dug${g}`, label:`📒 ${gLabel}`, items:chunkItems});
     }
   } else if(curApp==='kinfure'){
-    // 金フレ：100枚単位でグループ化
     const max=Math.max(...KALL.map(c=>c.id));
     for(let s=1;s<=max;s+=100){
       const e=Math.min(s+99,max);
       const rangeCards=KALL.filter(c=>c.id>=s&&c.id<=e);
       if(rangeCards.length===0) continue;
-      // 10枚単位で細分化
       const subItems=[];
       for(let ss=s;ss<=e;ss+=10){
         const se=Math.min(ss+9,e);
@@ -408,8 +469,8 @@ function getFilterItems(){
 
 function buildFilterUI(){
   const body = document.getElementById('filterBody');
+  if(!body) return;
   body.innerHTML = '';
-  // フィルタータイトル更新
   const titles={dondondo:'🎯 カスタムフィルター（文法項目選択）',daitokku:'🎯 カスタムフィルター（Unit選択）',kinfure:'🎯 カスタムフィルター（範囲選択）'};
   const ft=document.getElementById('filterPanelTitle');
   if(ft) ft.textContent=titles[curApp]||'🎯 カスタムフィルター';
@@ -510,7 +571,6 @@ function hideFilter(){
 function startCustomDeck(shuffle){
   let cards = getFilteredCards();
   if(cards.length === 0) return;
-  if(shuffle) cards = [...cards].sort(()=>Math.random()-.5);
   const label = shuffle ? '🎯 カスタム（シャッフル）' : '🎯 カスタム（順番通り）';
   const d = {
     key: 'custom',
@@ -609,9 +669,9 @@ function selApp(app){
 
 function renderGrid(){
   const g=document.getElementById('deckGrid');
+  if(!g) return;
   g.innerHTML='';
   if(curApp==='daitokku'){
-    // カスタムフィルターボタン
     const cb=document.createElement('button');
     cb.className='deck-btn'+(curKey==='custom'?' sel-b':'');
     cb.style.cssText='grid-column:1/-1;background:rgba(64,144,224,.08);border-color:#4090e0;color:#4090e0;text-align:center;padding:10px;';
@@ -621,21 +681,17 @@ function renderGrid(){
     daitokuDecks().forEach(d=>g.appendChild(mkBtn(d)));
   } else if(curApp==='dondondo'){
     const {WEEKS,SHUFFLE}=dondoDecks();
-    // カスタムフィルターボタン
     const customBtn=document.createElement('button');
     customBtn.className='deck-btn'+(curKey==='custom'?' sel-b':'');
     customBtn.style.cssText='grid-column:1/-1;background:rgba(64,144,224,.08);border-color:#4090e0;color:#4090e0;text-align:center;padding:10px;';
     customBtn.innerHTML='🎯 カスタムフィルター（文法項目を絞り込んで出題）<span class="deck-badge" style="text-align:center;display:block;margin-top:2px;">中1全23項目 / 中2全34項目 / 中3全22項目から自由に選択</span>';
     customBtn.onclick=showFilter;
     g.appendChild(customBtn);
-    // スケジュール週
     const lbl1=document.createElement('div'); lbl1.className='sec-label'; lbl1.textContent='📅 スケジュール順'; g.appendChild(lbl1);
     WEEKS.forEach(d=>g.appendChild(mkBtn(d)));
-    // シャッフル
     const lbl2=document.createElement('div'); lbl2.className='sec-label'; lbl2.textContent='🔀 週別シャッフル'; g.appendChild(lbl2);
     SHUFFLE.forEach(d=>g.appendChild(mkBtn(d)));
   } else {
-    // カスタムフィルターボタン
     const kb=document.createElement('button');
     kb.className='deck-btn'+(curKey==='custom'?' sel':'');
     kb.style.cssText='grid-column:1/-1;background:rgba(240,192,64,.08);border-color:var(--acc);color:var(--acc);text-align:center;padding:10px;';
@@ -655,13 +711,23 @@ function mkBtn(d){
 
 function startDeck(d){
   curKey=d.key;
+  let rawCards;
   if(curApp==='daitokku'){
-    deck=d.cards.map(c=>({ja:c.ja,en:c.en,sub:`Unit ${c.unit} - ${c.no}番`,tag:`U${c.unit}-${c.no}`,cardId:null}));
+    rawCards=d.cards.map(c=>({ja:c.ja,en:c.en,sub:`Unit ${c.unit} - ${c.no}番`,tag:`U${c.unit}-${c.no}`,cardId:null}));
   } else if(curApp==='dondondo'){
-    deck=d.cards.map(c=>({ja:c.ja,en:c.en,sub:`${c.title}`,tag:`U${c.num}`,cardId:null}));
+    rawCards=d.cards.map(c=>({ja:c.ja,en:c.en,sub:`${c.title}`,tag:`U${c.num}`,cardId:null}));
   } else {
-    deck=d.cards.map(c=>({ja:c.ja,en:c.en,sub:'',tag:`#${c.id}`,cardId:c.id}));
+    rawCards=d.cards.map(c=>({ja:c.ja,en:c.en,sub:'',tag:`#${c.id}`,cardId:c.id}));
   }
+  rawCards.forEach(c=>{ c.key=makeCardKey(c); });
+  
+  // ログイン済みの場合に重み付きソート。順番通り（!d.shuf）でも、未ログインでなければ重み順を考慮して最適にソートする仕様
+  if(currentUser && Object.keys(historyCache).length>0){
+    deck=weightedShuffle(rawCards);
+  } else {
+    deck=d.shuf ? shuf(rawCards) : rawCards;
+  }
+  
   wrong=[];idx=0;okCnt=0;ngCnt=0;revealed=false;
   clearCD();stopAllAudio();clearTimeout(aTimer);
   isAuto=false;document.getElementById('autoTgl').checked=false;
@@ -680,7 +746,7 @@ function startDeck(d){
 
 function renderCard(){
   if(idx>=deck.length){showComplete();return;}
-  SY.cancel(); // 前のカードの音声を即停止
+  SY.cancel();
   revealed=false;
   clearBomb();
   const c=deck[idx];
@@ -696,7 +762,6 @@ function renderCard(){
   document.getElementById('judgeRow').className='judge-row';
   document.getElementById('btnReplay').className='btn-replay';
   updStats();
-  // Time Bomb 起動（手動モードのみ）
   if(bombOn&&!isAuto) startBomb();
 }
 function reveal(){
@@ -712,7 +777,6 @@ function reveal(){
   spkE();
 }
 function replay(){
-  // 同じカードをリセットして再表示（カウントには影響しない）
   revealed=false;
   SY.cancel();
   document.getElementById('enWrap').className='en-wrap';
@@ -727,9 +791,15 @@ function replay(){
 }
 function judge(ok){
   if(!revealed||isAuto)return;
-  SY.cancel(); // 再生中の音声を即停止
+  SY.cancel();
   document.getElementById('mainCard').classList.remove('se');
   const el=document.getElementById('mainCard');
+  const card=deck[idx];
+  if(card && card.key && currentUser){
+    const h=updateHistoryLocal(card.key, ok);
+    saveHistoryToDb(card.key, h);
+    updateHistSummary();
+  }
   if(ok){okCnt++;el.classList.add('fc');}
   else{ngCnt++;wrong.push(deck[idx]);el.classList.add('fw');}
   idx++; setTimeout(renderCard,280);
@@ -783,13 +853,11 @@ const SY=window.speechSynthesis;
 let vJ=null,vE=null;
 function loadV(){
   const v=SY.getVoices();
-  // 日本語：iOS高品質音声を優先（Kyoko=女性, Otoya=男性）
   const jpPref=['Kyoko','Otoya','O-Ren','Hattori'];
   vJ=v.find(x=>jpPref.some(n=>x.name.includes(n)))
     ||v.find(x=>x.lang==='ja-JP'&&x.localService)
     ||v.find(x=>x.lang==='ja-JP')
     ||v.find(x=>x.lang.startsWith('ja'));
-  // 英語：iOS Samantha等の高品質音声を優先
   const enPref=['Samantha','Karen','Daniel','Moira','Veena'];
   vE=v.find(x=>enPref.some(n=>x.name.includes(n)))
     ||v.find(x=>x.lang==='en-US'&&x.localService)
@@ -810,7 +878,6 @@ function buildVoiceSelectors(){
   const selEN=document.getElementById('voiceEN');
   if(!selJP||!selEN) return;
 
-  // 日本語音声リスト
   const jpVoices=v.filter(x=>x.lang.startsWith('ja'));
   selJP.innerHTML='';
   jpVoices.forEach(voice=>{
@@ -826,7 +893,6 @@ function buildVoiceSelectors(){
     selJP.appendChild(opt);
   }
 
-  // 英語音声リスト
   const enVoices=v.filter(x=>x.lang.startsWith('en'));
   selEN.innerHTML='';
   enVoices.forEach(voice=>{
@@ -865,7 +931,6 @@ function spk(t,l,r,cb){
   SY.cancel();
   const u=new SpeechSynthesisUtterance(t);
   u.lang=l; u.rate=r||1; u.volume=1;
-  // 日本語は少しゆっくり・自然なピッチに
   if(l==='ja-JP'){u.pitch=1.1; u.rate=(r||1)*0.9;}
   else {u.pitch=1;}
   if(l==='ja-JP'&&vJ) u.voice=vJ;
@@ -924,7 +989,6 @@ function runAuto(){
   });
 }
 
-
 // ===================== ② TIME BOMB =====================
 let bombOn=false, bombTimer=null, bombInterval=null;
 
@@ -940,6 +1004,7 @@ function startBomb(){
   const doStartTimer=()=>{
     const bar=document.getElementById('bombBar');
     const wrap=document.getElementById('bombWrap');
+    if(!wrap || !bar) return;
     wrap.className='bomb-timer-wrap on';
     bar.style.width='100%';
     bar.style.transition='none';
@@ -949,7 +1014,6 @@ function startBomb(){
     },50);
     bombTimer=setTimeout(()=>{
       if(revealed)return;
-      // 時間切れ！強制爆発
       const card=document.getElementById('mainCard');
       card.classList.add('bomb-explode');
       wrap.className='bomb-timer-wrap';
@@ -972,7 +1036,6 @@ function startBomb(){
   };
 
   if(readJP){
-    // 日本語を読み上げてからタイマー開始
     const c=deck[idx];
     if(!c)return;
     document.getElementById('mainCard').classList.add('sj');
@@ -981,7 +1044,6 @@ function startBomb(){
       if(!revealed) doStartTimer();
     });
   } else {
-    // 即タイマー開始
     doStartTimer();
   }
 }
@@ -1002,19 +1064,207 @@ function spkContrast(text, onEnd){
     spk(text,'en-US',r,onEnd);
     return;
   }
-  // 1.5倍速 → 1.0倍速
   spk(text,'en-US',1.5,()=>{
     setTimeout(()=>spk(text,'en-US',1.0,onEnd),300);
   });
 }
 
-// contrastTgl onchange
 document.addEventListener('DOMContentLoaded',()=>{
   const ct=document.getElementById('contrastTgl');
   if(ct) ct.addEventListener('change',()=>{
     document.getElementById('contrastInfo').style.display=ct.checked?'block':'none';
   });
 });
+
+// ===================== FIREBASE =====================
+const firebaseConfig = {
+  apiKey: "AIzaSyARvjWhmhykDZgFijIHUY68USiWw7fxk10",
+  authDomain: "englishbootcamp-8f5d9.firebaseapp.com",
+  projectId: "englishbootcamp-8f5d9",
+  storageBucket: "englishbootcamp-8f5d9.firebasestorage.app",
+  messagingSenderId: "604343778658",
+  appId: "1:604343778658:web:95ede593eb7bb8bd32c03b"
+};
+let fbApp, fbAuth, fbDb;
+try {
+  fbApp = firebase.initializeApp(firebaseConfig);
+  fbAuth = firebase.auth();
+  fbDb = firebase.firestore();
+} catch(e){ console.warn('Firebase init failed:', e); }
+
+// ===================== AUTH STATE =====================
+let currentUser = null;
+let historyCache = {};
+
+if(fbAuth){
+  fbAuth.onAuthStateChanged(user => {
+    currentUser = user;
+    if(user){
+      updateUserBar(user);
+      loadHistory();
+    } else {
+      clearUserBar();
+    }
+  });
+}
+
+function updateUserBar(user){
+  const bar = document.getElementById('userBar');
+  const wrap = document.getElementById('loginBtnWrap');
+  const av = document.getElementById('userAvatar');
+  const em = document.getElementById('userEmail');
+  if(bar){ bar.classList.remove('hidden'); }
+  if(wrap){ wrap.style.display='none'; }
+  if(av){ av.textContent=(user.email||'?')[0].toUpperCase(); }
+  if(em){ em.textContent=user.email||''; }
+  updateHistSummary();
+}
+function clearUserBar(){
+  historyCache={};
+  const bar=document.getElementById('userBar');
+  const wrap=document.getElementById('loginBtnWrap');
+  if(bar) bar.classList.add('hidden');
+  if(wrap) wrap.style.display='flex';
+  updateHistSummary();
+}
+function updateHistSummary(){
+  const el=document.getElementById('histSummary');
+  if(!el) return;
+  if(!currentUser){ el.textContent='ログインすると履歴が保存されます'; return; }
+  const keys=Object.keys(historyCache);
+  const totalOk=keys.reduce((s,k)=>s+(historyCache[k].ok||0),0);
+  const totalNg=keys.reduce((s,k)=>s+(historyCache[k].ng||0),0);
+  el.innerHTML=`学習済み: ${keys.length}枚 / <span style="color:var(--grn)">○${totalOk}</span> <span style="color:var(--red)">×${totalNg}</span>`;
+}
+
+// ===================== AUTH UI =====================
+let authTab='login';
+function showAuthModal(){ const o=document.getElementById('authOverlay');if(o)o.className='auth-overlay on'; }
+function hideAuthModal(){ const o=document.getElementById('authOverlay');if(o)o.className='auth-overlay'; }
+function switchAuthTab(tab){
+  authTab=tab;
+  document.getElementById('tabLogin').className='auth-tab'+(tab==='login'?' active':'');
+  document.getElementById('tabRegister').className='auth-tab'+(tab==='register'?' active':'');
+  document.getElementById('btnAuthSubmit').textContent=tab==='login'?'ログイン':'新規登録';
+  document.getElementById('authError').textContent='';
+}
+async function doAuth(){
+  const email=document.getElementById('authEmail').value.trim();
+  const pass=document.getElementById('authPass').value;
+  const btn=document.getElementById('btnAuthSubmit');
+  const errEl=document.getElementById('authError');
+  if(!email||!pass){ errEl.textContent='メールアドレスとパスワードを入力してください'; return; }
+  btn.disabled=true; errEl.textContent='';
+  try{
+    if(authTab==='login'){
+      await fbAuth.signInWithEmailAndPassword(email,pass);
+    } else {
+      await fbAuth.createUserWithEmailAndPassword(email,pass);
+    }
+    hideAuthModal();
+  } catch(e){
+    const msgs={'auth/user-not-found':'メールアドレスが見つかりません','auth/wrong-password':'パスワードが違います','auth/email-already-in-use':'このメールアドレスは既に使用されています','auth/weak-password':'パスワードは6文字以上にしてください','auth/invalid-email':'メールアドレスの形式が正しくありません'};
+    errEl.textContent=msgs[e.code]||e.message;
+  }
+  btn.disabled=false;
+}
+async function doSignOut(){
+  if(fbAuth) await fbAuth.signOut();
+}
+
+document.addEventListener('keydown', e=>{
+  if(document.getElementById('authOverlay')?.classList.contains('on') && e.key==='Enter') doAuth();
+});
+
+// ===================== HISTORY =====================
+function makeCardKey(card){
+  const str=`${curApp}_${(card.ja||'').trim()}`;
+  let h=5381;
+  for(let i=0;i<str.length;i++){h=((h<<5)+h)+str.charCodeAt(i);h&=0x7fffffff;}
+  return h.toString(36);
+}
+
+async function loadHistory(){
+  if(!currentUser||!fbDb) return;
+  try{
+    const snap=await fbDb.collection('users').doc(currentUser.uid).collection('cards').get();
+    snap.forEach(doc=>{ historyCache[doc.id]=doc.data(); });
+    updateHistSummary();
+    const st=document.getElementById('userStats');
+    if(st) st.textContent='';
+  } catch(e){ console.warn('loadHistory error:',e); }
+}
+
+function updateHistoryLocal(cardKey, isOk){
+  const h=historyCache[cardKey]||{ok:0,ng:0,lastNg:null,streak:0};
+  if(isOk){ h.ok=(h.ok||0)+1; h.streak=(h.streak||0)+1; }
+  else { h.ng=(h.ng||0)+1; h.lastNg=Date.now(); h.streak=0; }
+  historyCache[cardKey]=h;
+  return h;
+}
+
+async function saveHistoryToDb(cardKey, h){
+  if(!currentUser||!fbDb) return;
+  try{
+    await fbDb.collection('users').doc(currentUser.uid).collection('cards').doc(cardKey).set(h);
+  } catch(e){ console.warn('saveHistory error:',e); }
+}
+
+async function confirmResetHistory(){
+  if(!currentUser){ alert('ログインが必要です'); return; }
+  if(!confirm('学習履歴をすべてリセットしますか？\nこの操作は取り消せません。')) return;
+  
+  historyCache={};
+  try{
+    const snap=await fbDb.collection('users').doc(currentUser.uid).collection('cards').get();
+    const docs = snap.docs;
+    if (docs.length === 0) {
+      updateHistSummary();
+      alert('リセットする履歴はありません。');
+      return;
+    }
+    
+    // Firestore制限（500件）を安全に回避するためのバッチ分割処理
+    const chunkSize = 400;
+    for (let i = 0; i < docs.length; i += chunkSize) {
+      const chunk = docs.slice(i, i + chunkSize);
+      const batch = fbDb.batch();
+      chunk.forEach(doc => batch.delete(doc.ref));
+      await batch.commit();
+    }
+    
+    updateHistSummary();
+    alert('すべての学習履歴をリセットしました。');
+  } catch(e){ 
+    console.warn('resetHistory error:', e); 
+    alert('履歴リセット中にエラーが発生しました。');
+  }
+}
+
+// ===================== WEIGHTED SHUFFLE =====================
+function calcWeight(cardKey){
+  const h=historyCache[cardKey];
+  if(!h||(h.ok||0)+(h.ng||0)===0) return 8; // 未出題：中優先
+  const streak=h.streak||0;
+  if(streak>=5) return 0.3; // 連続○5回：極低
+  if(streak>=3) return 1.0; // 連続○3回：低
+  let w=10+(h.ng||0)*1.5;
+  if(h.lastNg){
+    const hoursAgo=(Date.now()-h.lastNg)/3600000;
+    if(hoursAgo<24) w*=3;       // 24時間以内の×：3倍
+    else if(hoursAgo<72) w*=2;  // 3日以内：2倍
+    else if(hoursAgo<168) w*=1.5; // 7日以内：1.5倍
+  }
+  return Math.max(0.1,w);
+}
+
+function weightedShuffle(cards){
+  return [...cards].sort((a,b)=>{
+    const wa=calcWeight(a.key||makeCardKey(a))*(0.5+Math.random());
+    const wb=calcWeight(b.key||makeCardKey(b))*(0.5+Math.random());
+    return wb-wa;
+  });
+}
 
 // ===================== KEYBOARD =====================
 document.addEventListener('keydown',e=>{
@@ -1027,5 +1277,28 @@ document.addEventListener('keydown',e=>{
   else if(e.code==='KeyB')spkE();
 });
 </script>
+
+<!-- AUTH MODAL -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-modal">
+    <div class="auth-logo">EXECUTIVE BOOTCAMP</div>
+    <div class="auth-sub">ログインで学習履歴・重み付け学習が有効になります</div>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">ログイン</button>
+      <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">新規登録</button>
+    </div>
+    <div class="auth-field">
+      <label>メールアドレス</label>
+      <input type="email" id="authEmail" placeholder="example@email.com" autocomplete="email">
+    </div>
+    <div class="auth-field">
+      <label>パスワード（6文字以上）</label>
+      <input type="password" id="authPass" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <div class="auth-error" id="authError"></div>
+    <button class="btn-auth-submit" id="btnAuthSubmit" onclick="doAuth()">ログイン</button>
+    <button class="btn-guest" onclick="hideAuthModal()">ゲストとして使う（履歴は保存されません）</button>
+  </div>
+</div>
 </body>
 </html>
