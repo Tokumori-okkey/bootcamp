@@ -310,8 +310,8 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
     <div class="bomb-row">
       <span class="bomb-label">⏱️ 制限時間</span>
       <div class="t-row" style="flex:1;">
-        <input type="range" id="bombSec" min="1" max="5" step=".5" value="2.5" oninput="updV('bombSec','bombSecVal','s')">
-        <span class="t-val" id="bombSecVal">2.5s</span>
+        <input type="range" id="bombSec" min=".5" max="5" step=".5" value="2" oninput="updV('bombSec','bombSecVal','s')">
+        <span class="t-val" id="bombSecVal">2s</span>
       </div>
     </div>
     <div class="bomb-row" style="margin-top:6px;">
@@ -721,8 +721,8 @@ function startDeck(d){
   }
   rawCards.forEach(c=>{ c.key=makeCardKey(c); });
   
-  // ログイン済みの場合に重み付きソート。順番通り（!d.shuf）でも、未ログインでなければ重み順を考慮して最適にソートする仕様
-  if(currentUser && Object.keys(historyCache).length>0){
+  // 【修正】ログイン中、かつ「シャッフル」モード（d.shufがtrue）の時のみ忘却曲線の重み付けを発動
+  if(currentUser && Object.keys(historyCache).length>0 && d.shuf){
     deck=weightedShuffle(rawCards);
   } else {
     deck=d.shuf ? shuf(rawCards) : rawCards;
@@ -743,7 +743,6 @@ function startDeck(d){
   document.getElementById('kbdRow').className='kbd-row on';
   renderGrid(); renderCard();
 }
-
 function renderCard(){
   if(idx>=deck.length){showComplete();return;}
   SY.cancel();
@@ -1023,6 +1022,14 @@ function startBomb(){
       document.getElementById('mainCard').style.cursor='default';
       const r=parseFloat(document.getElementById('spRate').value);
       const bombCard=deck[idx];
+      
+      // 【追加・リアルタイム反映】時間切れの瞬間にローカルとFirestoreに「×（NG）」を即時反映
+      if(bombCard && bombCard.key && currentUser){
+        const h = updateHistoryLocal(bombCard.key, false);
+        saveHistoryToDb(bombCard.key, h);
+        updateHistSummary();
+      }
+      
       setTimeout(()=>{
         card.classList.remove('bomb-explode');
         ngCnt++;
@@ -1046,8 +1053,7 @@ function startBomb(){
   } else {
     doStartTimer();
   }
-}
-function clearBomb(){
+}function clearBomb(){
   clearTimeout(bombTimer);
   clearInterval(bombInterval);
   const bw=document.getElementById('bombWrap');
