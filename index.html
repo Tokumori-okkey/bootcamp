@@ -1265,11 +1265,12 @@ function calcWeight(cardKey){
 }
 
 function weightedShuffle(cards){
-  return [...cards].sort((a,b)=>{
-    const wa=calcWeight(a.key||makeCardKey(a))*(0.5+Math.random());
-    const wb=calcWeight(b.key||makeCardKey(b))*(0.5+Math.random());
-    return wb-wa;
+  const mapped = cards.map(c => {
+    const weight = calcWeight(c.key || makeCardKey(c)) * (0.5 + Math.random());
+    return { card: c, weight: weight };
   });
+  mapped.sort((a, b) => b.weight - a.weight);
+  return mapped.map(x => x.card);
 }
 
 // ===================== KEYBOARD =====================
