@@ -696,31 +696,100 @@ function showCardHint() {
     if (h && (h.ng || 0) >= 1) {
       const subEl = document.getElementById('cSub');
       if (subEl) {
-        subEl.innerHTML = `<span style="color:var(--red); font-weight:bold;">⚠️ 化石化注意: ${getGrammarWarning(c.tag)}</span>`;
+        // カードオブジェクト(c)全体を渡して高精度に自動判定
+        subEl.innerHTML = `<span style="color:var(--red); font-weight:bold;">⚠️ 化石化注意: ${getGrammarWarning(c)}</span>`;
       }
     }
   }
 }
 
-// ユニット番号から化石化警告用のテキストを返す辞書関数
-function getGrammarWarning(tag) {
-  if (!tag) return "語順・前置詞の配置";
-  const num = parseInt(tag.replace(/[^0-9]/g, ''));
-  if (tag.startsWith('U')) {
-    // どんどん話す（中1〜中3）のユニット特異的アラート
-    const warnings = {
-      12: "Whose構造 (Whose + 名詞)",
-      28: "現在完了 継続 (have been for/since)",
-      30: "現在完了 経験 (have met once)",
-      33: "受動態 (be + 過去分詞)",
-      34: "受動態の疑問・否定",
-      15: "which選択構造",
-      22: "現在進行形",
-      23: "There is/are 単複の不一致"
+// ユニットの文法概念と、日本人特有の「化石化バグ」を完全マッピングした辞書関数
+function getGrammarWarning(c) {
+  if (!c) return "語順・前置詞の配置";
+  
+  const tag = c.tag || "";
+  const sub = c.sub || "";
+  
+  // 1. どんどん話す（dondondo）の動的警告生成（セクションタイトルから自動マッピング）
+  if (curApp === 'dondondo') {
+    if (!sub) return "基礎語順の確認";
+    
+    const trapMap = {
+      "this / that": "指示代名詞(this/that)と対応する名詞の単複不一致",
+      "these / those": "複数代名詞(these/those)と複数形名詞[-s]の一致",
+      "What is (are) ～?": "代名詞（It / They）の変換ラグ・主述の一致",
+      "人称代名詞の主格": "主格代名詞の選定（He/She/They）ミス",
+      "人称代名詞 of the s": "所有格代名詞（his/her/their）の混同",
+      "人称代名詞の所有格": "所有格代名詞（his/her/their）の混同",
+      "Who is (are) ～?": "疑問代名詞Whoと対応する主格代名詞の選定",
+      "一般動詞": "3人称単数現在形「動詞[-s]」の深刻な落とし穴",
+      "how many (much) ～": "可算名詞(many)・不可算名詞(much)と名詞単複の一致",
+      "人称代名詞の目的格": "目的格代名詞（him/her/them）の選定・転置ミス",
+      "人称代名詞の独立所有格": "所有代名詞（mine/yours/theirs）のバグ",
+      "命令文 / Let's～": "動詞原形スタート、否定命令Don'tの脱落注意",
+      "whose": "Whose構造（Whose + 名詞 / Whose is...）の区別",
+      "where": "Where疑問文における助動詞（do/does/is/are）の脱落",
+      "when": "When疑問文と過去時制（did）の選定",
+      "which": "Which構造（Which is... / Which + 名詞）の選定",
+      "it": "状況・天候・時間の主語「It」の不自然な脱落",
+      "What time～?": "時間確認構造と対応するIt/Weの主語選定",
+      "how": "手段・状態の疑問詞Howの構文（by/withなど前置詞連動）",
+      "How old (tall) ～?": "尺度疑問詞（How + 形容詞）の構造崩れ",
+      "疑問詞主語の who": "Whoが主語の際の「3単現扱い」・助動詞不必要ルール",
+      "can": "助動詞canの後ろの「動詞原形」ルール徹底",
+      "現在進行形": "現在進行形（be + -ing）におけるbe動詞の脱落",
+      "There is (are) ～": "There is/areの後の主語に対する「単複の一致」",
+      "過去形": "過去時制（規則動詞-ed・不規則変化）への脳内切り替え",
+      "過去進行形": "過去進行形（was/were + -ing）の時制と単複一致",
+      "when節": "when節内の時制（過去形）と主節の時制一致（過去・過去）",
+      "一般動詞のSVC": "一般動詞のSVC（looks/tastes/became + 形容詞）",
+      "SVC+to(for)": "第4文型（SVOO）から第3文型（SVO+to/for）への書き換え語順",
+      "SVOO": "第5文型混同注意！第4文型（SVOO：人＋物）の語順",
+      "will（単純未来）": "助動詞willの後の「動詞原形」・未来アスペクト",
+      "will（意志未来）": "意志のwillと予定のbe going toのニュアンス混同",
+      "will（依頼）／shall（申し出・誘い）": "依頼（Will you?）と提案（Shall I? / Shall we?）の使い分け",
+      "be going to": "be going toにおけるbe動詞の脱落や動詞原形忘れ",
+      "must／may": "助動詞must/mayの後ろの「動詞原形」制約",
+      "have to": "have to（3単現has to / 過去had to）の時制変化ミス",
+      "be able to": "be able toの時制変化（was/were able to / will be able to）",
+      "感嘆文": "感嘆文（How + 形容詞 / What + 名詞）の極限語順転置",
+      "不定詞ー名詞的用法": "名詞的用法（to + 動詞原形）の主語・目的語配置",
+      "不定詞ー副詞的用法（目的）": "目的を表す副詞的用法（to + 動詞原形）",
+      "不定詞ー副詞的用法（感情の原因）": "感情の原因（happy to see... / surprised to hear...）",
+      "不定詞ー形容詞的用法": "形容詞的用法（something to drink / write with等の末尾前置詞）",
+      "動名詞": "動名詞（-ing）と不定詞（to-）をとる他動詞の選択ミス",
+      "原級比較": "原級比較（as + 形容詞/副詞の原級 + as）の構文維持",
+      "比較級ーer形": "比較級（-er + than）の不規則変化（better, heavier）",
+      "最上級ーest形": "最上級（the + -est + in/of）の定冠詞the・前置詞選択",
+      "比較級ーmore": "長音節語の比較級（more + 原級 + than）",
+      "最上級ーmost": "長音節語の最上級（the most + 原級 + in/of）",
+      "比較級ー副詞": "副詞の比較級（more slowly than / faster than）",
+      "最上級ー副詞": "副詞の最上級（the earliest / most carefully）",
+      "比較級、最上級を使った疑問詞の文": "選択比較疑問文（Which is bigger, A or B?）の語順",
+      "現在完了ー継続": "現在完了[継続]（have + 過去分詞 + for/since）の期間指定バグ",
+      "現在完了ー完了": "現在完了[完了]（have already/just + 過去分詞）の副詞位置",
+      "現在完了ー経験": "現在完了[経験]（have ever/never + 過去分詞）の度数副詞位置",
+      "現在完了進行形": "現在完了進行形（have been -ing）の継続動作アスペクト",
+      "that節": "that節内の時制の一致（主節が過去なら従属節も過去形）",
+      "受け身１": "受動態（be + 過去分詞）のbe動詞時制・不規則動詞変化",
+      "受け身２": "受動態の応用（疑問・否定・by以外の前置詞選択）"
     };
-    return warnings[num] || "基礎語順の確認";
+    return trapMap[sub] || `${sub}の文法構造`;
   }
-  return "前置詞の適切な選択";
+  
+  // 2. 大特訓（daitokku）の動的警告生成（Unit番号から自動判定）
+  if (curApp === 'daitokku') {
+    if (!tag) return "ビジネスアドリブ表現";
+    const unitNum = parseInt(tag.split('-')[0].replace(/[^0-9]/g, ''));
+    return `実践ビジネス表現・語彙（大特訓 Unit ${unitNum}）`;
+  }
+  
+  // 3. 金フレ（kinfure）の警告
+  if (curApp === 'kinfure') {
+    return "金フレ - 前置詞の適切なコロケーション結合";
+  }
+
+  return "語順・前置詞の配置";
 }
 function dondoDecks(){
   const WEEKS=[
