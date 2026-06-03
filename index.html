@@ -703,41 +703,42 @@ function showCardHint() {
   }
 }
 
-// ユニットの文法概念と、日本人特有の「化石化バグ」を完全マッピングした辞書関数
+// 教材・Unit・単語番号から、日本人特有の「化石化バグ」を完全自動マッピングする極限辞書関数
 function getGrammarWarning(c) {
   if (!c) return "語順・前置詞の配置";
   
   const tag = c.tag || "";
   const sub = c.sub || "";
   
-  // 1. どんどん話す（dondondo）の動的警告生成（セクションタイトルから自動マッピング）
+  // 1. どんどん話す（dondondo）の動的警告生成（c.subから自動マッピング）
   if (curApp === 'dondondo') {
     if (!sub) return "基礎語順の確認";
     
     const trapMap = {
-      "this / that": "指示代名詞(this/that)と対応する名詞の単複不一致",
+      "this / that": "指示代名詞(this/that)と名詞の「単複不一致」に注意！",
       "these / those": "複数代名詞(these/those)と複数形名詞[-s]の一致",
       "What is (are) ～?": "代名詞（It / They）の変換ラグ・主述の一致",
-      "人称代名詞の主格": "主格代名詞の選定（He/She/They）ミス",
-      "人称代名詞 of the s": "所有格代名詞（his/her/their）の混同",
-      "人称代名詞の所有格": "所有格代名詞（his/her/their）の混同",
+      "人称代名詞の主格": "主格代名詞の選定（He/She/They）ミスに注意！",
+      "人称代名詞 of the s": "所有格代名詞（his/her/their）の混同に注意！",
+      "人称代名詞の所有格": "所有格代名詞（his/her/their）の混同に注意！",
       "Who is (are) ～?": "疑問代名詞Whoと対応する主格代名詞の選定",
       "一般動詞": "3人称単数現在形「動詞[-s]」の深刻な落とし穴",
       "how many (much) ～": "可算名詞(many)・不可算名詞(much)と名詞単複の一致",
-      "人称代名詞の目的格": "目的格代名詞（him/her/them）の選定・転置ミス",
-      "人称代名詞の独立所有格": "所有代名詞（mine/yours/theirs）のバグ",
+      "人称代名詞の目的格": "目的格代名詞（him/her/them）の選定・転置ミスに注意！",
+      "人称代名詞の独立所有格": "所有代名詞（mine/yours/theirs）のバグに注意！",
       "命令文 / Let's～": "動詞原形スタート、否定命令Don'tの脱落注意",
       "whose": "Whose構造（Whose + 名詞 / Whose is...）の区別",
       "where": "Where疑問文における助動詞（do/does/is/are）の脱落",
       "when": "When疑問文と過去時制（did）の選定",
       "which": "Which構造（Which is... / Which + 名詞）の選定",
-      "it": "状況・天候・時間の主語「It」の不自然な脱落",
+      "it": "状況・天候・時間の主語「It」の不自然な脱落に注意！",
       "What time～?": "時間確認構造と対応するIt/Weの主語選定",
       "how": "手段・状態の疑問詞Howの構文（by/withなど前置詞連動）",
       "How old (tall) ～?": "尺度疑問詞（How + 形容詞）の構造崩れ",
+      "疑問詞主語 of who": "Whoが主語の際の「3単現扱い」・助動詞不必要ルール",
       "疑問詞主語の who": "Whoが主語の際の「3単現扱い」・助動詞不必要ルール",
       "can": "助動詞canの後ろの「動詞原形」ルール徹底",
-      "現在進行形": "現在進行形（be + -ing）におけるbe動詞の脱落",
+      "現在進行形": "現在進行形（be + -ing）におけるbe動詞の脱落に注意！",
       "There is (are) ～": "There is/areの後の主語に対する「単複の一致」",
       "過去形": "過去時制（規則動詞-ed・不規則変化）への脳内切り替え",
       "過去進行形": "過去進行形（was/were + -ing）の時制と単複一致",
@@ -777,16 +778,60 @@ function getGrammarWarning(c) {
     return trapMap[sub] || `${sub}の文法構造`;
   }
   
-  // 2. 大特訓（daitokku）の動的警告生成（Unit番号から自動判定）
+  // 2. 大特訓（daitokku）の動的警告生成（Unitごとの文法焦点を自動解析）
   if (curApp === 'daitokku') {
     if (!tag) return "ビジネスアドリブ表現";
     const unitNum = parseInt(tag.split('-')[0].replace(/[^0-9]/g, ''));
-    return `実践ビジネス表現・語彙（大特訓 Unit ${unitNum}）`;
+    
+    // 大特訓のUnit別特異的ターゲット
+    const daitokkuTraps = {
+      1: "基本時制・疑問文の語順崩れに注意！",
+      2: "SVC文型（looks/seemed + 形容詞）の語尾バグ",
+      3: "慣用・交渉移行フレーズの瞬発起動",
+      4: "SVOO（授与動詞：人 + 物）の語順転置に注意！",
+      5: "使役・知覚（makes me happy / left open）の補語選択",
+      6: "否定・強調（not at all / hardly ever）の配置",
+      7: "命令・依頼文の動詞スタート制約",
+      11: "付加疑問文（isn't it / aren't they）の時制一致",
+      12: "疑問代名詞Who/Whichと主述の一致",
+      13: "Whose構造（独立所有格：theirs / hers）の混同防止",
+      17: "尺度疑問詞（How long / How soon）の数値・単位配置",
+      22: "現在完了：完了・結果（already / yet）の配置位置",
+      23: "現在完了進行形（have been -ing）の継続アスペクト",
+      24: "現在完了：経験（have been to / never）の頻度副詞位置",
+      28: "義務・必要（must / have to / got to）の強度識別",
+      31: "不定詞の否定形（pretended not to）の配置位置",
+      36: "関係代名詞の主格（who / which）と先行詞の単複一致",
+      39: "関係代名詞の目的格（whom / which）の省略と前置詞末尾配置",
+      40: "所有格の関係代名詞（whose）の先行詞修飾関係",
+      43: "受動態（be + 過去分詞 + by/with）の時制バグ防止",
+      46: "仮定法過去（If I were you / I wish）の時制後退ルール",
+      47: "仮定法過去完了（If I had known... I would have done）",
+      48: "仮定法現在・混合（as if / It's time...）の時制処理",
+      55: "倍数比較表現（X times as ... as / the same ... as）",
+      56: "比較級の応用（much more / more ... than）の修飾",
+      57: "最上級の強調（the most... / one of the most...）"
+    };
+    
+    return daitokkuTraps[unitNum] || `Unit ${unitNum}：実践ビジネス構文と前置詞の結合`;
   }
   
-  // 3. 金フレ（kinfure）の警告
+  // 3. 金フレ（kinfure）の動的警告生成（単語IDからレベル・Partを判定してターゲット提示）
   if (curApp === 'kinfure') {
-    return "金フレ - 前置詞の適切なコロケーション結合";
+    const id = c.cardId;
+    if (!id) return "金フレ - 前置詞の適切なコロケーション結合";
+    
+    if (id <= 400) {
+      return `金フレ [600点〜730点級] ➡ 基本動詞と前置詞（complain [ABOUT] / register [FOR] 等）のコロケーション結合！`;
+    } else if (id >= 401 && id <= 500) {
+      return `金フレ [Part 1 写真描写] ➡ 空間配置・位置関係・動作状態（leaning [AGAINST] / stacked [ON] 等）の物理的結合！`;
+    } else if (id >= 501 && id <= 800) {
+      return `金フレ [860点級] ➡ エグゼクティブ意思決定・組織マネジメント必須動詞の結合価！`;
+    } else if (id >= 801 && id <= 1000) {
+      return `金フレ [990点級・多義語] ➡ 難関ビジネス連語・文脈に合わせた前置詞の瞬発選定！`;
+    } else {
+      return `金フレ [難関語彙・交渉表現] ➡ C1交渉の盤面を支配する機能語・結合語彙の正確なアウトプット！`;
+    }
   }
 
   return "語順・前置詞の配置";
