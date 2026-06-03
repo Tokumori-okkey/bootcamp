@@ -213,7 +213,7 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 </head>
 <body>
 <div class="logo">EXECUTIVE BOOTCAMP</div>
-<div class="logo-sub">FLASHCARD SYSTEM v5.0</div>
+<div class="logo-sub">FLASHCARD SYSTEM v6.0</div>
 
 <!-- VOICE SELECTOR -->
 <div class="voice-panel" id="voicePanel">
@@ -268,15 +268,36 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
       <button class="filter-close" onclick="hideFilter()">✕ 閉じる</button>
     </div>
     <div class="filter-body-scroll" id="filterBody"></div>
-    <div class="filter-modal-footer">
-      <div class="filter-count-row">
-        <div class="filter-count">選択中：<span id="filterCountTxt">0</span>項目 / <span id="filterCardCountTxt">0</span>枚</div>
-        <div class="filter-start-btns">
-          <button class="filter-start-btn seq" id="filterStartSeq" onclick="startCustomDeck(false)" disabled>▶ 順番通り</button>
-          <button class="filter-start-btn rnd" id="filterStartRnd" onclick="startCustomDeck(true)" disabled>🔀 シャッフル</button>
-        </div>
+<div class="filter-modal-footer">
+  <div class="filter-count-row" style="flex-direction: column; gap: 12px; align-items: stretch;">
+    <!-- 状況表示および枚数設定 -->
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+      <div class="filter-count" style="font-size: 0.65rem; color: var(--dim);">
+        選択中: <span id="filterCountTxt">0</span>項目 / 全 <span id="filterCardCountTxt">0</span>枚
+      </div>
+      <!-- リミット入力用UI -->
+      <div style="display: flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;">
+        <span style="color: var(--dim);">🎯 Smart Cap Limit:</span>
+        <input type="number" id="smartCapInput" value="50" min="5" max="500" step="5" style="width: 55px; background: var(--card); border: 1px solid var(--bdr); border-radius: 5px; color: var(--txt); padding: 3px 6px; font-size: 0.65rem; text-align: center; outline: none;">
+        <span style="color: var(--dim);">枚</span>
       </div>
     </div>
+    
+    <!-- 開始ボタン群 -->
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <!-- 通常の全出題（既存仕様） -->
+      <div style="display: flex; gap: 8px;">
+        <button class="filter-start-btn seq" id="filterStartSeq" onclick="startCustomDeck(false)" style="flex: 1; padding: 8px 12px; font-size: 0.85rem;" disabled>▶ 全件 順番通り</button>
+        <button class="filter-start-btn rnd" id="filterStartRnd" onclick="startCustomDeck(true)" style="flex: 1; padding: 8px 12px; font-size: 0.85rem;" disabled>🔀 全件 シャッフル</button>
+      </div>
+      <!-- 厳選出題（新規追加仕様） -->
+      <div style="display: flex; gap: 8px;">
+        <button class="filter-start-btn" id="filterStartSmartSeq" onclick="startSmartDueDeck(false)" style="flex: 1; padding: 8px 12px; font-size: 0.85rem; background: rgba(240,192,64,.15); border: 1px solid var(--acc); color: var(--acc);" disabled>🎯 Smart Due (順)</button>
+        <button class="filter-start-btn" id="filterStartSmartRnd" onclick="startSmartDueDeck(true)" style="flex: 1; padding: 8px 12px; font-size: 0.85rem; background: rgba(240,192,64,.15); border: 1px solid var(--acc); color: var(--acc);" disabled>🎯 Smart Due (シャッフル)</button>
+      </div>
+    </div>
+  </div>
+</div>
   </div>
 </div>
 
@@ -533,6 +554,12 @@ function updateFilterCount(){
   const disabled = cards.length === 0;
   document.getElementById('filterStartSeq').disabled = disabled;
   document.getElementById('filterStartRnd').disabled = disabled;
+  
+  // 新設ボタンのdisabled属性同期
+  const btnSmartSeq = document.getElementById('filterStartSmartSeq');
+  const btnSmartRnd = document.getElementById('filterStartSmartRnd');
+  if (btnSmartSeq) btnSmartSeq.disabled = disabled;
+  if (btnSmartRnd) btnSmartRnd.disabled = disabled;
 }
 
 function getFilteredCards(){
@@ -579,6 +606,43 @@ function startCustomDeck(shuffle){
     cards,
     shuf: shuffle
   };
+  hideFilter();
+  startDeck(d);
+}
+
+// 【新規実装】Smart Due 厳選自動抽出ロジック
+function startSmartDueDeck(shuffle) {
+  let cards = getFilteredCards();
+  if (cards.length === 0) return;
+
+  // 1. 各カードに一意の暗号キーを動的割り当て
+  cards.forEach(c => {
+    c.key = c.key || makeCardKey(c);
+  });
+
+  // 2. 蓄積履歴の calcWeight（重み）に基づいて降順ソート（弱点カードを先頭へ）
+  cards.sort((a, b) => {
+    return calcWeight(b.key) - calcWeight(a.key);
+  });
+
+  // 3. Smart Cap Limit（抽出上限）の入力値を取得し、5〜1000枚の範囲でクランプ
+  const limitInput = document.getElementById('smartCapInput');
+  let limit = parseInt(limitInput ? limitInput.value : 50) || 50;
+  limit = Math.max(5, Math.min(limit, 1000));
+
+  // 4. 最も復習の緊急性が高い「上位 N 枚」を厳選切り出し
+  const slicedCards = cards.slice(0, limit);
+
+  // 5. 厳選抽出用のセッション情報を作成して再生
+  const label = shuffle ? '🎯 Smart Due (シャッフル)' : '🎯 Smart Due (順)';
+  const d = {
+    key: 'custom_smart',
+    label: `${label}`,
+    sub: `厳選 ${slicedCards.length}枚 / Limit: ${limit}枚`,
+    cards: slicedCards,
+    shuf: shuffle
+  };
+  
   hideFilter();
   startDeck(d);
 }
@@ -647,6 +711,7 @@ function kinDecks(){
 let curApp=null,curKey=null;
 let deck=[],wrong=[],idx=0,okCnt=0,ngCnt=0,revealed=false;
 let isAuto=false,aTimer=null,cdTimer=null,cdTotal=0,cdLeft=0;
+let activeDeck=null; // 追加：現在の実行中デッキ情報を保持する変数
 
 function selApp(app){
   curApp=app;curKey=null;
@@ -655,7 +720,7 @@ function selApp(app){
   document.getElementById('btnKin').className='app-btn'+(app==='kinfure'?' kin':'');
   document.getElementById('welcome').style.display='none';
   document.getElementById('deckPanel').style.display='block';
-  document.getElementById('deckTitle').textContent=app==='dondondo'?'📚 どんどん話す — Week を選択':app==='daitokku'?'💬 大特訓 — Unit を選択':'⚡ 金フレ — 範囲を選択';
+  document.getElementById('deckTitle').textContent=app==='dondondo'?'📚 どんどん話す — カスタムフィルター':app==='daitokku'?'💬 大特訓 — カスタムフィルター':'⚡ 金フレ — 範囲を選択';
   document.getElementById('autoPanel').style.display='none';
   document.getElementById('progWrap').style.display='none';
   document.getElementById('statsRow').style.display='none';
@@ -664,36 +729,37 @@ function selApp(app){
   document.getElementById('judgeRow').className='judge-row';
   document.getElementById('complete').className='complete';
   document.getElementById('kbdRow').className='kbd-row';
-  stopAuto(); hideFilter(); renderGrid();
+  stopAuto();
+  
+  // 【仕様改定】どんどん・大特訓の場合は選択時に自動でフィルターモーダルを展開
+  if(app==='dondondo' || app==='daitokku'){
+    showFilter();
+  } else {
+    hideFilter();
+  }
+  renderGrid();
 }
-
 function renderGrid(){
   const g=document.getElementById('deckGrid');
   if(!g) return;
   g.innerHTML='';
   if(curApp==='daitokku'){
     const cb=document.createElement('button');
-    cb.className='deck-btn'+(curKey==='custom'?' sel-b':'');
-    cb.style.cssText='grid-column:1/-1;background:rgba(64,144,224,.08);border-color:#4090e0;color:#4090e0;text-align:center;padding:10px;';
-    cb.innerHTML='🎯 カスタムフィルター（Unitを絞り込んで出題）<span class="deck-badge" style="text-align:center;display:block;margin-top:2px;">Unit 1〜80から自由に選択</span>';
+    cb.className='deck-btn'+(curKey==='custom'||curKey==='custom_smart'?' sel-b':'');
+    cb.style.cssText='grid-column:1/-1;background:rgba(64,144,224,.08);border-color:#4090e0;color:#4090e0;text-align:center;padding:18px 10px;font-size:0.85rem;font-weight:bold;';
+    cb.innerHTML='🎯 カスタムフィルターを開く<span class="deck-badge" style="text-align:center;display:block;margin-top:6px;font-size:0.65rem;">Unit 1〜80から自由に絞り込んで学習を開始</span>';
     cb.onclick=showFilter;
     g.appendChild(cb);
-    daitokuDecks().forEach(d=>g.appendChild(mkBtn(d)));
   } else if(curApp==='dondondo'){
-    const {WEEKS,SHUFFLE}=dondoDecks();
-    const customBtn=document.createElement('button');
-    customBtn.className='deck-btn'+(curKey==='custom'?' sel-b':'');
-    customBtn.style.cssText='grid-column:1/-1;background:rgba(64,144,224,.08);border-color:#4090e0;color:#4090e0;text-align:center;padding:10px;';
-    customBtn.innerHTML='🎯 カスタムフィルター（文法項目を絞り込んで出題）<span class="deck-badge" style="text-align:center;display:block;margin-top:2px;">中1全23項目 / 中2全34項目 / 中3全22項目から自由に選択</span>';
-    customBtn.onclick=showFilter;
-    g.appendChild(customBtn);
-    const lbl1=document.createElement('div'); lbl1.className='sec-label'; lbl1.textContent='📅 スケジュール順'; g.appendChild(lbl1);
-    WEEKS.forEach(d=>g.appendChild(mkBtn(d)));
-    const lbl2=document.createElement('div'); lbl2.className='sec-label'; lbl2.textContent='🔀 週別シャッフル'; g.appendChild(lbl2);
-    SHUFFLE.forEach(d=>g.appendChild(mkBtn(d)));
+    const cb=document.createElement('button');
+    cb.className='deck-btn'+(curKey==='custom'||curKey==='custom_smart'?' sel-b':'');
+    cb.style.cssText='grid-column:1/-1;background:rgba(64,144,224,.08);border-color:#4090e0;color:#4090e0;text-align:center;padding:18px 10px;font-size:0.85rem;font-weight:bold;';
+    cb.innerHTML='🎯 カスタムフィルターを開く<span class="deck-badge" style="text-align:center;display:block;margin-top:6px;font-size:0.65rem;">中1全23項目 / 中2全34項目 / 中3全22項目から自由に選択</span>';
+    cb.onclick=showFilter;
+    g.appendChild(cb);
   } else {
     const kb=document.createElement('button');
-    kb.className='deck-btn'+(curKey==='custom'?' sel':'');
+    kb.className='deck-btn'+(curKey==='custom'||curKey==='custom_smart'?' sel':'');
     kb.style.cssText='grid-column:1/-1;background:rgba(240,192,64,.08);border-color:var(--acc);color:var(--acc);text-align:center;padding:10px;';
     kb.innerHTML='🎯 カスタムフィルター（範囲を絞り込んで出題）<span class="deck-badge" style="text-align:center;display:block;margin-top:2px;">10枚単位で自由に選択（全1100枚対応）</span>';
     kb.onclick=showFilter;
@@ -710,6 +776,7 @@ function mkBtn(d){
 }
 
 function startDeck(d){
+  activeDeck=d; // 現在のセッションオブジェクトをキャッシュ
   curKey=d.key;
   let rawCards;
   if(curApp==='daitokku'){
@@ -825,17 +892,10 @@ function showComplete(){
   document.getElementById('btnRetry').disabled=!wrong.length;
 }
 function restartDeck(){
-  if(!curKey)return;
-  let d=null;
-  if(curApp==='daitokku'){
-    d=daitokuDecks().find(x=>x.key===curKey);
-  } else if(curApp==='dondondo'){
-    const {WEEKS,SHUFFLE}=dondoDecks();
-    d=[...WEEKS,...SHUFFLE].find(x=>x.key===curKey);
-  } else {
-    d=kinDecks().find(x=>x.key===curKey);
+  // activeDeck（現在の設定情報）がキャッシュされていれば、その条件で完全に再構築してスタート
+  if(activeDeck){
+    startDeck(activeDeck);
   }
-  if(d)startDeck(d);
 }
 function retryWrong(){
   if(!wrong.length)return;
