@@ -366,7 +366,12 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
     <div class="c-sub" id="cSub"></div>
     <button class="spk-j" onclick="event.stopPropagation();spkJ()" title="日本語">🔊</button>
     <div class="hint-lbl">🇯🇵 → 🇺🇸　タップ or Space で答えを見る</div>
-    <div class="jp" id="jpTxt"></div>
+<div class="jp" id="jpTxt"></div>
+    <!-- 新設：ヒント表示領域 -->
+    <div id="hintTxt" style="display:none; font-family:'JetBrains Mono',monospace; font-size:0.9rem; color:var(--blu); margin-top:14px; text-align:center; letter-spacing:1px; line-height:1.5;"></div>
+    <div style="text-align:center; margin-top:10px;">
+      <button class="btn-hint" id="btnHint" onclick="event.stopPropagation(); showCardHint()" style="display:inline-block; background:none; border:1px solid var(--bdr); border-radius:5px; color:var(--dim); font-family:'JetBrains Mono',monospace; font-size:0.6rem; padding:3px 8px; cursor:pointer;">💡 HINT (H)</button>
+    </div>
     <div class="en-wrap" id="enWrap"><div class="en" id="enTxt"></div></div>
     <div class="bomb-timer-wrap" id="bombWrap"><div class="bomb-timer-bar" id="bombBar"></div></div>
     <div class="hist-badge" id="histBadge" style="display:none"><span class="hist-ok" id="histOk"></span><span class="hist-ng" id="histNg"></span></div>
@@ -647,6 +652,76 @@ function startSmartDueDeck(shuffle) {
   startDeck(d);
 }
 
+  // 前置詞を検知してターゲット・スキャフォールディングを生成する関数
+function makeHintText(en) {
+  // お父様が躓きやすい英語の主要前置詞リスト
+  const preps = ['to', 'with', 'of', 'for', 'in', 'on', 'at', 'by', 'about', 'from', 'as', 'into', 'through', 'during', 'under'];
+  const words = en.split(' ');
+  
+  const hintWords = words.map(w => {
+    // 判定用に記号をトリミング
+    const clean = w.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"");
+    
+    // 前置詞である場合は、マスクせずに大文字ブラケット [ ] で囲んで強調
+    if (preps.includes(clean)) {
+      return `[${w.toUpperCase()}]`;
+    }
+    
+    // 2文字以下の極めて短い単語（a, is, it等）はそのまま表示
+    if (clean.length <= 2) return w;
+    
+    // 一般単語は頭文字のみ残してアスタリスクで伏字（フェーディング）
+    return w[0] + '_'.repeat(w.length - 1);
+  });
+  
+  return hintWords.join(' ');
+}
+
+// オンデマンドでカードにヒントを表示し、かつ化石化バグの注意喚起を連動させる関数
+function showCardHint() {
+  if (revealed || isAuto) return;
+  const c = deck[idx];
+  if (!c) return;
+  
+  const hintTxt = document.getElementById('hintTxt');
+  if (hintTxt) {
+    // 脳科学的ヒントテキストの生成・表示
+    hintTxt.textContent = makeHintText(c.en);
+    hintTxt.style.display = 'block';
+    
+    // 【提案③連動】過去に❌（NG）判定がある脆弱なカードの場合のみ、
+    // ユニットの文法バグ特性に基づいた化石化事前警告をサブタイトルに割り込ませる
+    const cardKey = c.key || makeCardKey(c);
+    const h = historyCache[cardKey];
+    if (h && (h.ng || 0) >= 1) {
+      const subEl = document.getElementById('cSub');
+      if (subEl) {
+        subEl.innerHTML = `<span style="color:var(--red); font-weight:bold;">⚠️ 化石化注意: ${getGrammarWarning(c.tag)}</span>`;
+      }
+    }
+  }
+}
+
+// ユニット番号から化石化警告用のテキストを返す辞書関数
+function getGrammarWarning(tag) {
+  if (!tag) return "語順・前置詞の配置";
+  const num = parseInt(tag.replace(/[^0-9]/g, ''));
+  if (tag.startsWith('U')) {
+    // どんどん話す（中1〜中3）のユニット特異的アラート
+    const warnings = {
+      12: "Whose構造 (Whose + 名詞)",
+      28: "現在完了 継続 (have been for/since)",
+      30: "現在完了 経験 (have met once)",
+      33: "受動態 (be + 過去分詞)",
+      34: "受動態の疑問・否定",
+      15: "which選択構造",
+      22: "現在進行形",
+      23: "There is/are 単複の不一致"
+    };
+    return warnings[num] || "基礎語順の確認";
+  }
+  return "前置詞の適切な選択";
+}
 function dondoDecks(){
   const WEEKS=[
     {key:'w1', label:'Week 1 / 中1 P1-6',       sub:'中1 Unit 1-6',   cards:c1u(r(1,6)),                    shuf:false},
@@ -816,8 +891,9 @@ function renderCard(){
   revealed=false;
   clearBomb();
   const c=deck[idx];
-  document.getElementById('jpTxt').textContent=c.ja;
+document.getElementById('jpTxt').textContent=c.ja;
   document.getElementById('enTxt').textContent=c.en;
+  document.getElementById('hintTxt').style.display='none'; // ヒントを非表示にリセット
   document.getElementById('cTag').textContent=c.tag;
   document.getElementById('cSub').textContent=c.sub;
   document.getElementById('enWrap').className='en-wrap';
@@ -1336,7 +1412,8 @@ function weightedShuffle(cards){
 // ===================== KEYBOARD =====================
 document.addEventListener('keydown',e=>{
   if(e.target.tagName==='INPUT')return;
-  if(e.code==='Space'){e.preventDefault();reveal();}
+if(e.code==='Space'){e.preventDefault();reveal();}
+  else if(e.code==='KeyH'){e.preventDefault();showCardHint();} // Hキーでヒント表示
   else if(e.code==='ArrowRight')judge(true);
   else if(e.code==='ArrowLeft')judge(false);
   else if(e.code==='ArrowUp'){e.preventDefault();replay();}
