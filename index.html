@@ -213,7 +213,7 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 </head>
 <body>
 <div class="logo">EXECUTIVE BOOTCAMP</div>
-<div class="logo-sub">FLASHCARD SYSTEM v6.0</div>
+<div class="logo-sub">FLASHCARD SYSTEM v6.1</div>
 
 <!-- VOICE SELECTOR -->
 <div class="voice-panel" id="voicePanel">
@@ -249,6 +249,11 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 </div>
 <div class="deck-panel" id="deckPanel">
   <div class="deck-title" id="deckTitle">デッキを選択</div>
+  <!-- 【新規追加】動的学習方向切替セレクター（iOS風 segmented control） -->
+  <div id="kinfureDirSelector" style="display:none; margin-bottom:12px; align-items:center; justify-content:space-between; padding:4px; background:var(--card); border:1px solid var(--bdr); border-radius:8px;">
+    <button id="dirJEBtn" onclick="setDirection('je')" style="flex:1; padding:6px; border:none; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:0.65rem; font-weight:bold; cursor:pointer; background:rgba(240,192,64,0.15); color:var(--acc);">🇯🇵 ➡ 🇺🇸 日→英 (発信)</button>
+    <button id="dirEJBtn" onclick="setDirection('ej')" style="flex:1; padding:6px; border:none; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:0.65rem; font-weight:bold; cursor:pointer; background:none; color:var(--dim);">🇺🇸 ➡ 🇯🇵 英→日 (受信)</button>
+  </div>
   <div class="deck-grid" id="deckGrid"></div>
   <!-- HISTORY RESET -->
   <div class="hist-reset-row" id="histResetRow">
@@ -901,6 +906,7 @@ let curApp=null,curKey=null;
 let deck=[],wrong=[],idx=0,okCnt=0,ngCnt=0,revealed=false;
 let isAuto=false,aTimer=null,cdTimer=null,cdTotal=0,cdLeft=0;
 let activeDeck=null; // 追加：現在の実行中デッキ情報を保持する変数
+let studyDirection='je'; // 追加：金フレの学習方向状態（je = 日→英、ej = 英→日）
 
 function selApp(app){
   curApp=app;curKey=null;
@@ -920,12 +926,40 @@ function selApp(app){
   document.getElementById('kbdRow').className='kbd-row';
   stopAuto();
   
+stopAuto();
+  
+  // 【追加】金フレの時だけ方向トグルを出現させる
+  const dirSel = document.getElementById('kinfureDirSelector');
+  if (dirSel) {
+    dirSel.style.display = (app === 'kinfure') ? 'flex' : 'none';
+  }
+  
   // 【仕様改定】どんどん・大特訓の場合は選択時に自動でフィルターモーダルを展開
   if(app==='dondondo' || app==='daitokku'){
     showFilter();
   } else {
     hideFilter();
   }
+  renderGrid();
+}
+
+// 【新規追加】学習方向切替制御関数
+function setDirection(dir) {
+  studyDirection = dir;
+  const btnJE = document.getElementById('dirJEBtn');
+  const btnEJ = document.getElementById('dirEJBtn');
+  if (dir === 'je') {
+    btnJE.style.background = 'rgba(240,192,64,0.15)';
+    btnJE.style.color = 'var(--acc)';
+    btnEJ.style.background = 'none';
+    btnEJ.style.color = 'var(--dim)';
+  } else {
+    btnJE.style.background = 'none';
+    btnJE.style.color = 'var(--dim)';
+    btnEJ.style.background = 'rgba(64,144,224,0.15)';
+    btnEJ.style.color = '#4090e0';
+  }
+  buildFilterUI();
   renderGrid();
 }
 function renderGrid(){
@@ -1005,9 +1039,26 @@ function renderCard(){
   revealed=false;
   clearBomb();
   const c=deck[idx];
-document.getElementById('jpTxt').textContent=c.ja;
-  document.getElementById('enTxt').textContent=c.en;
-  document.getElementById('hintTxt').style.display='none'; // ヒントを非表示にリセット
+  
+  const isEJ = (curApp === 'kinfure' && studyDirection === 'ej');
+  
+  // テキストの出し分け
+  document.getElementById('jpTxt').textContent = isEJ ? c.en : c.ja;
+  document.getElementById('enTxt').textContent = isEJ ? c.ja : c.en;
+  
+  // ヒントボタンの非表示・表示（英→日はヒント不要なため非表示）
+  document.getElementById('hintTxt').style.display='none';
+  const hintBtn = document.getElementById('btnHint');
+  if (hintBtn) {
+    hintBtn.style.display = isEJ ? 'none' : 'inline-block';
+  }
+  
+  // タップ誘導ラベルの切り替え
+  const hintLbl = document.querySelector('.hint-lbl');
+  if (hintLbl) {
+    hintLbl.textContent = isEJ ? '🇺🇸 → 🇯🇵　タップ or Space で答えを見る' : '🇯🇵 → 🇺🇸　タップ or Space で答えを見る';
+  }
+  
   document.getElementById('cTag').textContent=c.tag;
   document.getElementById('cSub').textContent=c.sub;
   document.getElementById('enWrap').className='en-wrap';
@@ -1030,7 +1081,13 @@ function reveal(){
   document.getElementById('judgeRow').className='judge-row on';
   document.getElementById('btnReplay').className='btn-replay on';
   document.getElementById('mainCard').style.cursor='default';
-  spkE();
+  
+  const isEJ = (curApp === 'kinfure' && studyDirection === 'ej');
+  if (isEJ) {
+    spkJ(); // 英→日時は、答えの日本語を読み上げる
+  } else {
+    spkE(); // 日→英時は、答えの英語を読み上げる
+  }
 }
 function replay(){
   revealed=false;
@@ -1214,28 +1271,58 @@ function runAuto(){
   const c=deck[idx];
   const dJE=parseFloat(document.getElementById('dJE').value)*1000;
   const dNx=parseFloat(document.getElementById('dNx').value)*1000;
-  document.getElementById('mainCard').classList.add('sj');
-  startCD(2500,'🇯🇵 日本語読み上げ中...');
-  spk(c.ja,'ja-JP',1,()=>{
-    document.getElementById('mainCard').classList.remove('sj');
-    if(!isAuto)return;
-    startCD(dJE,`⏳ ${document.getElementById('dJE').value}秒後に英語表示...`);
-    aTimer=setTimeout(()=>{
+  
+  const isEJ = (curApp === 'kinfure' && studyDirection === 'ej');
+
+  if (isEJ) {
+    // 【英→日 オートプレイ】最初に英語問題、表示後に日本語アンサーを再生
+    document.getElementById('mainCard').classList.add('se');
+    startCD(2500,'🇺🇸 英語読み上げ中...');
+    const r=parseFloat(document.getElementById('spRate').value);
+    spk(c.en,'en-US',r,()=>{
+      document.getElementById('mainCard').classList.remove('se');
       if(!isAuto)return;
-      revealed=true;
-      document.getElementById('enWrap').className='en-wrap on';
-      document.getElementById('spkEBtn').style.display='block';
-      document.getElementById('mainCard').classList.add('se');
-      const useContrast=document.getElementById('contrastTgl').checked;
-      startCD(useContrast?6000:3000, useContrast?'⚡ 1.5x → 1.0x コントラスト再生中...':'🇺🇸 英語読み上げ中...');
-      spkContrast(c.en,()=>{
-        document.getElementById('mainCard').classList.remove('se');
+      startCD(dJE,`⏳ ${document.getElementById('dJE').value}秒後に日本語表示...`);
+      aTimer=setTimeout(()=>{
         if(!isAuto)return;
-        startCD(dNx,`⏭ ${document.getElementById('dNx').value}秒後に次へ...`);
-        aTimer=setTimeout(()=>{if(!isAuto)return;idx++;updStats();renderCard();runAuto();},dNx);
-      });
-    },dJE);
-  });
+        revealed=true;
+        document.getElementById('enWrap').className='en-wrap on';
+        document.getElementById('spkEBtn').style.display='block';
+        document.getElementById('mainCard').classList.add('sj');
+        startCD(3000,'🇯🇵 日本語読み上げ中...');
+        spk(c.ja,'ja-JP',1,()=>{
+          document.getElementById('mainCard').classList.remove('sj');
+          if(!isAuto)return;
+          startCD(dNx,`⏭ ${document.getElementById('dNx').value}秒後に次へ...`);
+          aTimer=setTimeout(()=>{if(!isAuto)return;idx++;updStats();renderCard();runAuto();},dNx);
+        });
+      },dJE);
+    });
+  } else {
+    // 【日→英 オートプレイ（既存仕様）】
+    document.getElementById('mainCard').classList.add('sj');
+    startCD(2500,'🇯🇵 日本語読み上げ中...');
+    spk(c.ja,'ja-JP',1,()=>{
+      document.getElementById('mainCard').classList.remove('sj');
+      if(!isAuto)return;
+      startCD(dJE,`⏳ ${document.getElementById('dJE').value}秒後に英語表示...`);
+      aTimer=setTimeout(()=>{
+        if(!isAuto)return;
+        revealed=true;
+        document.getElementById('enWrap').className='en-wrap on';
+        document.getElementById('spkEBtn').style.display='block';
+        document.getElementById('mainCard').classList.add('se');
+        const useContrast=document.getElementById('contrastTgl').checked;
+        startCD(useContrast?6000:3000, useContrast?'⚡ 1.5x → 1.0x コントラスト再生中...':'🇺🇸 英語読み上げ中...');
+        spkContrast(c.en,()=>{
+          document.getElementById('mainCard').classList.remove('se');
+          if(!isAuto)return;
+          startCD(dNx,`⏭ ${document.getElementById('dNx').value}秒後に次へ...`);
+          aTimer=setTimeout(()=>{if(!isAuto)return;idx++;updStats();renderCard();runAuto();},dNx);
+        });
+      },dJE);
+    });
+  }
 }
 
 // ===================== ② TIME BOMB =====================
@@ -1434,7 +1521,8 @@ document.addEventListener('keydown', e=>{
 
 // ===================== HISTORY =====================
 function makeCardKey(card){
-  const str=`${curApp}_${(card.ja||'').trim()}`;
+  const dirSuffix = curApp === 'kinfure' ? `_${studyDirection}` : '';
+  const str=`${curApp}_${(card.ja||'').trim()}${dirSuffix}`;
   let h=5381;
   for(let i=0;i<str.length;i++){h=((h<<5)+h)+str.charCodeAt(i);h&=0x7fffffff;}
   return h.toString(36);
