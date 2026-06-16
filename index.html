@@ -283,7 +283,7 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
       <!-- リミット入力用UI -->
       <div style="display: flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;">
         <span style="color: var(--dim);">🎯 Smart Cap Limit:</span>
-        <input type="number" id="smartCapInput" value="50" min="5" max="500" step="5" style="width: 55px; background: var(--card); border: 1px solid var(--bdr); border-radius: 5px; color: var(--txt); padding: 3px 6px; font-size: 0.65rem; text-align: center; outline: none;">
+        <input type="number" id="smartCapInput" value="50" min="5" max="1200" step="5" style="width: 55px; background: var(--card); border: 1px solid var(--bdr); border-radius: 5px; color: var(--txt); padding: 3px 6px; font-size: 0.65rem; text-align: center; outline: none;">
         <span style="color: var(--dim);">枚</span>
       </div>
     </div>
@@ -620,7 +620,7 @@ function startCustomDeck(shuffle){
   startDeck(d);
 }
 
-// 【新規実装】Smart Due 厳選自動抽出ロジック
+// 【修正版】Smart Due 厳選自動抽出ロジック（タイ・バイアス解消版）
 function startSmartDueDeck(shuffle) {
   let cards = getFilteredCards();
   if (cards.length === 0) return;
@@ -630,7 +630,11 @@ function startSmartDueDeck(shuffle) {
     c.key = c.key || makeCardKey(c);
   });
 
-  // 2. 蓄積履歴の calcWeight（重み）に基づいて降順ソート（弱点カードを先頭へ）
+  // 【★極めて重要な修正】
+  // ソート前に全体を1度シャッフルすることで、同じ重み「8」を持つ未学習カードの並び順の偏りを完全に破壊します
+  cards = shuf(cards);
+
+  // 2. 蓄積履歴の calcWeight（重み）に基づいて降順ソート
   cards.sort((a, b) => {
     return calcWeight(b.key) - calcWeight(a.key);
   });
@@ -638,7 +642,7 @@ function startSmartDueDeck(shuffle) {
   // 3. Smart Cap Limit（抽出上限）の入力値を取得し、5〜1000枚の範囲でクランプ
   const limitInput = document.getElementById('smartCapInput');
   let limit = parseInt(limitInput ? limitInput.value : 50) || 50;
-  limit = Math.max(5, Math.min(limit, 1000));
+  limit = Math.max(5, Math.min(limit, 1200));
 
   // 4. 最も復習の緊急性が高い「上位 N 枚」を厳選切り出し
   const slicedCards = cards.slice(0, limit);
