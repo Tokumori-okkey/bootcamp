@@ -1543,10 +1543,14 @@ async function loadHistory(){
   } catch(e){ console.warn('loadHistory error:',e); }
 }
 
+// 【更新】ローカル履歴の更新（自動マイグレーション対応版）
 function updateHistoryLocal(cardKey, isOk){
-  const h=historyCache[cardKey]||{ok:0,ng:0,lastNg:null,streak:0};
+  let h = getHistoryRecord(cardKey); // 旧キーからの救出をインターセプト
+  if(!h) h = {ok:0,ng:0,lastNg:null,streak:0};
+  
   if(isOk){ h.ok=(h.ok||0)+1; h.streak=(h.streak||0)+1; }
   else { h.ng=(h.ng||0)+1; h.lastNg=Date.now(); h.streak=0; }
+  
   historyCache[cardKey]=h;
   return h;
 }
@@ -1590,8 +1594,28 @@ async function confirmResetHistory(){
 }
 
 // ===================== WEIGHTED SHUFFLE =====================
+// 【新規追加】旧データ（_je なし）を検知し、新データ（_je あり）へ自動移行・救出する関数
+function getHistoryRecord(cardKey) {
+  if (historyCache[cardKey]) return historyCache[cardKey];
+  
+  // もし新キー（_jeあり）でデータが見つからず、旧キー（_jeなし）に履歴が存在する場合
+  if (cardKey.endsWith('_je')) {
+    const oldKey = cardKey.slice(0, -3); // '_je' を取り除く
+    if (historyCache[oldKey]) {
+      // データを新キーにシームレスに複製
+      historyCache[cardKey] = { ...historyCache[oldKey] };
+      // 旧キーを削除（クリーンアップ）
+      delete historyCache[oldKey];
+      return historyCache[cardKey];
+    }
+  }
+  return null;
+}
+
+// 【更新】重み計算ロジック（自動マイグレーション対応版）
 function calcWeight(cardKey){
-  const h=historyCache[cardKey];
+  const h = getHistoryRecord(cardKey); // 旧キーからの救出をインターセプト
+  
   if(!h||(h.ok||0)+(h.ng||0)===0) return 8; // 未出題：中優先
   const streak=h.streak||0;
   if(streak>=5) return 0.3; // 連続○5回：極低
