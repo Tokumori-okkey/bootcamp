@@ -1525,6 +1525,7 @@ document.addEventListener('keydown', e=>{
 
 // ===================== HISTORY =====================
 function makeCardKey(card){
+  // アプリが金フレ（kinfure）の場合のみ、末尾に _je または _ej を自動付与してDBを物理隔離します
   const dirSuffix = curApp === 'kinfure' ? `_${studyDirection}` : '';
   const str=`${curApp}_${(card.ja||'').trim()}${dirSuffix}`;
   let h=5381;
