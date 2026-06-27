@@ -370,7 +370,7 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
   <div class="card" id="mainCard" onclick="reveal()" style="cursor:pointer">
     <div class="c-tag" id="cTag">#1</div>
     <div class="c-sub" id="cSub"></div>
-    <button class="spk-j" onclick="event.stopPropagation();spkJ()" title="日本語">🔊</button>
+    <button class="spk-j" id="spkJBtn" onclick="event.stopPropagation();spkJ()" title="日本語">🔊</button>
     <div class="hint-lbl">🇯🇵 → 🇺🇸　タップ or Space で答えを見る</div>
 <div class="jp" id="jpTxt"></div>
     <!-- 新設：ヒント表示領域 -->
@@ -1067,7 +1067,14 @@ function renderCard(){
   document.getElementById('cTag').textContent=c.tag;
   document.getElementById('cSub').textContent=c.sub;
   document.getElementById('enWrap').className='en-wrap';
-  document.getElementById('spkEBtn').style.display='none';
+  // 質問フェーズにおけるスピーカーアイコンの表示切り替え（EJモード時は左右を反転）
+  if (isEJ) {
+    document.getElementById('spkJBtn').style.display = 'none';  // 日本語（答え）は非表示
+    document.getElementById('spkEBtn').style.display = 'block'; // 英語（問題）を右下に表示
+  } else {
+    document.getElementById('spkJBtn').style.display = 'block'; // 日本語（問題）を左下に表示
+    document.getElementById('spkEBtn').style.display = 'none';  // 英語（答え）は非表示
+  }
   document.getElementById('mainCard').className='card';
   document.getElementById('mainCard').style.cursor='pointer';
   document.getElementById('btnRev').style.display=isAuto?'none':'block';
@@ -1081,7 +1088,9 @@ function reveal(){
   clearBomb();
   revealed=true;
   document.getElementById('enWrap').className='en-wrap on';
-  document.getElementById('spkEBtn').style.display='block';
+  // 回答開示フェーズ：両方のスピーカーボタンを表示
+  document.getElementById('spkJBtn').style.display = 'block';
+  document.getElementById('spkEBtn').style.display = 'block';
   document.getElementById('btnRev').style.display='none';
   document.getElementById('judgeRow').className='judge-row on';
   document.getElementById('btnReplay').className='btn-replay on';
