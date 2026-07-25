@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -107,8 +106,6 @@ body{background:var(--bg);color:var(--txt);font-family:"Noto Sans JP",sans-serif
 .ki{display:flex;align-items:center;gap:5px;font-family:"JetBrains Mono",monospace;font-size:.58rem;color:var(--dim);}
 kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:2px 5px;font-size:.58rem;}
 
-
-/* VOICE SELECTOR */
 .voice-panel{width:100%;max-width:680px;background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:13px 16px;margin-bottom:14px;}
 .voice-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
 .voice-row:last-child{margin-bottom:0;}
@@ -118,8 +115,6 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 .voice-test{padding:6px 10px;background:var(--card);border:1px solid var(--bdr);border-radius:7px;color:var(--dim);font-family:"JetBrains Mono",monospace;font-size:.62rem;cursor:pointer;white-space:nowrap;}
 .voice-test:hover{border-color:var(--acc);color:var(--acc);}
 
-/* CUSTOM FILTER */
-/* FILTER MODAL */
 .filter-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;display:none;align-items:stretch;}
 .filter-overlay.on{display:flex;}
 .filter-modal{width:100%;max-width:700px;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;height:100%;}
@@ -152,7 +147,6 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 .filter-start-btn.rnd:hover{box-shadow:0 3px 14px rgba(240,192,64,.3);transform:translateY(-1px);}
 .filter-start-btn:disabled{opacity:.3;cursor:not-allowed;transform:none;}
 
-/* ===== USER BAR ===== */
 .user-bar{width:100%;max-width:680px;display:flex;align-items:center;gap:10px;padding:8px 14px;background:var(--sur);border:1px solid var(--bdr);border-radius:10px;margin-bottom:14px;}
 .user-bar.hidden{display:none;}
 .user-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--red));display:flex;align-items:center;justify-content:center;font-family:"Bebas Neue",cursive;font-size:.8rem;color:var(--bg);flex-shrink:0;}
@@ -165,7 +159,6 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 .btn-login-top{padding:5px 12px;background:var(--acc);border:none;border-radius:7px;color:var(--bg);font-family:"Bebas Neue",cursive;font-size:.85rem;letter-spacing:2px;cursor:pointer;transition:transform .1s;}
 .btn-login-top:hover{transform:translateY(-1px);}
 
-/* ===== AUTH MODAL ===== */
 .auth-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;}
 .auth-overlay.on{display:flex;}
 .auth-modal{width:100%;max-width:400px;background:var(--sur);border:1px solid var(--bdr);border-radius:16px;padding:28px 24px;}
@@ -185,17 +178,14 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 .btn-guest{width:100%;padding:10px;background:none;border:1px solid var(--bdr);border-radius:9px;color:var(--dim);font-family:"JetBrains Mono",monospace;font-size:.65rem;cursor:pointer;transition:all .2s;letter-spacing:1px;}
 .btn-guest:hover{border-color:var(--dim);color:var(--txt);}
 
-/* ===== HISTORY BADGE (card corner) ===== */
 .hist-badge{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);display:flex;gap:8px;font-family:"JetBrains Mono",monospace;font-size:.6rem;opacity:.7;}
 .hist-ok{color:var(--grn);}
 .hist-ng{color:var(--red);}
 
-/* ===== HISTORY RESET (feature panel) ===== */
 .hist-reset-row{border-top:1px solid var(--bdr);padding-top:10px;margin-top:10px;display:flex;align-items:center;justify-content:space-between;}
 .hist-reset-lbl{font-family:"JetBrains Mono",monospace;font-size:.62rem;color:var(--dim);}
 .btn-hist-reset{padding:6px 14px;background:none;border:1px solid var(--red);border-radius:7px;color:var(--red);font-family:"JetBrains Mono",monospace;font-size:.6rem;cursor:pointer;transition:all .2s;}
 .btn-hist-reset:hover{background:rgba(224,80,80,.1);}
-/* ② TIME BOMB */
 .bomb-row{display:flex;align-items:center;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid var(--bdr);flex-wrap:wrap;}
 .bomb-label{font-family:"JetBrains Mono",monospace;font-size:.6rem;color:var(--dim);}
 .bomb-timer-wrap{position:absolute;bottom:0;left:0;right:0;height:5px;background:var(--bdr);border-radius:0 0 16px 16px;overflow:hidden;display:none;}
@@ -203,19 +193,16 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 .bomb-timer-bar{height:100%;width:100%;background:linear-gradient(90deg,var(--grn),var(--acc),var(--red));border-radius:0 0 16px 16px;transition:width .1s linear;}
 @keyframes bomb-flash{0%,100%{background:var(--card);}50%{background:rgba(224,80,80,0.4);}}
 .card.bomb-explode{animation:bomb-flash 0.12s ease 4;}
-/* ③ CONTRAST */
 .contrast-info{font-family:"JetBrains Mono",monospace;font-size:.58rem;color:var(--blu);margin-top:4px;}
 </style>
-  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
 <div class="logo">EXECUTIVE BOOTCAMP</div>
-<div class="logo-sub">FLASHCARD SYSTEM v6.1</div>
+<div class="logo-sub">FLASHCARD SYSTEM v6.5</div>
 
-<!-- VOICE SELECTOR -->
 <div class="voice-panel" id="voicePanel">
   <div style="font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:2px;color:var(--dim);text-transform:uppercase;margin-bottom:10px;">🎙️ VOICE SETTINGS</div>
   <div class="voice-row">
@@ -230,8 +217,6 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
   </div>
 </div>
 
-
-<!-- USER BAR -->
 <div class="user-bar hidden" id="userBar">
   <div class="user-avatar" id="userAvatar">?</div>
   <span class="user-email" id="userEmail">ゲスト</span>
@@ -249,13 +234,11 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 </div>
 <div class="deck-panel" id="deckPanel">
   <div class="deck-title" id="deckTitle">デッキを選択</div>
-  <!-- 【新規追加】動的学習方向切替セレクター（iOS風 segmented control） -->
   <div id="kinfureDirSelector" style="display:none; margin-bottom:12px; align-items:center; justify-content:space-between; padding:4px; background:var(--card); border:1px solid var(--bdr); border-radius:8px;">
     <button id="dirJEBtn" onclick="setDirection('je')" style="flex:1; padding:6px; border:none; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:0.65rem; font-weight:bold; cursor:pointer; background:rgba(240,192,64,0.15); color:var(--acc);">🇯🇵 ➡ 🇺🇸 日→英 (発信)</button>
     <button id="dirEJBtn" onclick="setDirection('ej')" style="flex:1; padding:6px; border:none; border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:0.65rem; font-weight:bold; cursor:pointer; background:none; color:var(--dim);">🇺🇸 ➡ 🇯🇵 英→日 (受信)</button>
   </div>
   <div class="deck-grid" id="deckGrid"></div>
-  <!-- HISTORY RESET -->
   <div class="hist-reset-row" id="histResetRow">
     <div>
       <div style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--dim);letter-spacing:1px;">📊 学習履歴</div>
@@ -265,7 +248,6 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
   </div>
 </div>
 
-<!-- CUSTOM FILTER MODAL -->
 <div class="filter-overlay" id="filterPanel">
   <div class="filter-modal">
     <div class="filter-modal-hdr">
@@ -273,36 +255,34 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
       <button class="filter-close" onclick="hideFilter()">✕ 閉じる</button>
     </div>
     <div class="filter-body-scroll" id="filterBody"></div>
-<div class="filter-modal-footer">
-  <div class="filter-count-row" style="flex-direction: column; gap: 12px; align-items: stretch;">
-    <!-- 状況表示および枚数設定 -->
-    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-      <div class="filter-count" style="font-size: 0.65rem; color: var(--dim);">
-        選択中: <span id="filterCountTxt">0</span>項目 / 全 <span id="filterCardCountTxt">0</span>枚
-      </div>
-      <!-- リミット入力用UI -->
-      <div style="display: flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;">
-        <span style="color: var(--dim);">🎯 Smart Cap Limit:</span>
-        <input type="number" id="smartCapInput" value="50" min="5" max="1200" step="5" style="width: 55px; background: var(--card); border: 1px solid var(--bdr); border-radius: 5px; color: var(--txt); padding: 3px 6px; font-size: 0.65rem; text-align: center; outline: none;">
-        <span style="color: var(--dim);">枚</span>
+    <div class="filter-modal-footer">
+      <div class="filter-count-row" style="flex-direction: column; gap: 12px; align-items: stretch;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+          <div class="filter-count" style="font-size: 0.65rem; color: var(--dim);">
+            選択中: <span id="filterCountTxt">0</span>項目 / 全 <span id="filterCardCountTxt">0</span>枚
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;">
+            <span style="color: var(--dim);">🎯 Smart Cap Limit:</span>
+            <input type="number" id="smartCapInput" value="50" min="5" max="500" step="5" style="width: 55px; background: var(--card); border: 1px solid var(--bdr); border-radius: 5px; color: var(--txt); padding: 3px 6px; font-size: 0.65rem; text-align: center; outline: none;">
+            <span style="color: var(--dim);">枚</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; gap: 8px;">
+            <button class="filter-start-btn seq" id="filterStartSeq" onclick="startCustomDeck(false)" style="flex: 1; padding: 8px 12px; font-size: 0.85rem;" disabled>▶ 全件 順番通り</button>
+            <button class="filter-start-btn rnd" id="filterStartRnd" onclick="startCustomDeck(true)" style="flex: 1; padding: 8px 12px; font-size: 0.85rem;" disabled>🔀 全件 シャッフル</button>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="filter-start-btn" id="filterStartSmartSeq" onclick="startSmartDueDeck(false)" style="flex: 1; padding: 8px 12px; font-size: 0.85rem; background: rgba(240,192,64,.15); border: 1px solid var(--acc); color: var(--acc);" disabled>🎯 Smart Due (順)</button>
+            <button class="filter-start-btn" id="filterStartSmartRnd" onclick="startSmartDueDeck(true)" style="flex: 1; padding: 8px 12px; font-size: 0.85rem; background: rgba(240,192,64,.15); border: 1px solid var(--acc); color: var(--acc);" disabled>🎯 Smart Due (シャッフル)</button>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button class="filter-start-btn" id="filterStartConfSeq" onclick="startConfidenceCapDeck(false)" style="flex: 1; padding: 8px 12px; font-size: 0.85rem; background: rgba(64,208,128,.15); border: 1px solid var(--grn); color: var(--grn);" disabled>🛡️ Confidence Cap (順)</button>
+            <button class="filter-start-btn" id="filterStartConfRnd" onclick="startConfidenceCapDeck(true)" style="flex: 1; padding: 8px 12px; font-size: 0.85rem; background: rgba(64,208,128,.15); border: 1px solid var(--grn); color: var(--grn);" disabled>🛡️ Confidence Cap (シャッフル)</button>
+          </div>
+        </div>
       </div>
     </div>
-    
-    <!-- 開始ボタン群 -->
-    <div style="display: flex; flex-direction: column; gap: 8px;">
-      <!-- 通常の全出題（既存仕様） -->
-      <div style="display: flex; gap: 8px;">
-        <button class="filter-start-btn seq" id="filterStartSeq" onclick="startCustomDeck(false)" style="flex: 1; padding: 8px 12px; font-size: 0.85rem;" disabled>▶ 全件 順番通り</button>
-        <button class="filter-start-btn rnd" id="filterStartRnd" onclick="startCustomDeck(true)" style="flex: 1; padding: 8px 12px; font-size: 0.85rem;" disabled>🔀 全件 シャッフル</button>
-      </div>
-      <!-- 厳選出題（新規追加仕様） -->
-      <div style="display: flex; gap: 8px;">
-        <button class="filter-start-btn" id="filterStartSmartSeq" onclick="startSmartDueDeck(false)" style="flex: 1; padding: 8px 12px; font-size: 0.85rem; background: rgba(240,192,64,.15); border: 1px solid var(--acc); color: var(--acc);" disabled>🎯 Smart Due (順)</button>
-        <button class="filter-start-btn" id="filterStartSmartRnd" onclick="startSmartDueDeck(true)" style="flex: 1; padding: 8px 12px; font-size: 0.85rem; background: rgba(240,192,64,.15); border: 1px solid var(--acc); color: var(--acc);" disabled>🎯 Smart Due (シャッフル)</button>
-      </div>
-    </div>
-  </div>
-</div>
   </div>
 </div>
 
@@ -311,24 +291,21 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
     <span class="auto-lbl">🤖 AUTO PLAY + VOICE</span>
     <label class="tgl"><input type="checkbox" id="autoTgl" onchange="toggleAuto()"><div class="tgl-track"></div><div class="tgl-thumb"></div></label>
   </div>
-<div class="timer-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 10px; margin-bottom: 8px;">
-  <div class="t-item"><label>🇯🇵 日本語後<br>→英語まで（秒）</label><div class="t-row"><input type="range" id="dJE" min="0.5" max="10" step=".5" value="1" oninput="updV('dJE','vJE','s')"><span class="t-val" id="vJE">1s</span></div></div>
-  <div class="t-item"><label>🇺🇸 英語後<br>→次まで（秒）</label><div class="t-row"><input type="range" id="dNx" min="0.5" max="10" step=".5" value="1" oninput="updV('dNx','vNx','s')"><span class="t-val" id="vNx">1s</span></div></div>
-  <div class="t-item"><label>🗣️ 英語話速（Rate）</label><div class="t-row"><input type="range" id="spRate" min=".6" max="1.4" step=".1" value="1.0" oninput="updV('spRate','vRate','')"><span class="t-val" id="vRate">1.0</span></div></div>
-  <div class="t-item"><label>🗣️ 日本語話速（Rate）</label><div class="t-row"><input type="range" id="spRateJP" min=".6" max="1.4" step=".1" value="1.0" oninput="updV('spRateJP','vRateJP','')"><span class="t-val" id="vRateJP">1.0</span></div></div>
-</div>
+  <div class="timer-grid">
+    <div class="t-item"><label>🇯🇵 日本語後<br>→英語まで（秒）</label><div class="t-row"><input type="range" id="dJE" min="1" max="10" step=".5" value="3" oninput="updV('dJE','vJE','s')"><span class="t-val" id="vJE">3s</span></div></div>
+    <div class="t-item"><label>🇺🇸 英語後<br>→次まで（秒）</label><div class="t-row"><input type="range" id="dNx" min="1" max="10" step=".5" value="3" oninput="updV('dNx','vNx','s')"><span class="t-val" id="vNx">3s</span></div></div>
+    <div class="t-item"><label>🗣️ 英語速度<br>（rate）</label><div class="t-row"><input type="range" id="spRate" min=".6" max="1.4" step=".1" value="1.0" oninput="updV('spRate','vRate','')"><span class="t-val" id="vRate">1.0</span></div></div>
+  </div>
   <div class="auto-status" id="autoSt">
     <div class="a-dot"></div><span class="a-txt" id="aTxt">AUTO PLAY 実行中</span>
     <div class="cd-wrap"><div class="cd-bar" id="cdBar" style="width:100%"></div></div>
   </div>
 
-<!-- FEATURE PANEL -->
 <div class="feat-panel" id="featPanel">
   <div class="feat-hdr">
     <span class="feat-lbl">⚡ ADVANCED FEATURES（Time Bomb / Contrast Play）</span>
   </div>
 
-  <!-- ② TIME BOMB -->
   <div style="border-top:1px solid var(--bdr);padding-top:10px;margin-bottom:10px;">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
       <span class="feat-lbl">💣 TIME BOMB MODE</span>
@@ -347,7 +324,6 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
     </div>
   </div>
 
-  <!-- ③ CONTRAST PLAY -->
   <div style="border-top:1px solid var(--bdr);padding-top:10px;">
     <div style="display:flex;align-items:center;justify-content:space-between;">
       <span class="feat-lbl">⚡ CONTRAST PLAY（AUTO時: 1.5x→1.0x）</span>
@@ -361,6 +337,12 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
   <div class="prog-info"><span>PROGRESS</span><span class="prog-num" id="pNum">1/0</span></div>
   <div class="prog-bar"><div class="prog-fill" id="pFill" style="width:0%"></div></div>
 </div>
+
+<!-- STREAK HUD WIDGET -->
+<div id="confStreakWidget" style="display:none; width:100%; max-width:680px; font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--grn); text-align:center; margin: 8px auto 4px; padding: 6px; background:var(--sur); border:1px solid var(--bdr); border-radius:8px; animation: fi .3s ease;">
+  🔥 CURRENT STREAK: <span id="currentConfStreak" style="font-weight:bold; font-size:1.1rem; color:var(--grn);">0</span> | 🏆 MAX STREAK: <span id="maxConfStreak" style="font-weight:bold; font-size:1.1rem; color:var(--acc);">0</span>
+</div>
+
 <div class="stats-row" id="statsRow">
   <div class="stat ok"><div class="v" id="sCor">0</div><div class="l">CORRECT</div></div>
   <div class="stat ng"><div class="v" id="sWrg">0</div><div class="l">RETRY</div></div>
@@ -370,10 +352,9 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
   <div class="card" id="mainCard" onclick="reveal()" style="cursor:pointer">
     <div class="c-tag" id="cTag">#1</div>
     <div class="c-sub" id="cSub"></div>
-    <button class="spk-j" id="spkJBtn" onclick="event.stopPropagation();spkJ()" title="日本語">🔊</button>
+    <button class="spk-j" onclick="event.stopPropagation();spkJ()" title="日本語">🔊</button>
     <div class="hint-lbl">🇯🇵 → 🇺🇸　タップ or Space で答えを見る</div>
-<div class="jp" id="jpTxt"></div>
-    <!-- 新設：ヒント表示領域 -->
+    <div class="jp" id="jpTxt"></div>
     <div id="hintTxt" style="display:none; font-family:'JetBrains Mono',monospace; font-size:0.9rem; color:var(--blu); margin-top:14px; text-align:center; letter-spacing:1px; line-height:1.5;"></div>
     <div style="text-align:center; margin-top:10px;">
       <button class="btn-hint" id="btnHint" onclick="event.stopPropagation(); showCardHint()" style="display:inline-block; background:none; border:1px solid var(--bdr); border-radius:5px; color:var(--dim); font-family:'JetBrains Mono',monospace; font-size:0.6rem; padding:3px 8px; cursor:pointer;">💡 HINT (H)</button>
@@ -411,6 +392,7 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
   <div class="ki"><kbd>B</kbd> 英語読み上げ</div>
 </div>
 <script>
+  
 const C1=[{"num": 1, "title": "this / that", "ja": "これは良い本です。", "en": "This is a good book."}, {"num": 1, "title": "this / that", "ja": "この辞書は良い。", "en": "This dictionary is good."}, {"num": 1, "title": "this / that", "ja": "あれはおもしろい本ですか?–はい、そうです。", "en": "Is that an interesting book? - Yes, it is."}, {"num": 1, "title": "this / that", "ja": "あの本はおもしろいですか?／ーいえ、おもしろくありません。", "en": "Is that book interesting?／- No, it isn't."}, {"num": 1, "title": "this / that", "ja": "これは正しくない。", "en": "This is not right."}, {"num": 1, "title": "this / that", "ja": "あれは本物の花ではない。", "en": "That is not a real flower."}, {"num": 1, "title": "this / that", "ja": "このスープはあまり美味しくない。", "en": "This soup is not very tasty."}, {"num": 1, "title": "this / that", "ja": "これは塩ですか、それとも砂糖ですか?–砂糖です。", "en": "Is this salt or sugar? - It is sugar."}, {"num": 1, "title": "this / that", "ja": "あの女性はフランス人ですか、それともイタリア人ですか?／ーフランス人です。", "en": "Is that woman French or Italian?／- She is French."}, {"num": 1, "title": "this / that", "ja": "あの男性は日本人ですか、それとも中国人ですか?／––日本人です。", "en": "Is that man Japanese or Chinese?／- He is Japanese."}, {"num": 2, "title": "these / those", "ja": "これらは子供向けの本です。", "en": "These are books for children."}, {"num": 2, "title": "these / those", "ja": "あれらは本当の花ですか?–いいえ、違います。", "en": "Are those real flowers? - No, they aren't."}, {"num": 2, "title": "these / those", "ja": "この少年たちは中学生です。", "en": "These boys are junior high school students."}, {"num": 2, "title": "these / those", "ja": "あの少女たちは高校生ですか?––はい、そうです。", "en": "Are those girls high school students? - Yes, they are."}, {"num": 2, "title": "these / those", "ja": "これらの車はとても高い。", "en": "These cars are very expensive."}, {"num": 2, "title": "these / those", "ja": "あれらの家は新しくない。", "en": "Those houses are not new."}, {"num": 2, "title": "these / those", "ja": "これらは本ですか、それとも雑誌ですか?一雑誌です。", "en": "Are these books or magazines? - They are magazines."}, {"num": 2, "title": "these / those", "ja": "あれらの車は新しいですか、それとも古いですか?／–新しいです。", "en": "Are those cars new or old?／- They are new."}, {"num": 2, "title": "these / those", "ja": "この男性たちはアメリカ人ですか、それともドイツ人です／か?ードイツ人です。", "en": "Are these men American or German?／-They are German."}, {"num": 2, "title": "these / those", "ja": "あの女性たちは日本人ですか、それとも韓国人ですか?／––韓国人です。", "en": "Are those women Japanese or Korean?／- They are Korean."}, {"num": 3, "title": "What is (are) ～?", "ja": "これは何ですか?ーカメラです。", "en": "What is this? - It is a camera."}, {"num": 3, "title": "What is (are) ～?", "ja": "あれは何ですか?一灰皿です。", "en": "What is that? - It is an ashtray."}, {"num": 3, "title": "What is (are) ～?", "ja": "これは何ですか?–置き時計です。", "en": "What is this? - It's a clock."}, {"num": 3, "title": "What is (are) ～?", "ja": "あれは何ですか?–枕です。", "en": "What is that? - It's a pillow."}, {"num": 3, "title": "What is (are) ～?", "ja": "これらは何ですか?ーフランスの雑誌です。", "en": "What are these? - They are French magazines."}, {"num": 3, "title": "What is (are) ～?", "ja": "あの鳥たちはなんですか?–雀です。", "en": "What are those birds? - They are sparrows."}, {"num": 3, "title": "What is (are) ～?", "ja": "あれらは何ですか?–古い切手です。", "en": "What are those? - They are old stamps."}, {"num": 3, "title": "What is (are) ～?", "ja": "あの男の人たちは何ですか?– 警官です。", "en": "What are those men? - They are policemen."}, {"num": 3, "title": "What is (are) ～?", "ja": "あの女性たちはなんですか?–秘書です。", "en": "What are those women? - They are secretaries."}, {"num": 3, "title": "What is (are) ～?", "ja": "あの人たちは何ですか?––弁護士です。", "en": "What are those people? - They are lawyers."}, {"num": 4, "title": "人称代名詞の主格", "ja": "私は学生です。", "en": "I am a student."}, {"num": 4, "title": "人称代名詞の主格", "ja": "あなたは教師ですか?", "en": "Are you a teacher?"}, {"num": 4, "title": "人称代名詞の主格", "ja": "彼は弁護士です。", "en": "He is a lawyer."}, {"num": 4, "title": "人称代名詞の主格", "ja": "彼女は看護師ですか?–いいえ、違います。", "en": "Is she a nurse? - No, she isn't."}, {"num": 4, "title": "人称代名詞の主格", "ja": "私たちは日本人です。", "en": "We are Japanese."}, {"num": 4, "title": "人称代名詞の主格", "ja": "あなた方は学生ですか?", "en": "Are you students?"}, {"num": 4, "title": "人称代名詞の主格", "ja": "彼らは警官です。", "en": "They are policemen."}, {"num": 4, "title": "人称代名詞の主格", "ja": "彼女たちは高校生ですか?––いいえ、違います。", "en": "Are they high school students? - No, they aren't."}, {"num": 4, "title": "人称代名詞の主格", "ja": "あなた方は幸せですか?––はい、幸せです。", "en": "Are you happy? - Yes, we are."}, {"num": 4, "title": "人称代名詞の主格", "ja": "彼は親切です。", "en": "He is kind."}, {"num": 5, "title": "人称代名詞の所有格", "ja": "彼女は私の先生です。", "en": "She is my teacher."}, {"num": 5, "title": "人称代名詞の所有格", "ja": "あの猫はあなたのペットですか?", "en": "Is that cat your pet?"}, {"num": 5, "title": "人称代名詞の所有格", "ja": "この子たちは彼女の生徒です。", "en": "These children are her students."}, {"num": 5, "title": "人称代名詞の所有格", "ja": "あの少女たちは彼の娘です。", "en": "Those girls are his daughters."}, {"num": 5, "title": "人称代名詞の所有格", "ja": "これは私たちの車です。", "en": "This is our car."}, {"num": 5, "title": "人称代名詞の所有格", "ja": "あれはあなたがたの教室ですか?", "en": "Is that your classroom?"}, {"num": 5, "title": "人称代名詞の所有格", "ja": "あれは彼らの家ですか?", "en": "Is that their house?"}, {"num": 5, "title": "人称代名詞の所有格", "ja": "私の息子は大学生です。", "en": "My son is a college student."}, {"num": 5, "title": "人称代名詞の所有格", "ja": "あなたの奥さんは看護師ですか?", "en": "Is your wife a nurse?"}, {"num": 5, "title": "人称代名詞の所有格", "ja": "彼女の目は青いですか?–いえ、違います。", "en": "Are her eyes blue? - No, they aren't."}, {"num": 6, "title": "Who is (are) ～?", "ja": "この女の子は誰ですか?／–僕の妹です。", "en": "Who is this girl?／- She is my sister."}, {"num": 6, "title": "Who is (are) ～?", "ja": "あの男の子は誰ですか?／ーロバートです。", "en": "Who is that boy?／- He is Robert."}, {"num": 6, "title": "Who is (are) ～?", "ja": "あの男の人たちは誰ですか?／––僕の父と兄です。", "en": "Who are those men?／-They are my father and brother."}, {"num": 6, "title": "Who is (are) ～?", "ja": "あの女の人たちは誰ですか?／––私の母と姉です。", "en": "Who are those women?／- They are my mother and sister."}, {"num": 6, "title": "Who is (are) ～?", "ja": "あの背の高い男の人は誰ですか?ーブラウンさんです。", "en": "Who is that tall man? - He is Mr. Brown."}, {"num": 6, "title": "Who is (are) ～?", "ja": "あのきれいな女の人は誰ですか?ースミスさんです。", "en": "Who is that beautiful woman? - She is Ms. Smith."}, {"num": 6, "title": "Who is (are) ～?", "ja": "あんたは誰?ージョン·グリーンです。", "en": "Who are you? - I am John Green."}, {"num": 6, "title": "Who is (are) ～?", "ja": "私は誰?–あんたは私の娘だよ。", "en": "Who am I? - You are my daughter."}, {"num": 6, "title": "Who is (are) ～?", "ja": "彼らは誰なの?––僕の友達だよ。", "en": "Who are they? - They are my friends."}, {"num": 6, "title": "Who is (are) ～?", "ja": "彼女たちは誰ですか?–私の生徒です。", "en": "Who are they? - They are my students."}, {"num": 7, "title": "一般動詞 ", "ja": "私は車を2台持っています。", "en": "I have two cars."}, {"num": 7, "title": "一般動詞 ", "ja": "あなたはピアノを持っていますか?／ーいいえ、持っていません。", "en": "Do you have a piano?／- No, I don't."}, {"num": 7, "title": "一般動詞 ", "ja": "彼はたくさんの本を持っている。", "en": "He has many books."}, {"num": 7, "title": "一般動詞 ", "ja": "私は野球が好きです。", "en": "I like baseball."}, {"num": 7, "title": "一般動詞 ", "ja": "あなたは動物が好きですか?–はい、好きです。", "en": "Do you like animals? - Yes, I do."}, {"num": 7, "title": "一般動詞 ", "ja": "トムはサッカーが好きです。彼の弟もサッカーが好きです。", "en": "Tom likes soccer. His brother likes it, too."}, {"num": 7, "title": "一般動詞 ", "ja": "あなたは英語を話しますか?", "en": "Do you speak English?"}, {"num": 7, "title": "一般動詞 ", "ja": "彼らは日本語を上手に話します。", "en": "They speak Japanese well."}, {"num": 7, "title": "一般動詞 ", "ja": "あなたのお父さんは学校で何を教えますか?／––数学を教えます。", "en": "What does your father teach at school?／- He teaches mathematics."}, {"num": 7, "title": "一般動詞 ", "ja": "彼は毎日野球をします。", "en": "He plays baseball every day."}, {"num": 8, "title": "how many (much) ～", "ja": "あなたはかばんの中に本を何冊持っていますか?", "en": "How many books do you have in your bag?"}, {"num": 8, "title": "how many (much) ～", "ja": "あなたのおじさんは車を何台持っていますか?", "en": "How many cars does your uncle have?"}, {"num": 8, "title": "how many (much) ～", "ja": "彼にはいとこが何人いますか?", "en": "How many cousins does he have?"}, {"num": 8, "title": "how many (much) ～", "ja": "あなたは毎日ミルクをどれだけ飲みますか?", "en": "How much milk do you drink every day?"}, {"num": 8, "title": "how many (much) ～", "ja": "彼女はお金がいくら必要なのですか?", "en": "How much money does she need?"}, {"num": 8, "title": "how many (much) ～", "ja": "彼はいくつの言葉を話しますか?／––3カ国語を話します。", "en": "How many languages does he speak?／- He speaks three languages."}, {"num": 8, "title": "how many (much) ～", "ja": "このクラスには何人の生徒がいますか?／–40人です。", "en": "How many students does this class have?／- It has forty students."}, {"num": 8, "title": "how many (much) ～", "ja": "エミリーには何人の兄弟姉妹がいますか?／–兄が一人に妹が二人います。", "en": "How many brothers and sisters does Emily have?／- She has a brother and two sisters."}, {"num": 8, "title": "how many (much) ～", "ja": "彼は毎日コーヒーをどのくらい飲みますか?／––5、6杯飲みます。", "en": "How much coffee does he drink every day?／- He drinks five or six cups (of coffee)."}, {"num": 8, "title": "how many (much) ～", "ja": "あなたのお兄さんは友達が何人くらいいますか?／–わかりません。兄には友達が大勢います。", "en": "How many friends does your brother have?／- I don't know. He has many friends."}, {"num": 9, "title": "人称代名詞の目的格", "ja": "私は彼のことを知っています。", "en": "I know him."}, {"num": 9, "title": "人称代名詞の目的格", "ja": "あなたは彼女が好きですか?", "en": "Do you like her?"}, {"num": 9, "title": "人称代名詞の目的格", "ja": "彼女は毎日彼らに会います。", "en": "She sees them every day."}, {"num": 9, "title": "人称代名詞の目的格", "ja": "彼女たちは私のことをよく知っています。", "en": "They know me well."}, {"num": 9, "title": "人称代名詞の目的格", "ja": "私は彼女たちがあまり好きではありません。", "en": "I don't like them very much."}, {"num": 9, "title": "人称代名詞の目的格", "ja": "彼は私たちのことが好きですか?", "en": "Does he like us?"}, {"num": 9, "title": "人称代名詞の目的格", "ja": "あなたのお父さんは私のことを知っていますか?", "en": "Does your father know me?"}, {"num": 9, "title": "人称代名詞の目的格", "ja": "私の母はあなたたちが大好きです。", "en": "My mother likes you a lot."}, {"num": 9, "title": "人称代名詞の目的格", "ja": "あなたの息子さんはよく彼と遊びますか?", "en": "Does your son often play with him?"}, {"num": 9, "title": "人称代名詞の目的格", "ja": "彼女は時々彼らのためにピアノを弾きます。", "en": "She sometimes plays the piano for them."}, {"num": 10, "title": "人称代名詞の独立所有格", "ja": "この自転車は僕のものです。", "en": "This bicycle is mine."}, {"num": 10, "title": "人称代名詞の独立所有格", "ja": "あの大きな家はあなたのですか?", "en": "Is that big house yours?"}, {"num": 10, "title": "人称代名詞の独立所有格", "ja": "彼女のカメラは新しい。彼のもまた新しい。", "en": "Her camera is new. His is new, too."}, {"num": 10, "title": "人称代名詞の独立所有格", "ja": "このノートはあなたのですか、それとも彼女のですか?", "en": "Is this notebook yours or hers?"}, {"num": 10, "title": "人称代名詞の独立所有格", "ja": "彼らの学校は古い。私たちのは新しい。", "en": "Their school is old. Ours is new."}, {"num": 10, "title": "人称代名詞の独立所有格", "ja": "この教室はあなたたちのですか?", "en": "Is this classroom yours?"}, {"num": 10, "title": "人称代名詞の独立所有格", "ja": "あの大きな部屋は彼らのものです。", "en": "That big room is theirs."}, {"num": 10, "title": "人称代名詞の独立所有格", "ja": "この小さな猫はあなたのお姉さんのペットですか?", "en": "Is this small cat your sister's pet?"}, {"num": 10, "title": "人称代名詞の独立所有格", "ja": "あの本は彼のですか、彼女のですか?", "en": "Is that book his or hers?"}, {"num": 10, "title": "人称代名詞の独立所有格", "ja": "あれらの花は彼女たちのものですか?", "en": "Are those flowers theirs?"}, {"num": 11, "title": "命令文 / Let's～", "ja": "この本を読みなさい。", "en": "Read this book."}, {"num": 11, "title": "命令文 / Let's～", "ja": "黒板にあなたの名前を書いてください。", "en": "Write your name on the blackboard, please."}, {"num": 11, "title": "命令文 / Let's～", "ja": "静かにしなさい。", "en": "Be quiet."}, {"num": 11, "title": "命令文 / Let's～", "ja": "教科書を開いてはいけません。", "en": "Don't open your textbook."}, {"num": 11, "title": "命令文 / Let's～", "ja": "うるさくしないでください。", "en": "Please don't be noisy."}, {"num": 11, "title": "命令文 / Let's～", "ja": "放課後サッカーをしようよ。", "en": "Let's play soccer after school."}, {"num": 11, "title": "命令文 / Let's～", "ja": "彼らと海に行こう。", "en": "Let's go to the sea with them."}, {"num": 11, "title": "命令文 / Let's～", "ja": "彼女たちと遊ぼう。", "en": "Let's play with them."}, {"num": 11, "title": "命令文 / Let's～", "ja": "この箱を開けましょう。", "en": "Let's open this box."}, {"num": 11, "title": "命令文 / Let's～", "ja": "明日東京に行こうよ。", "en": "Let's go to Tokyo tomorrow."}, {"num": 12, "title": "whose", "ja": "これは誰のかばんですか。", "en": "Whose bag is this?"}, {"num": 12, "title": "whose", "ja": "あの自転車は誰のですか?", "en": "Whose is that bicycle?"}, {"num": 12, "title": "whose", "ja": "あの少年たちは誰の生徒ですか?", "en": "Whose students are those boys?"}, {"num": 12, "title": "whose", "ja": "あれは誰の自転車ですか?", "en": "Whose bicycle is that?"}, {"num": 12, "title": "whose", "ja": "あれらの切手は誰のですか?", "en": "Whose are those stamps?"}, {"num": 12, "title": "whose", "ja": "これは誰のノートですか?––彼のです。", "en": "Whose notebook is this? - It's his."}, {"num": 12, "title": "whose", "ja": "このかわいい猫は誰のですか?–わたしたちのです。", "en": "Whose is this cute cat? - It's ours."}, {"num": 12, "title": "whose", "ja": "あれは誰の部屋ですか?–あなたのです。", "en": "Whose room is that? - It's yours."}, {"num": 12, "title": "whose", "ja": "これらは誰の本ですか?––彼らのです。", "en": "Whose books are these? - They are theirs."}, {"num": 12, "title": "whose", "ja": "あれは誰のコンピュータですか?––彼女たちのです。", "en": "Whose computer is that? - It's theirs."}, {"num": 13, "title": "where", "ja": "あなたの本はどこにありますか?", "en": "Where is your book?"}, {"num": 13, "title": "where", "ja": "あなたはどこで勉強しますか?", "en": "Where do you study?"}, {"num": 13, "title": "where", "ja": "彼女の猫はどこにいますか?", "en": "Where is her cat?"}, {"num": 13, "title": "where", "ja": "彼女はどこに住んでいますか?", "en": "Where does she live?"}, {"num": 13, "title": "where", "ja": "彼らはどこにいますか?", "en": "Where are they?"}, {"num": 13, "title": "where", "ja": "彼らはどこで野球をしますか?／–公園でします。", "en": "Where do they play baseball?／- They play it in the park."}, {"num": 13, "title": "where", "ja": "あなたの弟はどこにいますか?–自分の部屋にいます。", "en": "Where is your brother? - He is in his room."}, {"num": 13, "title": "where", "ja": "君たちは毎日どこに行きますか?–学校に行きます。", "en": "Where do you go every day? - We go to school."}, {"num": 13, "title": "where", "ja": "卵(複数) はどこ?–冷蔵庫の中だよ。", "en": "Where are the eggs? - They are in the refrigerator."}, {"num": 13, "title": "where", "ja": "エミリーはどこの出身ですか?ーカナダです。", "en": "Where is Emily from? - She is from Canada."}, {"num": 14, "title": "when", "ja": "あなたのお母さんの誕生日はいつですか?", "en": "When is your mother's birthday?"}, {"num": 14, "title": "when", "ja": "彼女はいつピアノを弾きますか?", "en": "When does she play the piano?"}, {"num": 14, "title": "when", "ja": "あなたのお父さんはいつ釣りに行きますか?", "en": "When does your father go fishing?"}, {"num": 14, "title": "when", "ja": "クリスマスはいつですか?", "en": "When is Christmas?"}, {"num": 14, "title": "when", "ja": "あなたの子供たちはいつ宿題をしますか?", "en": "When do your children do their homework?"}, {"num": 14, "title": "when", "ja": "パーティーはいつ?–来週の日曜だよ。", "en": "When is the party? - It is next Sunday."}, {"num": 14, "title": "when", "ja": "彼女たちはいつサッカーをしますか?／––毎週土曜日にします。", "en": "When do they play soccer?／- They play it every Saturday."}, {"num": 14, "title": "when", "ja": "彼と彼のお兄さんはいつキャッチボールをしますか?／––毎日します。", "en": "When do he and his brother play catch?／- They play it every day."}, {"num": 14, "title": "when", "ja": "あなたのお父さんはいつ夕食を作りますか?／一日曜日によく作ります。", "en": "When does your father cook dinner?／- He often cooks it on Sundays."}, {"num": 14, "title": "when", "ja": "あなたはいつ彼に会いますか?––毎日会います。", "en": "When do you see him? - I see him every day."}, {"num": 15, "title": "which", "ja": "どちらがあなたの自転車ですか?", "en": "Which is your bicycle?"}, {"num": 15, "title": "which", "ja": "どちらが彼の家ですか、こちらですかそれともあちらですか", "en": "Which is his house, this one or that one?"}, {"num": 15, "title": "which", "ja": "どちらが彼女の鉛筆(複数)ですか?", "en": "Which are her pencils?"}, {"num": 15, "title": "which", "ja": "どれがあなたのお父さんの車ですか?", "en": "Which is your father's car?"}, {"num": 15, "title": "which", "ja": "どの本があなたのですか?", "en": "Which book is yours?"}, {"num": 15, "title": "which", "ja": "どの女の人が彼女の先生ですか?／–あの背の高い女の人です。", "en": "Which woman is her teacher?／- That tall woman is."}, {"num": 15, "title": "which", "ja": "どちらがあなたの生徒ですか、こちらの子供たちですがそれ／ともあちらの子供たちですか?–この子たちです。", "en": "Which are your students, these children or those／children? - These children are."}, {"num": 15, "title": "which", "ja": "どの犬が彼女のですか?–あの大きい犬です。", "en": "Which dog is hers? - That big dog is."}, {"num": 15, "title": "which", "ja": "どちらがあなたのお父さんのお気に入りの椅子ですか、こう／らですかそれともあちらですか?–あちらの椅子です。", "en": "Which is your father's favorite chair, this one or that one? - That one is."}, {"num": 15, "title": "which", "ja": "どちらが彼の好きなスポーツですか、野球ですか、それともサッカーですか?ーサッカーです。", "en": "Which is his favorite sport, baseball or soccer?／- Soccer is."}, {"num": 16, "title": "it", "ja": "今日は晴れている。", "en": "It is fine today."}, {"num": 16, "title": "it", "ja": "東京は晴れていますか?", "en": "Is it fine in Tokyo?"}, {"num": 16, "title": "it", "ja": "今、ロンドンでは朝の 10時です。", "en": "It is ten o'clock in the morning in London now."}, {"num": 16, "title": "it", "ja": "今日、パリは暑いですか?", "en": "Is it hot in Paris today?"}, {"num": 16, "title": "it", "ja": "オーストラリアでは今夏です。", "en": "It is summer in Australia now."}, {"num": 16, "title": "it", "ja": "その部屋の中は暗い。", "en": "It is dark in the room."}, {"num": 16, "title": "it", "ja": "入っておいで。ここは暖かいよ。", "en": "Come in. It is warm here."}, {"num": 16, "title": "it", "ja": "夕食の時間だ。", "en": "It's dinner time."}, {"num": 16, "title": "it", "ja": "その国ではいつも暖かい。", "en": "It's always warm in the country."}, {"num": 16, "title": "it", "ja": "彼の部屋の中はあまり暖かくない。", "en": "It isn't very warm in his room."}, {"num": 17, "title": "What time～?", "ja": "今何時ですか?", "en": "What time is it now?"}, {"num": 17, "title": "What time～?", "ja": "あなたは何時に寝ますか?", "en": "What time do you go to bed?"}, {"num": 17, "title": "What time～?", "ja": "今、東京は何時なの?", "en": "What time is it in Tokyo now?"}, {"num": 17, "title": "What time～?", "ja": "最初の授業は何時に始まるのですか?", "en": "What time does the first class begin?"}, {"num": 17, "title": "What time～?", "ja": "あなたのお父さんは毎晩何時に帰宅しますか?", "en": "What time does your father come home every evening?"}, {"num": 17, "title": "What time～?", "ja": "あなたの家では何時に夕食を食べますか?／–7時に食べます。", "en": "What time do you have dinner at your home?／- We have it at seven o'clock."}, {"num": 17, "title": "What time～?", "ja": "今、あなたの国では何時ですか?／一夜の9時です。", "en": "What time is it in your country now?／- It is nine o'clock at night."}, {"num": 17, "title": "What time～?", "ja": "あなたの妹と弟は何時に学校に行きますか?／–8時に行きます。", "en": "What time do your sister and brother go to school?／- They go to school at eight o'clock."}, {"num": 17, "title": "What time～?", "ja": "彼のお兄さんは何時に起きますか?／–5時に起きます。", "en": "What time does his brother get up?／- He gets up at five o'clock."}, {"num": 17, "title": "What time～?", "ja": "この授業は何時に終わりますか?／–8時45分に終わります。", "en": "What time does this class end?／- It ends at eight forty-five."}, {"num": 18, "title": "how", "ja": "ご機嫌いかがですか?–元気です、ありがとうございます。", "en": "How are you? - I'm fine, thank you."}, {"num": 18, "title": "how", "ja": "あなたの息子さんはどうやって学校に行きますか?", "en": "How does your son go to school?"}, {"num": 18, "title": "how", "ja": "あなたのおばあさんの具合はいかがですか?", "en": "How is your grandmother?"}, {"num": 18, "title": "how", "ja": "ブラウンさんはどうやって会社に行きますか?", "en": "How does Mr. Brown go to the office?"}, {"num": 18, "title": "how", "ja": "これはどのように使うのですか?", "en": "How do I use this?"}, {"num": 18, "title": "how", "ja": "ニューヨークでは天気はいかがですか?／ーよく晴れています。", "en": "How is the weather in New York?／- It is very fine."}, {"num": 18, "title": "how", "ja": "彼らはどのように日本に来るのですか?／––飛行機で来ます。", "en": "How do they come to Japan?／-They come by airplane."}, {"num": 18, "title": "how", "ja": "お父さんとお母さんはいかがですか?／––元気です、ありがとう。", "en": "How are your father and mother?／- They are fine, thank you."}, {"num": 18, "title": "how", "ja": "トムはどんな風に歩きますか?––ゆっくり歩きます。", "en": "How does Tom walk? - He walks slowly."}, {"num": 18, "title": "how", "ja": "ロバートはどのように日本語を話しますか?／ーとても上手に話します。", "en": "How does Robert speak Japanese?／- He speaks it very well."}, {"num": 19, "title": "How old (tall) ～?", "ja": "あなたは何歳ですか?／–15歳です。", "en": "How old are you?／- I am fifteen years old."}, {"num": 19, "title": "How old (tall) ～?", "ja": "あなたのお母さんはいくつですか?／–42歳です。", "en": "How old is your mother?／- She is forty-two years old."}, {"num": 19, "title": "How old (tall) ～?", "ja": "あの子たちは何歳ですか?／–7歳です。", "en": "How old are those children?／- They are seven years old."}, {"num": 19, "title": "How old (tall) ～?", "ja": "あなたの背はどれくらいですか?／–160 センチ(1メーター60 センチ)です。", "en": "How tall are you?／- I am one hundred and sixty centimeters (one meter／sixty centimeters)."}, {"num": 19, "title": "How old (tall) ～?", "ja": "トムの背はどれくらいですか?–6フィート2インチです。", "en": "How tall is Tom? - He is six feet two inches."}, {"num": 19, "title": "How old (tall) ～?", "ja": "彼らの背はどのくらいですか?––2メートル以上あります。", "en": "How tall are they? - They are over two meters."}, {"num": 19, "title": "How old (tall) ～?", "ja": "このお城はどのくらいの古さですか?／––500 年位です。", "en": "How old is this castle?／It is about five hundred years old."}, {"num": 19, "title": "How old (tall) ～?", "ja": "この本はいくらですか?––1000 円です。", "en": "How much is this book? - It is one thousand yen."}, {"num": 19, "title": "How old (tall) ～?", "ja": "この自転車はいくらですか?／–2万円です。", "en": "How much is this bicycle?／- It is twenty thousand yen."}, {"num": 19, "title": "How old (tall) ～?", "ja": "あの自動車はいくらですか?––300 万円です。", "en": "How much is that car? - It is three million yen."}, {"num": 20, "title": "疑問詞主語の who", "ja": "誰がこの部屋を掃除するのですか?", "en": "Who cleans this room?"}, {"num": 20, "title": "疑問詞主語の who", "ja": "誰がこの家に住んでいますか?", "en": "Who lives in this house?"}, {"num": 20, "title": "疑問詞主語の who", "ja": "誰が英語を上手に話しますか?", "en": "Who speaks English well?"}, {"num": 20, "title": "疑問詞主語の who", "ja": "誰があのピアノを弾くのですか?", "en": "Who plays that piano?"}, {"num": 20, "title": "疑問詞主語の who", "ja": "誰がこの公園で毎日キャッチボールをしますか?", "en": "Who plays catch in this park every day?"}, {"num": 20, "title": "疑問詞主語の who", "ja": "誰がフランス語を教えますか?ーホワイトさんです。", "en": "Who teaches French? - Mr. White does."}, {"num": 20, "title": "疑問詞主語の who", "ja": "あなたの家では普通は誰が夕食を料理しますか?／––母がします。", "en": "Who usually cooks dinner in your family?／-My mother does."}, {"num": 20, "title": "疑問詞主語の who", "ja": "誰がこの車を運転しますか?–私の両親です。", "en": "Who drives this car? - My parents do."}, {"num": 20, "title": "疑問詞主語の who", "ja": "誰がこの辞書を欲しがっていますか?／–多くの生徒が欲しがっています。", "en": "Who wants this dictionary?／- Many students do."}, {"num": 20, "title": "疑問詞主語の who", "ja": "誰がこの机を使いますか?–私の姉です。", "en": "Who uses this desk? - My sister does."}, {"num": 21, "title": "can", "ja": "私の言うことが聞こえますか?", "en": "Can you hear me?"}, {"num": 21, "title": "can", "ja": "トムはとても上手に日本語を話すことができます。", "en": "Tom can speak Japanese very well."}, {"num": 21, "title": "can", "ja": "私はピアノとバイオリンが弾けます。", "en": "I can play the piano and the violin."}, {"num": 21, "title": "can", "ja": "彼女は車の運転ができません。", "en": "She can't drive."}, {"num": 21, "title": "can", "ja": "あなたは海で泳げますか?", "en": "Can you swim in the sea?"}, {"num": 21, "title": "can", "ja": "あの外国人たちは箸を使うことができますか?", "en": "Can those foreigners use chopsticks?"}, {"num": 21, "title": "can", "ja": "彼女は何カ国語を話せますか?", "en": "How many languages can she speak?"}, {"num": 21, "title": "can", "ja": "あなたは 100 メートルを 11 秒で走れますか?", "en": "Can you run one hundred meters in eleven seconds?"}, {"num": 21, "title": "can", "ja": "あなたは何ができますか?", "en": "What can you do?"}, {"num": 21, "title": "can", "ja": "どこでライオンを見ることができますか?／ーアフリカで見ることができます。", "en": "Where can we see lions?／- We can see them in Africa."}, {"num": 22, "title": "現在進行形", "ja": "私は今朝食を食べているところです。", "en": "I am eating breakfast now."}, {"num": 22, "title": "現在進行形", "ja": "あなたは英語を話しているのですか?", "en": "Are you speaking English?"}, {"num": 22, "title": "現在進行形", "ja": "僕の弟は部屋で宿題をしています。", "en": "My brother is doing his homework in his room."}, {"num": 22, "title": "現在進行形", "ja": "君は今何をしているの?", "en": "What are you doing now?"}, {"num": 22, "title": "現在進行形", "ja": "子供たちは公園で何をしていますか?", "en": "What are the children doing in the park?"}, {"num": 22, "title": "現在進行形", "ja": "エミリーはどこでピアノを弾いているの?／––音楽室で弾いているんだよ。", "en": "Where is Emily playing the piano?／- She is playing it in the music room."}, {"num": 22, "title": "現在進行形", "ja": "彼女は何語を話しているのですか?／ーフランス語を話しています。", "en": "What language is she speaking?／- She is speaking French."}, {"num": 22, "title": "現在進行形", "ja": "君は何を食べているの?ースパゲッティーを食べてるよ。", "en": "What are you eating? - I am eating spaghetti."}, {"num": 22, "title": "現在進行形", "ja": "トムとジョンは何をしているの?／–キャッチボールをしてるよ。", "en": "What are Tom and John doing?／- They are playing catch."}, {"num": 22, "title": "現在進行形", "ja": "彼はいつもテレビを見ている。", "en": "He is always watching TV."}, {"num": 23, "title": "There is (are) ～", "ja": "その部屋には窓が三つあります。", "en": "There are three windows in the room."}, {"num": 23, "title": "There is (are) ～", "ja": "庭には木が(何本か) ありますか?", "en": "Are there any trees in the garden?"}, {"num": 23, "title": "There is (are) ～", "ja": "このクラスには生徒が何人いますか?", "en": "How many students are there in this class?"}, {"num": 23, "title": "There is (are) ～", "ja": "彼の部屋には本が3冊しかない。", "en": "There are only three books in his room."}, {"num": 23, "title": "There is (are) ～", "ja": "世界にはいくつの言語がありますか?", "en": "How many languages are there in the world?"}, {"num": 23, "title": "There is (are) ～", "ja": "この庭には花が一輪もない。", "en": "There are not any flowers in this garden."}, {"num": 23, "title": "There is (are) ～", "ja": "一年は何カ月ですか?", "en": "How many months are there in a year?"}, {"num": 23, "title": "There is (are) ～", "ja": "この町には公園がたくさんありますか?––はい、あります。", "en": "Are there many parks in this town? - Yes, there are."}, {"num": 23, "title": "There is (are) ～", "ja": "その丘の上には高い木が何本かある。", "en": "There are some tall trees on the hill."}, {"num": 23, "title": "There is (are) ～", "ja": "この学校には女の子が一人もいない。", "en": "There aren't any girls in this school."}];
 const C2=[{"num": 1, "title": "過去形", "ja": "昨日私は疲れていました。", "en": "I was tired yesterday."}, {"num": 1, "title": "過去形", "ja": "その時彼女はとても幸福でした。", "en": "She was very happy then."}, {"num": 1, "title": "過去形", "ja": "突然ピーターが部屋に入ってきました。", "en": "Peter came into (entered) the room suddenly."}, {"num": 1, "title": "過去形", "ja": "君はいつ宿題をしたのですか？", "en": "When did you do your homework?"}, {"num": 1, "title": "過去形", "ja": "私たちは去年アメリカを訪れました。", "en": "We visited America last year."}, {"num": 1, "title": "過去形", "ja": "彼らは昼食に何を食べましたか？", "en": "What did they eat for lunch?"}, {"num": 1, "title": "過去形", "ja": "彼女はどのように動物園に行きましたか？ー電車で行きました。", "en": "How did she go to the zoo? ? She went there by train."}, {"num": 1, "title": "過去形", "ja": "公園には子供たちがたくさんいました。", "en": "There were many children in the park."}, {"num": 1, "title": "過去形", "ja": "一時間前君はどこにいたの？ー自分の部屋にいたよ。", "en": "Where were you an hour ago? ? I was in my room."}, {"num": 1, "title": "過去形", "ja": "彼女たちは僕たちにとても親切だった。", "en": "They were very kind to us."}, {"num": 2, "title": "過去進行形", "ja": "彼女はその時ピアノを弾いていました。", "en": "She was playing the piano then."}, {"num": 2, "title": "過去進行形", "ja": "あなたは英語を勉強していたのですか？", "en": "Were you studying English?"}, {"num": 2, "title": "過去進行形", "ja": "二時間前トムは何をしていましたか？", "en": "What was Tom doing two hours ago?"}, {"num": 2, "title": "過去進行形", "ja": "誰がこの部屋で眠っていたのですか？", "en": "Who was sleeping in this room?"}, {"num": 2, "title": "過去進行形", "ja": "今朝あなたはエミリーと話をしていましたか？", "en": "Were you talking with Emily this morning?"}, {"num": 2, "title": "過去進行形", "ja": "その時彼らは先生の言うことを聴いていなかった。", "en": "They were not listening to the teacher then."}, {"num": 2, "title": "過去進行形", "ja": "今日の午後君は何を読んでいたの？ー雑誌を読んでいたよ。", "en": "What were you reading this afternoon? ? I was reading a magazine."}, {"num": 2, "title": "過去進行形", "ja": "その外国人は何語を話していましたか？ースペイン語を話していました。", "en": "What language was the foreigner speaking? ? He (she) was speaking Spanish."}, {"num": 2, "title": "過去進行形", "ja": "君の妹はなぜ泣いていたのですか？", "en": "Why was your sister crying?"}, {"num": 2, "title": "過去進行形", "ja": "その時僕は風呂に入っていませんでした。", "en": "I was not taking a bath then."}, {"num": 3, "title": "when節", "ja": "彼に再会した時、彼女はとても幸せだった。", "en": "She was very happy when she saw him again."}, {"num": 3, "title": "when節", "ja": "夏が来るとたくさんの人が海に行く。", "en": "When summer comes, many people go to the sea."}, {"num": 3, "title": "when節", "ja": "昨夜帰宅した時、父はとても疲れていた。", "en": "My father was very tired when he got (back) home last night."}, {"num": 3, "title": "when節", "ja": "お母さんが部屋に入ってきた時、僕は宿題をしていた。", "en": "I was doing my homework when my mother came into (entered) the room."}, {"num": 3, "title": "when節", "ja": "勉強する時彼はいつもこの机を使うのですか？", "en": "Does he always use this desk when he studies?"}, {"num": 3, "title": "when節", "ja": "君がロバートに電話した時、彼は家にいましたか？", "en": "Was Robert at home when you called him?"}, {"num": 3, "title": "when節", "ja": "子供の時、僕の弟は体があまり丈夫ではなかった。", "en": "My brother was not very strong when he was a child."}, {"num": 3, "title": "when節", "ja": "僕のおじは若い時英語とドイツ語を勉強した。", "en": "My uncle studied English and German when he was young."}, {"num": 3, "title": "when節", "ja": "先生が教室にいる時、生徒たちはとても静かだ。", "en": "When the teacher is in the classroom, the students are very quiet."}, {"num": 3, "title": "when節", "ja": "君が学校から帰った時君のお兄さんは何をしていましたか？", "en": "What was your brother doing when you came back home from school?"}, {"num": 4, "title": "一般動詞のSVC", "ja": "彼はとても忙しそうだ。", "en": "He looks very busy."}, {"num": 4, "title": "一般動詞のSVC", "ja": "彼女はそのドレスを着てとてもきれいに見えた。", "en": "She looked very beautiful in the dress."}, {"num": 4, "title": "一般動詞のSVC", "ja": "その知らせを聞いた時、彼はとても怒った。", "en": "When he heard the news, he got very angry."}, {"num": 4, "title": "一般動詞のSVC", "ja": "木の葉はいつ黄色くなりますか？", "en": "When do the leaves turn yellow?"}, {"num": 4, "title": "一般動詞のSVC", "ja": "お父さんの髪が白髪になってきている。", "en": "My father's hair is turning gray."}, {"num": 4, "title": "一般動詞のSVC", "ja": "このスープはとてもいい味がする。", "en": "This soup tastes very good."}, {"num": 4, "title": "一般動詞のSVC", "ja": "この石鹸はいい匂いがする。", "en": "This soap smells good."}, {"num": 4, "title": "一般動詞のSVC", "ja": "その子犬はとても大きくなった。", "en": "The puppy became very big."}, {"num": 4, "title": "一般動詞のSVC", "ja": "その少女は成長して、何になりましたか？", "en": "What did the girl become when she grew up?"}, {"num": 4, "title": "一般動詞のSVC", "ja": "君のお母さんは若く見えるね。", "en": "Your mother looks young."}, {"num": 5, "title": "SVC+to(for)", "ja": "お父さんは古い辞書を僕にくれた。", "en": "My father gave an old dictionary to me."}, {"num": 5, "title": "SVC+to(for)", "ja": "彼女は一枚の写真を私たちに見せた。", "en": "She showed a picture to us."}, {"num": 5, "title": "SVC+to(for)", "ja": "それを犬にあげなさい。", "en": "Give it to the dog."}, {"num": 5, "title": "SVC+to(for)", "ja": "エミリーがあなたに英語を教えるのですか？", "en": "Does Emily teach English to you?"}, {"num": 5, "title": "SVC+to(for)", "ja": "彼はあなたに自転車を貸してくれましたか？", "en": "Did he lend a bicycle to you?"}, {"num": 5, "title": "SVC+to(for)", "ja": "お姉さんが僕にドーナツを作ってくれた。", "en": "My sister made some doughnuts for me."}, {"num": 5, "title": "SVC+to(for)", "ja": "ブラウンさんは彼女にその話をしましたか？", "en": "Did Mr. Brown tell the story to her?"}, {"num": 5, "title": "SVC+to(for)", "ja": "トムは彼らに自分の新車を見せた。", "en": "Tom showed his new car to them."}, {"num": 5, "title": "SVC+to(for)", "ja": "あなたは彼にお金をいくらあげたのですか？", "en": "How much money did you give to him?"}, {"num": 5, "title": "SVC+to(for)", "ja": "彼女は妹にかわいい人形を作ってあげた。", "en": "She made a pretty doll for her sister."}, {"num": 6, "title": "SVOO", "ja": "兄が僕に本を一冊くれた。", "en": "My brother gave me a book."}, {"num": 6, "title": "SVOO", "ja": "私は彼らに一枚の写真を見せた。", "en": "I showed them a picture."}, {"num": 6, "title": "SVOO", "ja": "猫にえさを少し（いくらかのえさを）あげなさい。", "en": "Give the cat some food."}, {"num": 6, "title": "SVOO", "ja": "あなたのお父さんがあなたに数学を教えてくれるのですか？", "en": "Does your father teach you mathematics?"}, {"num": 6, "title": "SVOO", "ja": "彼女は彼に辞書を貸してあげましたか？", "en": "Did she lend him a dictionary?"}, {"num": 6, "title": "SVOO", "ja": "お母さんが僕にクッキーを作ってくれた。", "en": "My mother made me some cookies."}, {"num": 6, "title": "SVOO", "ja": "おじいさんが僕たちにおもしろい話をしてくれた。", "en": "My grandfather told us an interesting story."}, {"num": 6, "title": "SVOO", "ja": "ピーターは彼女に彼の新しい自転車を見せた。", "en": "Peter showed her his new bicycle."}, {"num": 6, "title": "SVOO", "ja": "彼女たちは彼にお金をいくらかあげた。", "en": "They gave him some money."}, {"num": 6, "title": "SVOO", "ja": "おばあさんが彼女に素敵な人形を作ってあげた。", "en": "Her grandmother made her a nice doll."}, {"num": 7, "title": "will（単純未来）", "ja": "私は10月に17歳になります。", "en": "I will be seventeen years old in October."}, {"num": 7, "title": "will（単純未来）", "ja": "明日のパーティーはとても楽しいでしょう。", "en": "Tomorrow's party will be a lot of fun."}, {"num": 7, "title": "will（単純未来）", "ja": "そのテストはそんなに難しくないでしょう。", "en": "The examination will not (won't) be so difficult (hard)."}, {"num": 7, "title": "will（単純未来）", "ja": "お昼ご飯がもうじきできるわよ。", "en": "Lunch will be ready soon."}, {"num": 7, "title": "will（単純未来）", "ja": "彼女はいい先生になるでしょう。", "en": "She will be (become) a good teacher."}, {"num": 7, "title": "will（単純未来）", "ja": "彼らは今夜帰ってくるでしょうか？", "en": "Will they be back tonight?"}, {"num": 7, "title": "will（単純未来）", "ja": "明後日は晴れるでしょうか？", "en": "Will it be fine (sunny) the day after tomorrow?"}, {"num": 7, "title": "will（単純未来）", "ja": "彼の手紙は数日後に届く（到着する）でしょう。", "en": "His letter will arrive in a few days."}, {"num": 7, "title": "will（単純未来）", "ja": "彼女たちはいつ日本に来るのでしょうか？ー来月来ます。", "en": "When will they come to Japan? ? They will come next month."}, {"num": 7, "title": "will（単純未来）", "ja": "みんな幸福になるでしょう。", "en": "Everybody (everyone) will be happy."}, {"num": 8, "title": "will（意志未来）", "ja": "私がそれをやります。", "en": "I will do it."}, {"num": 8, "title": "will（意志未来）", "ja": "僕はいつかアメリカに行くぞ。", "en": "I will go to America some day."}, {"num": 8, "title": "will（意志未来）", "ja": "私はあなたにもう会いません。", "en": "I will not (won't) see you again."}, {"num": 8, "title": "will（意志未来）", "ja": "僕が君の宿題を手伝ってあげるよ。", "en": "I will help you with your homework."}, {"num": 8, "title": "will（意志未来）", "ja": "私はそんな本は読みません。", "en": "I will not (won't) read such a book."}, {"num": 8, "title": "will（意志未来）", "ja": "僕は英語とロシア語を身につけるぞ。", "en": "I will learn English and Russian."}, {"num": 8, "title": "will（意志未来）", "ja": "あなたのことは絶対に忘れません。", "en": "I will never forget you."}, {"num": 8, "title": "will（意志未来）", "ja": "一週間したら戻ってくるからね。", "en": "I will be back in a week."}, {"num": 8, "title": "will（意志未来）", "ja": "僕は今夜外出しないよ。", "en": "I will not (won't) go out tonight."}, {"num": 8, "title": "will（意志未来）", "ja": "今日宿題を終わらせるぞ。", "en": "I will finish my homework today."}, {"num": 9, "title": "will（依頼）／shall（申し出・誘い）", "ja": "手伝ってくれるかい？ーいいとも。", "en": "Will you please help me? ? Sure."}, {"num": 9, "title": "will（依頼）／shall（申し出・誘い）", "ja": "窓を閉めてくれませんか？ーいいですよ。", "en": "Will you please close the window? ? All right."}, {"num": 9, "title": "will（依頼）／shall（申し出・誘い）", "ja": "僕に自転車を貸してくれない？ーごめんね、でも貸せないんだ。", "en": "Will you please lend me your bicycle? ? I'm sorry but I can't."}, {"num": 9, "title": "will（依頼）／shall（申し出・誘い）", "ja": "みんなのためにピアノを弾いてくれませんか？ーいいですよ。", "en": "Will you please play the piano for everyone? ? Certainly."}, {"num": 9, "title": "will（依頼）／shall（申し出・誘い）", "ja": "コーヒーを入れてくれるかい？ーいいよ。", "en": "Will you please make some coffee? ? Sure."}, {"num": 9, "title": "will（依頼）／shall（申し出・誘い）", "ja": "紅茶をもうすこし飲みますか？ーはい、お願いします。", "en": "Will you have some more tea? ? Yes, please."}, {"num": 9, "title": "will（依頼）／shall（申し出・誘い）", "ja": "あなたに椅子を持って来ましょうか？ーはい、お願いします。", "en": "Shall I bring (get) you a chair? ? Yes, please."}, {"num": 9, "title": "will（依頼）／shall（申し出・誘い）", "ja": "あなたに夕食を作ってあげましょうか？ーいいえ、結構です。", "en": "Shall I cook dinner for you? ? No, thank you."}, {"num": 9, "title": "will（依頼）／shall（申し出・誘い）", "ja": "彼らと野球をしようか？ーうん、しよう。", "en": "Shall we play baseball with them? ? Yes, let's."}, {"num": 9, "title": "will（依頼）／shall（申し出・誘い）", "ja": "公園でサッカーをしようか？ーいや、やめとこう。", "en": "Shall we play soccer in the park? ? No, let's not."}, {"num": 10, "title": "be going to", "ja": "私は今日の午後彼に駅前で会う予定です。", "en": "I am going to meet him in front of the station this afternoon."}, {"num": 10, "title": "be going to", "ja": "彼の飛行機は何時にパリに着くのですか？", "en": "What time is his flight going to arrive in Paris?"}, {"num": 10, "title": "be going to", "ja": "誰が彼女を駅前で（車で）拾うのですか？", "en": "Who is going to pick her up in front of the station?"}, {"num": 10, "title": "be going to", "ja": "あなたは大学で何を勉強するつもりですか。", "en": "What are you going to study at college?"}, {"num": 10, "title": "be going to", "ja": "あなたはどこに泊まるつもりですか？ー海辺のホテルに泊まるつもりです。", "en": "Where are you going to stay? ? I'm going to stay at a hotel by the sea."}, {"num": 10, "title": "be going to", "ja": "あなたはいつ日本を出発する予定ですか？ー来週発つ予定です。", "en": "When are you going to leave Japan? ? I'm going to leave next week."}, {"num": 10, "title": "be going to", "ja": "彼女はいくつの国を訪れる予定ですか？ー7カ国の予定です。", "en": "How many countries is she going to visit? ? She is going to visit seven countries."}, {"num": 10, "title": "be going to", "ja": "彼は午前中にその仕事を終える予定だった。", "en": "He was going to finish the work in the morning."}, {"num": 10, "title": "be going to", "ja": "彼らは何を食べるつもりでしたか？ー中華料理を食べるつもりでした。", "en": "What were they going to eat? ? They were going to eat Chinese food."}, {"num": 10, "title": "be going to", "ja": "夏休みはヨーロッパを旅して回る予定なんだ。", "en": "I'm going to travel around Europe during the summer vacation."}, {"num": 11, "title": "must／may", "ja": "あなたは宿題を今日しなければいけません。", "en": "You must do your homework today."}, {"num": 11, "title": "must／may", "ja": "僕は今晩家にいなければなりませんか？", "en": "Must I stay home tonight?"}, {"num": 11, "title": "must／may", "ja": "子供はそこに一人で行ってはなりません。", "en": "A child must not go there alone."}, {"num": 11, "title": "must／may", "ja": "一日中テレビを見てはいけません。", "en": "You mustn't watch TV all day."}, {"num": 11, "title": "must／may", "ja": "あなたはお年寄りたちに親切にしなければなりません。", "en": "You must be kind to old people."}, {"num": 11, "title": "must／may", "ja": "このパンを食べてもいいですか？ーはい、いいですよ。", "en": "May I eat this bread? ? Yes, you may."}, {"num": 11, "title": "must／may", "ja": "あの人と話してもいいですか？ーいいえ、いけません。", "en": "May I talk to that person? ? No, you may not."}, {"num": 11, "title": "must／may", "ja": "君たちはこの湖で泳いでもいいですよ。", "en": "You may swim in this lake."}, {"num": 11, "title": "must／may", "ja": "このアルバムを見てもいいですか？ーいいえ、いけません。", "en": "May I look at this album? ? No, you may not."}, {"num": 11, "title": "must／may", "ja": "弟とあなたの家に行ってもいいですか？ーはい、いいですよ。", "en": "May I go to (visit) your house with my brother? ? Yes, you may."}, {"num": 12, "title": "have to", "ja": "この学校では学生たちは制服を着なくてはならない。", "en": "Students have to wear uniforms in this school."}, {"num": 12, "title": "have to", "ja": "僕たちはこれらの本を読まなくてはいけませんか？ーはい、そうです。", "en": "Do we have to read these books? ? Yes, you do."}, {"num": 12, "title": "have to", "ja": "私は英語を話さなくてはなりませんか？ーいいえ、話さなくてもいいです。", "en": "Do I have to speak English? ? No, you don't."}, {"num": 12, "title": "have to", "ja": "彼は車を3台洗わなくてはならない。", "en": "He has to wash three cars."}, {"num": 12, "title": "have to", "ja": "彼女はその部屋で静かにしていなければなりませんか？ーはい、そうです。", "en": "Does she have to stay calm in the room? ? Yes, she does."}, {"num": 12, "title": "have to", "ja": "彼女は皿を洗わないでもよかった。", "en": "She didn't have to wash the dishes."}, {"num": 12, "title": "have to", "ja": "彼女は一人でそこに行かないですんだ。", "en": "She didn't have to go there alone."}, {"num": 12, "title": "have to", "ja": "なぜ彼はそんなに一生懸命勉強しなければならないのですか？", "en": "Why does he have to study so hard?"}, {"num": 12, "title": "have to", "ja": "トムと彼の弟は自分たちの部屋を掃除しなければならない。", "en": "Tom and his brother have to clean their rooms."}, {"num": 12, "title": "have to", "ja": "エミリーは何をしなければならなかったのですか？ーピアノを練習しなければなりませんでした。", "en": "What did Emily have to do? ? She had to practice the piano."}, {"num": 13, "title": "be able to", "ja": "その国であなたは多くのことを学べるでしょう。", "en": "You will be able to learn many things in the country."}, {"num": 13, "title": "be able to", "ja": "僕は来週そこで彼らに会うことができるでしょう。", "en": "I will be able to see them there next week."}, {"num": 13, "title": "be able to", "ja": "彼女は日本語を上手に話せるようになるでしょう。", "en": "She will be able to speak Japanese well."}, {"num": 13, "title": "be able to", "ja": "僕たちは昨日その湖で一日中泳ぐことができました。", "en": "We were able to swim in the lake all day yesterday."}, {"num": 13, "title": "be able to", "ja": "先週あなたは何冊の本を読むことができましたか？", "en": "How many books were you able to read last week?"}, {"num": 13, "title": "be able to", "ja": "誰がその問題を解くことができましたか？", "en": "Who was able to solve the problem?"}, {"num": 13, "title": "be able to", "ja": "彼らはそこでとんぼを一匹も捕まえることができませんでした。", "en": "They weren't able to catch any dragonflies there."}, {"num": 13, "title": "be able to", "ja": "僕はもうすぐ車の運転ができるようになるでしょう。", "en": "I will be able to drive soon."}, {"num": 13, "title": "be able to", "ja": "その当時彼女はとても上手にピアノを弾くことができた。", "en": "She was able to play the piano very well then (in those days)."}, {"num": 13, "title": "be able to", "ja": "彼はホワイトさんと英語で話すことができましたか？ーはい、できました。", "en": "Was he able to speak with Mr. White in English? ? Yes, he was."}, {"num": 14, "title": "感嘆文", "ja": "彼はなんと親切なのでしょう。", "en": "How kind he is!"}, {"num": 14, "title": "感嘆文", "ja": "彼はなんと偉大な作家なのでしょう。", "en": "What a great writer he is!"}, {"num": 14, "title": "感嘆文", "ja": "タマはなんとかわいい猫なのでしょう。", "en": "What a cute cat Tama is!"}, {"num": 14, "title": "感嘆文", "ja": "チェスはなんとおもしろいのでしょう。", "en": "How interesting chess is!"}, {"num": 14, "title": "感嘆文", "ja": "海はなんと大きいのでしょう。", "en": "How big the sea is!"}, {"num": 14, "title": "感嘆文", "ja": "彼はなんと一生懸命勉強するのでしょう。", "en": "How hard he studies!"}, {"num": 14, "title": "感嘆文", "ja": "彼女はなんと注意深く車を運転するのでしょう。", "en": "How carefully she drives!"}, {"num": 14, "title": "感嘆文", "ja": "昨日はなんと暑かったのでしょう。", "en": "How hot it was yesterday!"}, {"num": 14, "title": "感嘆文", "ja": "あなたの息子さんはなんと大きくなったのでしょう。", "en": "How big your son became!"}, {"num": 14, "title": "感嘆文", "ja": "それはなんとおもしろい物語だったのでしょう。", "en": "What an interesting story it was!"}, {"num": 15, "title": "不定詞ー名詞的用法", "ja": "僕はいつかアメリカに行きたい。", "en": "I want to go to America some day."}, {"num": 15, "title": "不定詞ー名詞的用法", "ja": "僕の姉は去年イタリア語を勉強し始めた。", "en": "My sister began to study Italian last year."}, {"num": 15, "title": "不定詞ー名詞的用法", "ja": "私は来年インドに行くことを決めました。", "en": "I decided to go to India next year."}, {"num": 15, "title": "不定詞ー名詞的用法", "ja": "あなたは何をしたいですか？", "en": "What do you want to do?"}, {"num": 15, "title": "不定詞ー名詞的用法", "ja": "彼は朝食を食べ始めた。", "en": "He began to eat breakfast."}, {"num": 15, "title": "不定詞ー名詞的用法", "ja": "彼女の趣味は花を育てることです。", "en": "Her hobby is to grow flowers."}, {"num": 15, "title": "不定詞ー名詞的用法", "ja": "彼の夢は世界中を旅行することでした。", "en": "His dream was to travel around the world."}, {"num": 15, "title": "不定詞ー名詞的用法", "ja": "英語を話すのは簡単ではありません。", "en": "To speak English is not easy."}, {"num": 15, "title": "不定詞ー名詞的用法", "ja": "ジャズを聞くのが私の趣味です。", "en": "To listen to jazz is my hobby."}, {"num": 15, "title": "不定詞ー名詞的用法", "ja": "あなたといるのはとても楽しいです。", "en": "To be with you is a lot of fun."}, {"num": 16, "title": "不定詞ー副詞的用法（目的）", "ja": "僕は本を何冊か借りに図書館に行った。", "en": "I went to the library to borrow some books."}, {"num": 16, "title": "不定詞ー副詞的用法（目的）", "ja": "彼は美術を勉強するためにいつかフランスに行くだろう。", "en": "He will go to France to study art some day."}, {"num": 16, "title": "不定詞ー副詞的用法（目的）", "ja": "僕の兄は毎週日曜日サーフィンを楽しみに海に行く。", "en": "My brother goes to the sea to enjoy surfing every Sunday."}, {"num": 16, "title": "不定詞ー副詞的用法（目的）", "ja": "君はトムに会うためにここに来たのですか？", "en": "Did you come here to see Tom?"}, {"num": 16, "title": "不定詞ー副詞的用法（目的）", "ja": "ロバートとナンシーは昨夜夕食をしにすてきなレストランに行った。", "en": "Robert and Nancy went to a nice restaurant to have dinner last night."}, {"num": 16, "title": "不定詞ー副詞的用法（目的）", "ja": "僕の弟は新しい自転車を買うためにお金を貯めている。", "en": "My brother is saving money to buy a new bicycle."}, {"num": 16, "title": "不定詞ー副詞的用法（目的）", "ja": "僕は宿題をするために明日の朝早く起きるつもりです。", "en": "I am going to get up early tomorrow morning to do my homework."}, {"num": 16, "title": "不定詞ー副詞的用法（目的）", "ja": "来年イギリスに行くために僕のいとこは一生懸命英語を勉強している。", "en": "My cousin is studying English hard to go to England next year."}, {"num": 16, "title": "不定詞ー副詞的用法（目的）", "ja": "彼らは試験に受かるために毎日何時間も勉強しなければならない。", "en": "They have to study for many hours every day to pass the exam."}, {"num": 16, "title": "不定詞ー副詞的用法（目的）", "ja": "彼女は明日おばあさんを訪問するために鎌倉に一人で行くだろう。", "en": "She will go to Kamakura alone to visit her grandmother tomorrow."}, {"num": 17, "title": "不定詞ー副詞的用法（感情の原因）", "ja": "あなたに会えてうれしいです。", "en": "I am happy to meet you."}, {"num": 17, "title": "不定詞ー副詞的用法（感情の原因）", "ja": "彼にまた会えてうれしかった。", "en": "I was happy to see him again."}, {"num": 17, "title": "不定詞ー副詞的用法（感情の原因）", "ja": "彼女はあなたに再び会って喜ぶでしょう。", "en": "She will be glad to see you again."}, {"num": 17, "title": "不定詞ー副詞的用法（感情の原因）", "ja": "遅れてすみません（遅れて残念です）。", "en": "I am sorry to be late."}, {"num": 17, "title": "不定詞ー副詞的用法（感情の原因）", "ja": "その大きな建物を見て彼らは驚きました。", "en": "They were surprised to see the big building."}, {"num": 17, "title": "不定詞ー副詞的用法（感情の原因）", "ja": "彼の話を聴いて私たちはとても驚いた。", "en": "We were very surprised to hear his story."}, {"num": 17, "title": "不定詞ー副詞的用法（感情の原因）", "ja": "私はその悪い知らせを聴いて残念だった。", "en": "I was sorry to hear the bad news."}, {"num": 17, "title": "不定詞ー副詞的用法（感情の原因）", "ja": "あなたのご両親はあなたの手紙を受け取って喜ぶでしょう。", "en": "Your parents will be pleased to receive your letter."}, {"num": 17, "title": "不定詞ー副詞的用法（感情の原因）", "ja": "あなたは旧友に会えてうれしかったですか？", "en": "Were you happy to see your old friend?"}, {"num": 17, "title": "不定詞ー副詞的用法（感情の原因）", "ja": "彼らはその美しい湖で泳ぐことができてとても幸せだった。", "en": "They were very happy to swim in the beautiful lake."}, {"num": 18, "title": "不定詞ー形容詞的用法", "ja": "私には今日しなければならない（するべき）宿題があります。", "en": "I have homework to do today."}, {"num": 18, "title": "不定詞ー形容詞的用法", "ja": "彼女は彼に言いたいこと（言うための何か）があった。", "en": "She had something to say to him."}, {"num": 18, "title": "不定詞ー形容詞的用法", "ja": "あなたは読む本を（何冊か）持っていますか？", "en": "Do you have any books to read?"}, {"num": 18, "title": "不定詞ー形容詞的用法", "ja": "彼は明日あなたに会う時間はないでしょう。", "en": "He won't have any time to see you tomorrow."}, {"num": 18, "title": "不定詞ー形容詞的用法", "ja": "彼は何か食べるものが欲しかったのですか？", "en": "Did he want something to eat?"}, {"num": 18, "title": "不定詞ー形容詞的用法", "ja": "僕は今日何もすることがない。", "en": "I don't have anything to do today."}, {"num": 18, "title": "不定詞ー形容詞的用法", "ja": "僕はあの店で弟にあげる物を何か買うつもりだ。", "en": "I am going to buy something to give to my brother at that store."}, {"num": 18, "title": "不定詞ー形容詞的用法", "ja": "彼は昨日することがたくさんあった。", "en": "He had a lot of things to do yesterday."}, {"num": 18, "title": "不定詞ー形容詞的用法", "ja": "彼には住む家がない。", "en": "He doesn't have a house to live in."}, {"num": 18, "title": "不定詞ー形容詞的用法", "ja": "あなたは筆記用具（書くための何か）を持っていますか？", "en": "Do you have anything to write with?"}, {"num": 19, "title": "動名詞", "ja": "彼女はピアノを弾くのが好きです。", "en": "She likes playing the piano."}, {"num": 19, "title": "動名詞", "ja": "あなたは煙草を吸うのをやめますか。", "en": "Will you stop (give up) smoking?"}, {"num": 19, "title": "動名詞", "ja": "あなたはいつ切手を集め始めたのですか？", "en": "When did you begin (start) collecting stamps?"}, {"num": 19, "title": "動名詞", "ja": "外国語を勉強するのは僕にとってとても楽しい。", "en": "Learning foreign languages is a lot of fun for me."}, {"num": 19, "title": "動名詞", "ja": "車を運転するのは時には退屈だ。", "en": "Driving a car is sometimes boring."}, {"num": 19, "title": "動名詞", "ja": "彼女は英語を話すのが得意です。", "en": "She is good at speaking English."}, {"num": 19, "title": "動名詞", "ja": "彼の趣味は珍しい蝶を集めることです。", "en": "His hobby is collecting rare butterflies."}, {"num": 19, "title": "動名詞", "ja": "彼の仕事は外国人に日本語を教えることですか？", "en": "Is his job teaching Japanese to foreigners?"}, {"num": 19, "title": "動名詞", "ja": "なぜ英語を学ぶことが大切なのですか？", "en": "Why is learning English important?"}, {"num": 19, "title": "動名詞", "ja": "あなたはどんな楽器を弾くのが好きですか？", "en": "What musical instrument do you like playing?"}, {"num": 20, "title": "原級比較", "ja": "この教会はあの教会と同じくらい古い。", "en": "This church is as old as that church (one)."}, {"num": 20, "title": "原級比較", "ja": "あの少年たちはこの少年たちと同じくらいの年齢ですか？", "en": "Are those boys as old as these boys?"}, {"num": 20, "title": "原級比較", "ja": "その猫は犬と同じくらい大きかった。", "en": "The cat was as big as a dog."}, {"num": 20, "title": "原級比較", "ja": "あの映画はこの映画と同じくらいおもしろい。", "en": "That movie is as interesting as this movie."}, {"num": 20, "title": "原級比較", "ja": "これらのみかんはあれらのみかんと同じくらい甘いですか？（ここでは、みかんはorangeで）", "en": "Are these oranges as sweet as those oranges (ones)?"}, {"num": 20, "title": "原級比較", "ja": "彼女は母親と同じくらい美しくなりました。", "en": "She became as beautiful as her mother."}, {"num": 20, "title": "原級比較", "ja": "この車は僕の車ほど速く走らない。", "en": "This car doesn't run as fast as my car (mine)."}, {"num": 20, "title": "原級比較", "ja": "君は彼女と同じくらい熱心に勉強しなければならない。", "en": "You have to (must) study as hard as she does."}, {"num": 20, "title": "原級比較", "ja": "彼は君ほど上手には英語を話せない。", "en": "He can't speak English as well as you do."}, {"num": 20, "title": "原級比較", "ja": "彼女は今朝お母さんと同じくらい早く起きた。", "en": "She got up as early as her mother this morning."}, {"num": 21, "title": "比較級ーer形", "ja": "このりんごはあのりんごより大きい。", "en": "This apple is bigger than that one."}, {"num": 21, "title": "比較級ーer形", "ja": "トムは僕より背が高い。", "en": "Tom is taller than me (I)."}, {"num": 21, "title": "比較級ーer形", "ja": "あなたの車は彼女のより新しいですか？", "en": "Is your car newer than hers?"}, {"num": 21, "title": "比較級ーer形", "ja": "私たちは彼らよりずっと幸せでした。", "en": "We were much happier than they were."}, {"num": 21, "title": "比較級ーer形", "ja": "明日は今日よりずっと暑くなるでしょう。", "en": "It will be much hotter tomorrow than today."}, {"num": 21, "title": "比較級ーer形", "ja": "母は父より若く見えます。", "en": "My mother looks younger than my father."}, {"num": 21, "title": "比較級ーer形", "ja": "彼のかばんは僕のより重そうに見えた。", "en": "His bag looked heavier than mine."}, {"num": 21, "title": "比較級ーer形", "ja": "誰がナンシーよりきれいですか？ーエミリーです。", "en": "Who is prettier than Nancy? ? Emily is."}, {"num": 21, "title": "比較級ーer形", "ja": "あの絵はこの絵より良い。", "en": "That picture is better than this one."}, {"num": 21, "title": "比較級ーer形", "ja": "エベレスト山は富士山よりずっと高い。", "en": "Mt. Everest is much higher than Mt. Fuji."}, {"num": 22, "title": "最上級ーest形", "ja": "ロバートは家族で一番背が高い。", "en": "Robert is the tallest in his family."}, {"num": 22, "title": "最上級ーest形", "ja": "この猫が5匹の中で一番小さい。", "en": "This cat is the smallest of the five."}, {"num": 22, "title": "最上級ーest形", "ja": "富士山は日本で一番高い山です。", "en": "Mt. Fuji is the highest mountain in Japan."}, {"num": 22, "title": "最上級ーest形", "ja": "あなたの家族の中で誰が一番若いですか？", "en": "Who is the youngest in your family?"}, {"num": 22, "title": "最上級ーest形", "ja": "彼はクラスでもっとも頭のいい生徒です。", "en": "He is the smartest student in the class."}, {"num": 22, "title": "最上級ーest形", "ja": "日本で一番長い川は何ですか？", "en": "What is the longest river in Japan?"}, {"num": 22, "title": "最上級ーest形", "ja": "あの少女は町で一番きれいだ。", "en": "That girl is the prettiest in town."}, {"num": 22, "title": "最上級ーest形", "ja": "あの自転車は3台のうちで一番新しい。", "en": "That bicycle is the newest of the three."}, {"num": 22, "title": "最上級ーest形", "ja": "これが全てのうちで一番いい方法です。", "en": "This is the best way of all."}, {"num": 22, "title": "最上級ーest形", "ja": "それら全てのうちで一番良い辞書はどれですか？", "en": "Which is the best dictionary of them all?"}, {"num": 23, "title": "比較級ーmore", "ja": "英語はフランス語より役に立ちますか？", "en": "Is English more useful than French?"}, {"num": 23, "title": "比較級ーmore", "ja": "これらの花はあれらの花より美しい。", "en": "These flowers are more beautiful than those."}, {"num": 23, "title": "比較級ーmore", "ja": "トムはエドよりずっと頭が良い。", "en": "Tom is much more intelligent than Ed."}, {"num": 23, "title": "比較級ーmore", "ja": "その本はこの本よりずっと難しかった。", "en": "The book was much more difficult than this one."}, {"num": 23, "title": "比較級ーmore", "ja": "日本では野球はサッカーより人気がありますか？", "en": "Is baseball more popular than soccer in Japan?"}, {"num": 23, "title": "比較級ーmore", "ja": "彼より彼のお父さんの方が有名だった。", "en": "His father was more famous than him (he)."}, {"num": 23, "title": "比較級ーmore", "ja": "健康はお金より大切です。", "en": "Health is more important than money."}, {"num": 23, "title": "比較級ーmore", "ja": "あの映画はこの映画よりずっとおもしろいよ。", "en": "That movie is much more interesting than this one."}, {"num": 23, "title": "比較級ーmore", "ja": "彼の車は僕のより高い（高価）。", "en": "His car is more expensive than mine."}, {"num": 23, "title": "比較級ーmore", "ja": "この町は君の町より危険だ。", "en": "This town is more dangerous than your town."}, {"num": 24, "title": "最上級ーmost", "ja": "すべてのうちで健康がもっとも大切です。", "en": "Health is the most important of all."}, {"num": 24, "title": "最上級ーmost", "ja": "これらの絵のうちでこれが一番美しい。", "en": "This is the most beautiful of these pictures."}, {"num": 24, "title": "最上級ーmost", "ja": "彼は世界でもっとも有名な俳優の一人です。", "en": "He is one of the most famous actors in the world."}, {"num": 24, "title": "最上級ーmost", "ja": "町で一番きれいな女の子は誰ですか？", "en": "Who is the most beautiful girl in town?"}, {"num": 24, "title": "最上級ーmost", "ja": "野球は日本で最も人気のあるスポーツの一つですか？", "en": "Is baseball one of the most popular sports in Japan?"}, {"num": 24, "title": "最上級ーmost", "ja": "あなたのクラスでは誰が一番頭がいいですか？", "en": "Who is the most intelligent in your class?"}, {"num": 24, "title": "最上級ーmost", "ja": "この10台の車の中であの赤い車が一番高い。", "en": "That red car is the most expensive of these ten cars."}, {"num": 24, "title": "最上級ーmost", "ja": "世界で一番難しい言語は何ですか？", "en": "What is the most difficult language in the world?"}, {"num": 24, "title": "最上級ーmost", "ja": "一番小さなリンゴが一番おいしかった。", "en": "The smallest apple was the most delicious."}, {"num": 24, "title": "最上級ーmost", "ja": "チェスは最もおもしろいゲームの一つです。", "en": "Chess is one of the most interesting games."}, {"num": 25, "title": "比較級ー副詞", "ja": "弟は僕より速く泳げます。", "en": "My brother can swim faster than me (I)."}, {"num": 25, "title": "比較級ー副詞", "ja": "彼女は他の少女たちよりゆっくり歩きます。", "en": "She walks more slowly than other girls."}, {"num": 25, "title": "比較級ー副詞", "ja": "彼は僕より上手に英語を話すことができます。", "en": "He can speak English better than me (I)."}, {"num": 25, "title": "比較級ー副詞", "ja": "トムは友人たちより早く駅に着いた。", "en": "Tom got to (arrived at) the station earlier than his friends."}, {"num": 25, "title": "比較級ー副詞", "ja": "あなたは彼より一生懸命勉強しますか？", "en": "Do you study harder than he does?"}, {"num": 25, "title": "比較級ー副詞", "ja": "弟は僕より遅く家に帰ってきました。", "en": "My brother came (back) home later than I did."}, {"num": 25, "title": "比較級ー副詞", "ja": "今朝僕はお母さんより早く起きました。", "en": "I got up earlier than my mother this morning."}, {"num": 25, "title": "比較級ー副詞", "ja": "彼は僕より注意深くその本を読みました。", "en": "He read the book more carefully than I did."}, {"num": 25, "title": "比較級ー副詞", "ja": "彼女はあなたより流暢にフランス語を話しますか？", "en": "Does she speak French more fluently than you do?"}, {"num": 25, "title": "比較級ー副詞", "ja": "兄は僕よりずっと長く勉強します。", "en": "My brother studies much longer than I do."}, {"num": 26, "title": "最上級ー副詞", "ja": "家族の中では母が一番早起きです", "en": "My mother gets up (the) earliest in my family."}, {"num": 26, "title": "最上級ー副詞", "ja": "僕のクラスでは彼が一番上手に英語が話せます。", "en": "He can speak English (the) best in my class."}, {"num": 26, "title": "最上級ー副詞", "ja": "エミリーは3人のうちで一番ゆっくり歩きました。", "en": "Emily walked (the) most slowly of the three."}, {"num": 26, "title": "最上級ー副詞", "ja": "彼は彼らみんなの中で一番流暢に日本語を話しました。", "en": "He spoke Japanese (the) most fluently of them all."}, {"num": 26, "title": "最上級ー副詞", "ja": "あなたのクラスでは誰が一番一生懸命勉強しますか？ートムです。", "en": "Who studies (the) hardest in your class? ? Tom does."}, {"num": 26, "title": "最上級ー副詞", "ja": "昨日姉は家族で一番遅く帰宅しました。", "en": "My sister got (back) home (the) latest in my family yesterday."}, {"num": 26, "title": "最上級ー副詞", "ja": "彼らみんなのうちでエドが一番速く泳げるようになるでしょう。", "en": "Ed will be able to swim (the) fastest of them all."}, {"num": 26, "title": "最上級ー副詞", "ja": "あなたの家族では誰が一番長く眠りますか？ー妹です。", "en": "Who sleeps (the) longest in your family? ? My sister does."}, {"num": 26, "title": "最上級ー副詞", "ja": "あの子供たちの中でパットが一番注意深く先生の言うことを聴きました。", "en": "Pat listened to the teacher (the) most carefully of those children."}, {"num": 26, "title": "最上級ー副詞", "ja": "すべての動物の中でチーターが一番速く走ります。", "en": "The cheetah runs (the) fastest of all animals."}, {"num": 27, "title": "比較級、最上級を使った疑問詞の文", "ja": "あなたとあなたのお父さんでは、どちらが背が高いですか？", "en": "Who is taller, you or your father?"}, {"num": 27, "title": "比較級、最上級を使った疑問詞の文", "ja": "彼の部屋と彼女のでは、どちらが大きいですか？", "en": "Which is bigger, his room or hers (her room)?"}, {"num": 27, "title": "比較級、最上級を使った疑問詞の文", "ja": "トムとロバートでは、昨夜どちらが遅く寝ましたか？", "en": "Who went to bed later last night, Tom or Robert?"}, {"num": 27, "title": "比較級、最上級を使った疑問詞の文", "ja": "エミリーとナンシーでは、明日どちらが早く学校に来るでしょうか？", "en": "Who will come to school earlier tomorrow, Emily or Nancy?"}, {"num": 27, "title": "比較級、最上級を使った疑問詞の文", "ja": "あなたの学校と彼らの学校では、どちらが古いですか？", "en": "Which is older, your school or theirs?"}, {"num": 27, "title": "比較級、最上級を使った疑問詞の文", "ja": "猫と犬では、あなたはどちらの方が好きですか？", "en": "Which do you like better, cats or dogs?"}, {"num": 27, "title": "比較級、最上級を使った疑問詞の文", "ja": "数学と英語では、あなたはどちらの方が好きですか？ー数学の方が好きです。", "en": "Which do you like better, mathematics or English? ? I like mathematics better."}, {"num": 27, "title": "比較級、最上級を使った疑問詞の文", "ja": "あなたのクラスでは誰が一番背が高いですか？ートムです。", "en": "Who is the tallest in your class? ? Tom is."}, {"num": 27, "title": "比較級、最上級を使った疑問詞の文", "ja": "あなたはどの科目が一番好きですか？ー歴史です。", "en": "Which subject do you like (the) best? ? I like history (the) best."}, {"num": 27, "title": "比較級、最上級を使った疑問詞の文", "ja": "あなたの家族で、今朝誰が一番早く起きましたか？ー父です。", "en": "Who got up (the) earliest in your family this morning? ? My father did."}, {"num": 28, "title": "現在完了ー継続", "ja": "私はこの町に10年住んでいます。", "en": "I have lived in this town for ten years."}, {"num": 28, "title": "現在完了ー継続", "ja": "先週からずっと暑い。", "en": "It has been hot since last week."}, {"num": 28, "title": "現在完了ー継続", "ja": "あなたはどのくらいの間彼を知っているのですか？", "en": "How long have you known him?"}, {"num": 28, "title": "現在完了ー継続", "ja": "彼は両親に長い間手紙を書いていません。", "en": "He has not written to his parents for a long time."}, {"num": 28, "title": "現在完了ー継続", "ja": "僕は月曜日からずっと彼に会っていない。", "en": "I haven't seen him since Monday."}, {"num": 28, "title": "現在完了ー継続", "ja": "彼女はそのかばんを3年使っている。", "en": "She has used the bag for three years."}, {"num": 28, "title": "現在完了ー継続", "ja": "お父さんは先週からずっと忙しい。", "en": "My father has been busy since last week."}, {"num": 28, "title": "現在完了ー継続", "ja": "ブラウン夫妻は1985年から日本に住んでいます。", "en": "Mr. and Mrs. Brown have lived in Japan since 1985."}, {"num": 28, "title": "現在完了ー継続", "ja": "ピーターは2時間自分の部屋にいる。", "en": "Peter has been in his room for two hours."}, {"num": 28, "title": "現在完了ー継続", "ja": "私たちはこの列車に5時間乗っています。", "en": "We have been on this train for five hours."}, {"num": 29, "title": "現在完了ー完了", "ja": "僕はちょうど昼食を食べたところです。", "en": "I have just had (eaten) lunch."}, {"num": 29, "title": "現在完了ー完了", "ja": "あなたはもう宿題をしてしまいましたか？", "en": "Have you done your homework yet?"}, {"num": 29, "title": "現在完了ー完了", "ja": "トムが窓を割ってしまいました。", "en": "Tom has broken the window."}, {"num": 29, "title": "現在完了ー完了", "ja": "彼女は財布をなくしてしまいました。", "en": "She has lost her wallet (purse)."}, {"num": 29, "title": "現在完了ー完了", "ja": "彼らはもうそこに着きましたか？", "en": "Have they arrived (got) there yet?"}, {"num": 29, "title": "現在完了ー完了", "ja": "私たちはまだ彼からの手紙を受け取っていません。", "en": "We haven't received (got) a letter from him yet."}, {"num": 29, "title": "現在完了ー完了", "ja": "その少年はアメリカに行ってしまいました。", "en": "The boy has gone to America."}, {"num": 29, "title": "現在完了ー完了", "ja": "トムとピーターはもう車を洗ってしまいました。", "en": "Tom and Peter have already washed the car."}, {"num": 29, "title": "現在完了ー完了", "ja": "誰がこの箱を開けてしまったのですか？ー僕です。", "en": "Who has opened this box? ? I have."}, {"num": 29, "title": "現在完了ー完了", "ja": "彼女たちはまだ夕食を食べていません。", "en": "They haven't had (eaten) dinner yet."}, {"num": 30, "title": "現在完了ー経験", "ja": "僕は彼に一度会ったことがあります。", "en": "I have met him once."}, {"num": 30, "title": "現在完了ー経験", "ja": "僕は以前にこの映画を見たことがあります。", "en": "I have seen this movie before."}, {"num": 30, "title": "現在完了ー経験", "ja": "あなたは今までにその国に行ったことがありますか？", "en": "Have you ever been to that country?"}, {"num": 30, "title": "現在完了ー経験", "ja": "彼女は一度も外国に行ったことがありません。", "en": "She has never been abroad (to a foreign country)."}, {"num": 30, "title": "現在完了ー経験", "ja": "私たちは何度もこの本を読んだことがあります。", "en": "We have read this book many times."}, {"num": 30, "title": "現在完了ー経験", "ja": "君は今までにボウリングをしたことがあるかい？ーいや、ないよ。", "en": "Have you ever tried bowling? ? No, I haven't."}, {"num": 30, "title": "現在完了ー経験", "ja": "彼は英語で外国人と話したことが一度もない。", "en": "He has never talked to a foreigner in English."}, {"num": 30, "title": "現在完了ー経験", "ja": "あなたは外車を運転したことがありますか？", "en": "Have you ever driven a foreign car?"}, {"num": 30, "title": "現在完了ー経験", "ja": "トムは3回、ヨーロッパに行ったことがある。", "en": "Tom has been to Europe three times."}, {"num": 30, "title": "現在完了ー経験", "ja": "ヘンリーは以前に日本語を習ったことがありません。", "en": "Henry has never learned Japanese before."}, {"num": 31, "title": "現在完了進行形", "ja": "私は2時間この本を読んでいます。", "en": "I have been reading this book for two hours."}, {"num": 31, "title": "現在完了進行形", "ja": "彼女は3時間以上ピアノを弾いています。", "en": "She has been playing the piano for more than three hours."}, {"num": 31, "title": "現在完了進行形", "ja": "君はどのくらいテレビを見ているんだい？", "en": "How long have you been watching TV?"}, {"num": 31, "title": "現在完了進行形", "ja": "彼らは長い間日本語を学んでいるのですか？", "en": "Have they been learning Japanese for a long time?"}, {"num": 31, "title": "現在完了進行形", "ja": "今朝からずっと雨だ。", "en": "It has been raining since this morning."}, {"num": 31, "title": "現在完了進行形", "ja": "科学者たちは何世紀もその難問を解こうとしている。", "en": "Scientists have been trying to solve the difficult problem for centuries."}, {"num": 31, "title": "現在完了進行形", "ja": "彼は恋人を何時間も待っている。", "en": "He has been waiting for his girlfriend for hours."}, {"num": 31, "title": "現在完了進行形", "ja": "彼らは何カ月もアパートを探している。", "en": "They have been looking for an apartment for months."}, {"num": 31, "title": "現在完了進行形", "ja": "ナンシーはここで10年働いています。", "en": "Nancy has been working here for ten years."}, {"num": 31, "title": "現在完了進行形", "ja": "あの少年は1時間以上走っている。", "en": "That boy has been running for over an hour."}, {"num": 32, "title": "that節", "ja": "私は、彼女はアメリカに住んでいると思います。", "en": "I think that she lives in America."}, {"num": 32, "title": "that節", "ja": "あなたは、彼が昨日ここに来たことを知っていますか？", "en": "Do you know that he came here yesterday?"}, {"num": 32, "title": "that節", "ja": "彼女は、彼がいつか帰って来ると信じています。", "en": "She believes that he will come back some day."}, {"num": 32, "title": "that節", "ja": "私は、あなたがたがまたいらっしゃってくれれば良いと思います。", "en": "I hope that you will come again."}, {"num": 32, "title": "that節", "ja": "彼女は、弟はテレビを見ているのだと思った。", "en": "She thought that her brother was watching TV."}, {"num": 32, "title": "that節", "ja": "僕たちは、その映画がおもしろいとは思わなかった。", "en": "We did not think (that) the movie was interesting."}, {"num": 32, "title": "that節", "ja": "明日晴れればいいなあ。", "en": "I hope (that) it will be fine tomorrow."}, {"num": 32, "title": "that節", "ja": "彼女は、その男の人は彼らの先生なのだと信じていた。", "en": "She believed (that) the man was their teacher."}, {"num": 32, "title": "that節", "ja": "あなたはなぜ彼が外国に行くことを望むのですか？", "en": "Why do you hope (that) he will go abroad (to a foreign country)?"}, {"num": 32, "title": "that節", "ja": "彼らは、自分たちが間違っていることを知らなかった。", "en": "They did not know (that) they were wrong."}, {"num": 33, "title": "受け身１", "ja": "エミリーはみんなに好かれています。", "en": "Emily is liked by everybody (everyone)."}, {"num": 33, "title": "受け身１", "ja": "この部屋は毎日使われますか？", "en": "Is this room used every day?"}, {"num": 33, "title": "受け身１", "ja": "この机は彼によって作られたのではありません。", "en": "This desk was not made by him."}, {"num": 33, "title": "受け身１", "ja": "英語は多くの国で話されます。", "en": "English is spoken in many countries."}, {"num": 33, "title": "受け身１", "ja": "この本は多くの人に読まれるでしょう。", "en": "This book will be read by many people."}, {"num": 33, "title": "受け身１", "ja": "その子は両親に愛されていました。", "en": "The child was loved by his (her) parents."}, {"num": 33, "title": "受け身１", "ja": "この人形は木製ですか（木でできているのですか）？ーいいえ、違います。紙でできています。", "en": "Is this doll made of wood? ? No, it isn't. It is made of paper."}, {"num": 33, "title": "受け身１", "ja": "チーズは牛乳で作られます。", "en": "Cheese is made from milk."}, {"num": 33, "title": "受け身１", "ja": "美しい歌がその少女たちによって歌われました。", "en": "A beautiful song was sung by the girls."}, {"num": 33, "title": "受け身１", "ja": "この本は誰に書かれたのですか？", "en": "Whom (Who) was this book written by?"}, {"num": 34, "title": "受け身２", "ja": "あの男の人は子供たちに好かれていません。", "en": "That man is not liked by children."}, {"num": 34, "title": "受け身２", "ja": "その星は日本で見られますか？", "en": "Is the star seen in Japan?"}, {"num": 34, "title": "受け身２", "ja": "これは何でできているのですか？ー石でできています。", "en": "What is this made of? ? It is made of stone."}, {"num": 34, "title": "受け身２", "ja": "あなたはあの先生に叱られたことがありますか？（現在完了）", "en": "Have you ever been scolded by that teacher?"}, {"num": 34, "title": "受け身２", "ja": "この話はみんなに知られています。", "en": "This story is known to everyone (everybody)."}, {"num": 34, "title": "受け身２", "ja": "その言葉はどこで話されますか？", "en": "Where is the language spoken?"}, {"num": 34, "title": "受け身２", "ja": "そのケーキはトムに食べられてしまいました。", "en": "The cake has been eaten by Tom."}, {"num": 34, "title": "受け身２", "ja": "あれらの車は、毎日は使われていません。", "en": "Those cars are not used every day."}, {"num": 34, "title": "受け身２", "ja": "あなたはどこで生まれたのですか？ー日本で生まれました。", "en": "Where were you born? ? I was born in Japan."}, {"num": 34, "title": "受け身２", "ja": "ワインは葡萄で作られます。", "en": "Wine is made from grapes."}];
 const C3=[{"num": 1, "title": "従属節を導く接続詞１", "ja": "もし明日晴れたら、僕たちはピクニックに行きます。", "en": "If it is fine tomorrow, we will go on a picnic."}, {"num": 1, "title": "従属節を導く接続詞１", "ja": "もし彼が明日来なかったら、僕がその仕事をするよ。", "en": "If he doesn't come tomorrow, I will do the work."}, {"num": 1, "title": "従属節を導く接続詞１", "ja": "英語を覚えたいなら、君はもっと規則的に勉強しなければならない。", "en": "If you want to learn English, you have to study more regularly."}, {"num": 1, "title": "従属節を導く接続詞１", "ja": "病気だったので、彼女は欠席した。", "en": "As she was sick, she was absent."}, {"num": 1, "title": "従属節を導く接続詞１", "ja": "雨が降っていたので、彼は一日中家にいた。", "en": "He stayed (at) home all day because it was raining (rainy)."}, {"num": 1, "title": "従属節を導く接続詞１", "ja": "とても疲れていたので、彼女は泳ぎに行かないことにした（決めた）。", "en": "As she was very tired, she decided not to go swimming."}, {"num": 1, "title": "従属節を導く接続詞１", "ja": "あなたはテレビを見る前に宿題をしなければなりません。", "en": "You have to do your homework before you watch television."}, {"num": 1, "title": "従属節を導く接続詞１", "ja": "あなたの弟は寝る前にいつも歯を磨きますか？", "en": "Does your brother always brush his teeth before he goes to bed?"}, {"num": 1, "title": "従属節を導く接続詞１", "ja": "夕食を食べたら皿を洗ってください。", "en": "Please wash the dishes after you eat dinner."}, {"num": 1, "title": "従属節を導く接続詞１", "ja": "彼が車を洗った後に雨が降り始めた。", "en": "It began to rain after he washed his car."}, {"num": 2, "title": "従属節を導く接続詞２", "ja": "僕が宿題をしている間、弟は漫画の本を読んでいた。", "en": "While I was doing my homework, my brother was reading a comic book."}, {"num": 2, "title": "従属節を導く接続詞２", "ja": "道を歩いていると（歩いている間）、彼は旧友に会った。", "en": "He met an old friend while he was walking on the street."}, {"num": 2, "title": "従属節を導く接続詞２", "ja": "僕たちが君を探している間、君はどこにいたんだい？", "en": "Where were you while we were looking for you?"}, {"num": 2, "title": "従属節を導く接続詞２", "ja": "彼はその国にいる間に多くのことを学んだ。", "en": "He learned a lot of things while he was in the country."}, {"num": 2, "title": "従属節を導く接続詞２", "ja": "彼が帰ってくるまでここで待っていよう。", "en": "Let's wait here until he comes back."}, {"num": 2, "title": "従属節を導く接続詞２", "ja": "彼らはその試験に受かるまで懸命に勉強しなければならない。", "en": "They have to study hard until they pass the examination."}, {"num": 2, "title": "従属節を導く接続詞２", "ja": "僕は両親が帰ってくるまで家にいなければならないんです。", "en": "I have to stay at home until my parents come back."}, {"num": 2, "title": "従属節を導く接続詞２", "ja": "その石はとても重かったけれど、彼はそれを持ち上げようとした。", "en": "Although the stone was very heavy, he tried to lift it."}, {"num": 2, "title": "従属節を導く接続詞２", "ja": "とても疲れていたけれど彼女はピアノの練習をした。", "en": "Though she was very tired, she practiced the piano."}, {"num": 2, "title": "従属節を導く接続詞２", "ja": "とても遅かったけれど、彼女は出かけることにした（決めた）。", "en": "Although it was very late, she decided to go out."}, {"num": 3, "title": "間接疑問文", "ja": "僕は彼が何歳なのか知らない。", "en": "I don't know how old he is."}, {"num": 3, "title": "間接疑問文", "ja": "君はあの女の人が誰か知ってる？", "en": "Do you know who that woman is?"}, {"num": 3, "title": "間接疑問文", "ja": "彼女が今どこにいるのか教えてくれますか？", "en": "Will you please tell me where she is now?"}, {"num": 3, "title": "間接疑問文", "ja": "あの箱の中には何が入っているんだろう？（wonder使用）", "en": "I wonder what is in that box."}, {"num": 3, "title": "間接疑問文", "ja": "彼らはその少年がどこで生まれたのか知りたがっている。", "en": "They want to know where the boy was born."}, {"num": 3, "title": "間接疑問文", "ja": "君が何をしたいのか言ってくれよ。", "en": "Please tell me what you want to do."}, {"num": 3, "title": "間接疑問文", "ja": "彼は彼女がなぜ泣き始めたのかわからなかった。", "en": "He did not know why she began to cry."}, {"num": 3, "title": "間接疑問文", "ja": "彼らはどんな食べ物が好きなのかしら？（wonder使用）", "en": "I wonder what food they like."}, {"num": 3, "title": "間接疑問文", "ja": "その外国人がどのくらい日本にいるか知っていますか？", "en": "Do you know how long the foreigner has been in Japan?"}, {"num": 3, "title": "間接疑問文", "ja": "彼らはその言葉が何を意味するのか知ろうとした。", "en": "They tried to understand what the word meant."}, {"num": 4, "title": "疑問詞＋to不定詞", "ja": "僕は何と言ったらいいのかわからなかった。", "en": "I didn't know what to say."}, {"num": 4, "title": "疑問詞＋to不定詞", "ja": "彼は英語の勉強の仕方を知りたがっている。", "en": "He wants to know how to study English."}, {"num": 4, "title": "疑問詞＋to不定詞", "ja": "彼らはどこに行ったら良いのかわかっていますか？", "en": "Do they know where to go?"}, {"num": 4, "title": "疑問詞＋to不定詞", "ja": "僕は今何をするべきかわからない。", "en": "I don't know what to do now."}, {"num": 4, "title": "疑問詞＋to不定詞", "ja": "いつ出発したらいいか教えてください。", "en": "Please tell me when to start (leave)."}, {"num": 4, "title": "疑問詞＋to不定詞", "ja": "あなたはどちらの本を買うか決めなければならない。", "en": "You must (have to) decide which book to buy."}, {"num": 4, "title": "疑問詞＋to不定詞", "ja": "彼はその機械の使い方を学んでいる。", "en": "He is learning how to use the machine."}, {"num": 4, "title": "疑問詞＋to不定詞", "ja": "あなたのお母さんはあなたに料理の仕方を教えてくれますか？", "en": "Does your mother teach you how to cook?"}, {"num": 4, "title": "疑問詞＋to不定詞", "ja": "どちらの本もおもしろそうなので、僕はどちらを買うべきかわからない。", "en": "As both books look interesting, I don't know which to buy."}, {"num": 4, "title": "疑問詞＋to不定詞", "ja": "その店で何を買ったらいいのか教えてくれるかい？", "en": "Will you please tell me what to buy at the store?"}, {"num": 5, "title": "形式主語のit", "ja": "英語を学ぶことは大切です。", "en": "It is important to learn (study) English."}, {"num": 5, "title": "形式主語のit", "ja": "車を運転するのは簡単ですか？", "en": "Is it easy to drive a car?"}, {"num": 5, "title": "形式主語のit", "ja": "一年で外国語をマスターするのは不可能です。", "en": "It is impossible to master a foreign language in a year."}, {"num": 5, "title": "形式主語のit", "ja": "新しいことを学ぶことはおもしろいです。", "en": "It is interesting to learn new things."}, {"num": 5, "title": "形式主語のit", "ja": "なぜ多くの科目を勉強することが必要なのですか？", "en": "Why is it necessary to study many subjects?"}, {"num": 5, "title": "形式主語のit", "ja": "人の名前を覚えるのは、私には難しいです。", "en": "It is difficult for me to remember people's names."}, {"num": 5, "title": "形式主語のit", "ja": "彼女には毎日ピアノを練習することが大切です。", "en": "It is important for her to practice the piano every day."}, {"num": 5, "title": "形式主語のit", "ja": "あなたには切手を集めるのがおもしろいのですね。", "en": "It is interesting for you to collect stamps, isn't it?"}, {"num": 5, "title": "形式主語のit", "ja": "彼らには、英語を話すことがとても簡単です。", "en": "It is very easy for them to speak English."}, {"num": 5, "title": "形式主語のit", "ja": "彼には朝早く起きるのが難しいのです。", "en": "It is difficult for him to get up early in the morning."}, {"num": 6, "title": "SVO+to不定詞", "ja": "僕は君にそこに行って欲しい。", "en": "I want you to go there."}, {"num": 6, "title": "SVO+to不定詞", "ja": "父は僕に毎日勉強しろと言います。", "en": "My father tells me to study every day."}, {"num": 6, "title": "SVO+to不定詞", "ja": "彼はあなたに英語を教えてくれるよう頼みましたか？", "en": "Did he ask you to teach him English?"}, {"num": 6, "title": "SVO+to不定詞", "ja": "先生は生徒たちに宿題をやるように言った。", "en": "The teacher told the students to do their homework."}, {"num": 6, "title": "SVO+to不定詞", "ja": "なぜ彼女は彼にすぐ来てくれと頼んだのですか？", "en": "Why did she ask him to come at once?"}, {"num": 6, "title": "SVO+to不定詞", "ja": "私はあなた方に幸せになって欲しいのです。", "en": "I want you to be happy."}, {"num": 6, "title": "SVO+to不定詞", "ja": "彼女はあなたに彼女の息子さんに数学を教えてもらいたがっています。", "en": "She wants you to teach mathematics to her son."}, {"num": 6, "title": "SVO+to不定詞", "ja": "彼女は彼にその箱を開けないようにと言いました。", "en": "She told him not to open the box."}, {"num": 6, "title": "SVO+to不定詞", "ja": "私は彼らにその写真を見ないようにと頼んだ。", "en": "I asked them not to look at the picture."}, {"num": 6, "title": "SVO+to不定詞", "ja": "俺はお前にその部屋に入るなと言ったよな。", "en": "I told you not to go into (enter) the room, didn't I?"}, {"num": 7, "title": "SVOC", "ja": "私たちはその猫をミケと呼びます。", "en": "We call the cat Mike."}, {"num": 7, "title": "SVOC", "ja": "彼らは息子をジェームズと名づけました。", "en": "They named their son James."}, {"num": 7, "title": "SVOC", "ja": "あなたたちは彼をリーダーにしたのですか？", "en": "Did you make him your leader?"}, {"num": 7, "title": "SVOC", "ja": "彼女はあなたを何と呼びますか？", "en": "What does she call you?"}, {"num": 7, "title": "SVOC", "ja": "あなたのプレゼントは彼女を喜ばせるでしょう。", "en": "Your present will make her happy."}, {"num": 7, "title": "SVOC", "ja": "なぜ彼は怒ったのですか（何が彼を怒らせたのですか）？", "en": "What made him angry?"}, {"num": 7, "title": "SVOC", "ja": "彼女は自分の部屋をきれいにしておく。", "en": "She keeps her room clean."}, {"num": 7, "title": "SVOC", "ja": "なぜあなたは壁を黄色く塗ったのですか？", "en": "Why did you paint the walls yellow?"}, {"num": 7, "title": "SVOC", "ja": "あなた方はこれを英語で何と呼びますか？", "en": "What do you call this in English?"}, {"num": 7, "title": "SVOC", "ja": "その知らせを聞いて僕たちはうれしかった（その知らせは僕たちを幸せにした）。", "en": "The news made us happy."}, {"num": 8, "title": "現在分詞修飾", "ja": "眠っている（その）赤ちゃんはかわいい。", "en": "The sleeping baby is cute."}, {"num": 8, "title": "現在分詞修飾", "ja": "ゆりかごの中で眠っている（その）赤ちゃんはかわいかった。", "en": "The baby sleeping in the cradle was cute."}, {"num": 8, "title": "現在分詞修飾", "ja": "あなたはその走っている少年たちが見えますか？", "en": "Can you see the running boys?"}, {"num": 8, "title": "現在分詞修飾", "ja": "校庭を走っている少年たちは彼の生徒たちでした。", "en": "The boys running in the school playground were his students."}, {"num": 8, "title": "現在分詞修飾", "ja": "英語を話しているその少女は誰ですか？", "en": "Who is the girl speaking English?"}, {"num": 8, "title": "現在分詞修飾", "ja": "彼には外国で暮らしているおばさんがいるのですか？", "en": "Does he have an aunt living abroad (in a foreign country)?"}, {"num": 8, "title": "現在分詞修飾", "ja": "あなたは走っている馬を見たことがありますか？", "en": "Have you ever seen a running horse?"}, {"num": 8, "title": "現在分詞修飾", "ja": "私は海を泳いでいるペンギンを一度も見たことがありません。", "en": "I have never seen a penguin swimming in the sea."}, {"num": 8, "title": "現在分詞修飾", "ja": "あなたはあの角に立っている男の人を知っていますか？", "en": "Do you know the man standing at that corner?"}, {"num": 8, "title": "現在分詞修飾", "ja": "ピアノを弾いている女性は彼のお姉さんでした。", "en": "The woman playing the piano was his sister."}, {"num": 9, "title": "過去分詞修飾", "ja": "あの割れた窓を見なさい。", "en": "Look at that broken window."}, {"num": 9, "title": "過去分詞修飾", "ja": "トムに割られた窓は明日直されるでしょう。", "en": "The window broken by Tom will be fixed tomorrow."}, {"num": 9, "title": "過去分詞修飾", "ja": "彼は中古車を買うつもりです。", "en": "He is going to buy a used car."}, {"num": 9, "title": "過去分詞修飾", "ja": "これは有名な作家に使われた部屋です。", "en": "This is a room used by a famous writer."}, {"num": 9, "title": "過去分詞修飾", "ja": "あなたは英語で書かれた本を読んだことがありますか？", "en": "Have you ever read a book written in English?"}, {"num": 9, "title": "過去分詞修飾", "ja": "彼はドイツ製の車を買いたがっています。", "en": "He wants to buy a car made in Germany."}, {"num": 9, "title": "過去分詞修飾", "ja": "これは多くの人に愛されている歌なのですか？", "en": "Is this a song loved by many people?"}, {"num": 9, "title": "過去分詞修飾", "ja": "英語は多くの人に話される言語です。", "en": "English is a language spoken by many people."}, {"num": 9, "title": "過去分詞修飾", "ja": "僕にゆで卵をいくつかください。", "en": "Give me some boiled eggs."}, {"num": 9, "title": "過去分詞修飾", "ja": "彼はお母さんが焼いた（お母さんに焼かれた）ケーキを美味しく食べた（楽しんだ）。", "en": "He enjoyed the cake baked by his mother."}, {"num": 10, "title": "関係代名詞・主格（人）", "ja": "彼には切手を集めるのが好きな友達がいます。", "en": "He has a friend who (that) likes collecting stamps."}, {"num": 10, "title": "関係代名詞・主格（人）", "ja": "公園で走っている人たちが見えますか？", "en": "Can you see the people who (that) are running in the park?"}, {"num": 10, "title": "関係代名詞・主格（人）", "ja": "この学校には、外国で生まれた生徒がたくさんいます。", "en": "In this school, there are many students who (that) were born abroad."}, {"num": 10, "title": "関係代名詞・主格（人）", "ja": "動物が好きなその少女は獣医になりたがっている。", "en": "The girl who (that) likes animals wants to be a veterinarian (vet)."}, {"num": 10, "title": "関係代名詞・主格（人）", "ja": "君は昨日僕たちに話しかけた男の人を覚えているかい？", "en": "Do you remember the man who (that) spoke to us yesterday?"}, {"num": 10, "title": "関係代名詞・主格（人）", "ja": "毎晩夜更かしするその少年は、よく学校に遅刻する。", "en": "The boy who (that) stays up late every night is often late for school."}, {"num": 10, "title": "関係代名詞・主格（人）", "ja": "彼女は、歴史を勉強している大学生ですか？", "en": "Is she a college student who (that) studies history?"}, {"num": 10, "title": "関係代名詞・主格（人）", "ja": "この本を書いた作家は誰ですか？", "en": "Who is the writer who (that) wrote this book?"}, {"num": 10, "title": "関係代名詞・主格（人）", "ja": "ピアノを弾いている女性はあなたのおばさんですか？", "en": "Is the woman who (that) is playing the piano your aunt?"}, {"num": 10, "title": "関係代名詞・主格（人）", "ja": "一生懸命勉強しているその学生はじきに英語が話せるようになるでしょう。", "en": "The student who (that) is studying hard will soon be able to speak English."}, {"num": 11, "title": "関係代名詞・主格（人以外）", "ja": "彼はしっぽの短い猫を飼っている。", "en": "He has a cat which (that) has a small tail."}, {"num": 11, "title": "関係代名詞・主格（人以外）", "ja": "これは3時に出発する電車ですか？", "en": "Is this a train which (that) leaves at three o'clock?"}, {"num": 11, "title": "関係代名詞・主格（人以外）", "ja": "あれは僕の父に作られた机です。", "en": "That is a desk which (that) was made by my father."}, {"num": 11, "title": "関係代名詞・主格（人以外）", "ja": "その大工さんに建てられた家はとても丈夫です。", "en": "The house which (that) was built by the carpenter is very strong."}, {"num": 11, "title": "関係代名詞・主格（人以外）", "ja": "うちの庭にやってくる犬はいつもお腹をすかせている。", "en": "The dog which (that) comes to our garden is always hungry."}, {"num": 11, "title": "関係代名詞・主格（人以外）", "ja": "駅のそばに建っている建物は何ですか？", "en": "What is the building which (that) stands near the station?"}, {"num": 11, "title": "関係代名詞・主格（人以外）", "ja": "船のように見える雲が見えるかい？", "en": "Can you see the cloud which (that) looks like a ship?"}, {"num": 11, "title": "関係代名詞・主格（人以外）", "ja": "その作家に書かれた（その）物語は多くの人に読まれるでしょう。", "en": "The story which (that) was written by the writer will be read by many people."}, {"num": 11, "title": "関係代名詞・主格（人以外）", "ja": "先週開店したレストランに行こう。", "en": "Let's go to the restaurant which (that) opened last week."}, {"num": 11, "title": "関係代名詞・主格（人以外）", "ja": "子供たちは花でおおわれた丘で遊んだ。", "en": "The children played on the hill which (that) was covered with flowers."}, {"num": 12, "title": "関係代名詞・所有格whoseとof which", "ja": "彼にはお父さんがパイロットである友達がいます。", "en": "He has a friend whose father is a pilot."}, {"num": 12, "title": "関係代名詞・所有格whoseとof which", "ja": "頂上が雪でおおわれている山が見えますか？", "en": "Can you see the mountain the top of which is covered with snow?"}, {"num": 12, "title": "関係代名詞・所有格whoseとof which", "ja": "髪が長いあの少女がナンシーです。", "en": "That girl whose hair is long is Nancy."}, {"num": 12, "title": "関係代名詞・所有格whoseとof which", "ja": "趣味が車を運転することであるその女性は、よく海に車で行く。", "en": "The woman whose hobby is driving (a car) often goes to the sea by car."}, {"num": 12, "title": "関係代名詞・所有格whoseとof which", "ja": "お母さんが中国人のその少年は中国語を話せますか？", "en": "Can the boy whose mother is Chinese speak Chinese?"}, {"num": 12, "title": "関係代名詞・所有格whoseとof which", "ja": "自動車が故障してしまったその男性は、電車で仕事に行った。", "en": "The man whose car broke down went to work by train."}, {"num": 12, "title": "関係代名詞・所有格whoseとof which", "ja": "屋根が緑色のあの家を見てください。", "en": "Please look at that house the roof of which is green."}, {"num": 12, "title": "関係代名詞・所有格whoseとof which", "ja": "私は窓の大きな部屋で勉強したいの。", "en": "I want to study in a room the window of which is big."}, {"num": 12, "title": "関係代名詞・所有格whoseとof which", "ja": "僕は図書館で題名が興味深い本を見つけた。", "en": "At the library, I found a book the title of which was interesting."}, {"num": 12, "title": "関係代名詞・所有格whoseとof which", "ja": "あの庭の大きな家は僕のおばさんのです。", "en": "That house the garden of which is big is my aunt's."}, {"num": 13, "title": "関係代名詞・目的格（人）", "ja": "あれが彼が尊敬している作家です。", "en": "That is the writer (whom / that) he respects."}, {"num": 13, "title": "関係代名詞・目的格（人）", "ja": "トムはエミリーが一番好きな男の子ですか？", "en": "Is Tom the boy (whom / that) Emily likes (the) best?"}, {"num": 13, "title": "関係代名詞・目的格（人）", "ja": "彼はナンシーが愛した男性ではありませんでした。", "en": "He wasn't the man (whom / that) Nancy loved."}, {"num": 13, "title": "関係代名詞・目的格（人）", "ja": "僕らが昨日会った男性は有名なピアニストです。", "en": "The man (whom / that) we met yesterday is a famous pianist."}, {"num": 13, "title": "関係代名詞・目的格（人）", "ja": "あなたが教える生徒たちは頭が良いですか？", "en": "Are the students (whom / that) you teach smart (clever)?"}, {"num": 13, "title": "関係代名詞・目的格（人）", "ja": "私が手助けした老人は駅に行きたがっていました。", "en": "The old man (whom / that) I helped wanted to go to the station."}, {"num": 13, "title": "関係代名詞・目的格（人）", "ja": "あれが、彼が会いたがっている女の子ですか？", "en": "Is that the girl (whom / that) he wants to meet?"}, {"num": 13, "title": "関係代名詞・目的格（人）", "ja": "あなたが招待した人たちはもう来ましたか？", "en": "Have the people (whom / that) you invited come yet?"}, {"num": 13, "title": "関係代名詞・目的格（人）", "ja": "彼女は誰もが知っている歌手です。", "en": "She is a singer (whom / that) everybody knows."}, {"num": 13, "title": "関係代名詞・目的格（人）", "ja": "私の知っているあるアメリカ人はとても上手に日本語を話します。", "en": "An American (whom / that) I know speaks Japanese very well."}, {"num": 14, "title": "関係代名詞・目的格（人以外）", "ja": "あれは彼が描いた絵です。", "en": "That is a picture (which / that) he painted (drew)."}, {"num": 14, "title": "関係代名詞・目的格（人以外）", "ja": "あなたは彼女が毎日歌う歌を知っていますか？", "en": "Do you know the song (which / that) she sings every day?"}, {"num": 14, "title": "関係代名詞・目的格（人以外）", "ja": "これらは私がとった写真ではありません。", "en": "These are not the pictures (which / that) I took."}, {"num": 14, "title": "関係代名詞・目的格（人以外）", "ja": "私が昨夜見た映画はとてもおもしろかった。", "en": "The movie (which / that) I saw last night was very interesting."}, {"num": 14, "title": "関係代名詞・目的格（人以外）", "ja": "昨日彼女が焼いたクッキー（複数）は美味しかった。", "en": "The cookies (which / that) she baked yesterday were delicious."}, {"num": 14, "title": "関係代名詞・目的格（人以外）", "ja": "あの外国人が話している言葉はドイツ語ですか？", "en": "Is the language (which / that) that foreigner is speaking German?"}, {"num": 14, "title": "関係代名詞・目的格（人以外）", "ja": "彼が書いたその物語は多くの人に読まれるでしょう。", "en": "The story (which / that) he wrote will be read by many people."}, {"num": 14, "title": "関係代名詞・目的格（人以外）", "ja": "ピーターが先月買った中古車は新しく見えますか？", "en": "Does the used car (which / that) Peter bought last month look new?"}, {"num": 14, "title": "関係代名詞・目的格（人以外）", "ja": "彼が読みたがっている本は高いのですか？", "en": "Is the book (which / that) he wants to read expensive?"}, {"num": 14, "title": "関係代名詞・目的格（人以外）", "ja": "彼が5年間勉強している言語は何ですか？", "en": "What is the language (which / that) he has been studying for five years?"}, {"num": 15, "title": "先行詞を含む関係代名詞what", "ja": "私は彼の言ったことが理解できなかった。", "en": "I could not understand what he said."}, {"num": 15, "title": "先行詞を含む関係代名詞what", "ja": "それが、あなたが望むことなのですか？", "en": "Is that what you want?"}, {"num": 15, "title": "先行詞を含む関係代名詞what", "ja": "彼について知っていることを教えてもらえる？", "en": "Will you please tell me what you know about him?"}, {"num": 15, "title": "先行詞を含む関係代名詞what", "ja": "彼はこういうふうに言ったのです（これが彼の言ったことです）。", "en": "This is what he said."}, {"num": 15, "title": "先行詞を含む関係代名詞what", "ja": "彼女がそこで見たのは驚くべきものだった。", "en": "What she saw there was surprising."}, {"num": 15, "title": "先行詞を含む関係代名詞what", "ja": "彼らがしたことは正しかった。", "en": "What they did was right."}, {"num": 15, "title": "先行詞を含む関係代名詞what", "ja": "我々が予期しないことが起こった。", "en": "What we didn't expect happened."}, {"num": 15, "title": "先行詞を含む関係代名詞what", "ja": "君がしなければならないのは毎日勉強することだ。", "en": "What you have to do is (to) study every day."}, {"num": 15, "title": "先行詞を含む関係代名詞what", "ja": "君のご両親が君にして欲しいことはもっと頻繁に手紙を書くことだよ。", "en": "What your parents want you to do is (to) write to them more often."}, {"num": 15, "title": "先行詞を含む関係代名詞what", "ja": "あの政治家は言行一致しない（言うこととやることが違う）。", "en": "What that politician says is different from what he does."}, {"num": 16, "title": "too～to…", "ja": "彼女はあまりに疲れていて立ち上がることができない。", "en": "She is too tired to stand up."}, {"num": 16, "title": "too～to…", "ja": "私は忙しすぎてあなたを手伝うことはできません。", "en": "I am too busy to help you."}, {"num": 16, "title": "too～to…", "ja": "彼らの息子は一人で旅行するには幼すぎる。", "en": "Their son is too young to travel alone."}, {"num": 16, "title": "too～to…", "ja": "その学生は眠すぎて勉強を続けることができなかった。", "en": "The student was too sleepy to continue his study."}, {"num": 16, "title": "too～to…", "ja": "彼はその仕事をするには年をとりすぎている。", "en": "He is too old to do the work."}, {"num": 16, "title": "too～to…", "ja": "このコーヒーは濃すぎて僕は飲めない。", "en": "This coffee is too strong for me to drink."}, {"num": 16, "title": "too～to…", "ja": "先生は速く話しすぎて、生徒たちは理解できなかった。", "en": "The teacher spoke too fast for the students to understand."}, {"num": 16, "title": "too～to…", "ja": "その本は難しすぎて彼らは読めないでしょう。", "en": "The book will be too difficult for them to read."}, {"num": 16, "title": "too～to…", "ja": "その文は長すぎて彼女は覚えられなかった。", "en": "The sentence was too long for her to remember."}, {"num": 16, "title": "too～to…", "ja": "この料理は辛すぎて私は食べられません。", "en": "This dish is too spicy for me to eat."}, {"num": 17, "title": "enough～to…", "ja": "君は両親から独立していい年だ。", "en": "You are old enough to be independent of your parents."}, {"num": 17, "title": "enough～to…", "ja": "彼は親切にも僕の宿題を手伝ってくれた。", "en": "He was kind enough to help me with my homework."}, {"num": 17, "title": "enough～to…", "ja": "トムとナンシーはまだ結婚できる年齢ではない。", "en": "Tom and Nancy are not old enough to get married."}, {"num": 17, "title": "enough～to…", "ja": "彼は働かないで暮らしていけるほど豊かだ。", "en": "He is rich enough to live without working."}, {"num": 17, "title": "enough～to…", "ja": "この部屋は本を読むのに十分明るい。", "en": "It is light enough in this room to read a book."}, {"num": 17, "title": "enough～to…", "ja": "海水は十分に温かくて彼らは泳ぐことができた。", "en": "The water of the sea was warm enough for them to swim."}, {"num": 17, "title": "enough～to…", "ja": "この家は10人の人が暮らせる大きさだ。", "en": "This house is big enough for ten people to live in."}, {"num": 17, "title": "enough～to…", "ja": "彼はバスケットボールの選手になるのに十分な背丈になるでしょう。", "en": "He will be tall enough to be a basketball player."}, {"num": 17, "title": "enough～to…", "ja": "その箱は（十分に）軽いので女性でも運べる。", "en": "The box is light enough for a woman to carry."}, {"num": 17, "title": "enough～to…", "ja": "この本は（十分に）やさしいので子供でも読める。", "en": "This book is easy enough for children to read."}, {"num": 18, "title": "so～that…", "ja": "彼はとても親切なので、みんな彼のことが好きだ。", "en": "He is so kind that everyone likes him."}, {"num": 18, "title": "so～that…", "ja": "その俳優はとてもハンサムなので女性に非常に人気がある。", "en": "The actor is so good-looking that he is very popular among women."}, {"num": 18, "title": "so～that…", "ja": "昨日はとても寒かったので僕らは外出しなかった。", "en": "It was so cold yesterday that we did not go out."}, {"num": 18, "title": "so～that…", "ja": "その映画はとてもおもしろくて僕は3回も見た。", "en": "The movie was so interesting that I saw it three times."}, {"num": 18, "title": "so～that…", "ja": "この小説は長すぎて、最後まで読める人はほとんどいない。", "en": "This novel is so long that few people can read it till the end."}, {"num": 18, "title": "so～that…", "ja": "その言語はすごく難しかったので私は習得を諦めた。", "en": "The language was so difficult that I gave up learning it."}, {"num": 18, "title": "so～that…", "ja": "彼女はとても興奮していたので眠ることができなかった。", "en": "She was so excited that she could not sleep."}, {"num": 18, "title": "so～that…", "ja": "彼の話はとても退屈だったので、僕たちは皆眠ってしまった。", "en": "His story was so boring that we all fell asleep."}, {"num": 18, "title": "so～that…", "ja": "彼女はとても忙しくて弟の宿題を手伝えなかった。", "en": "She was so busy that she could not help her brother with his homework."}, {"num": 18, "title": "so～that…", "ja": "あの車はすごく高いので僕には買えない。", "en": "That car is so expensive that I can't buy it."}, {"num": 19, "title": "原形不定詞・知覚", "ja": "私は彼女が何か言うのを聞きました。", "en": "I heard her say something."}, {"num": 19, "title": "原形不定詞・知覚", "ja": "あなたは彼があの店に入るのをよく見かけますか？", "en": "Do you often see him go into the store?"}, {"num": 19, "title": "原形不定詞・知覚", "ja": "私は、彼らが教室を掃除するのを一度も見たことがない。", "en": "I have never seen them clean the classroom."}, {"num": 19, "title": "原形不定詞・知覚", "ja": "生徒たちは先生が説明するのを注意深く聴いた。", "en": "The students listened carefully to the teacher explain."}, {"num": 19, "title": "原形不定詞・知覚", "ja": "その老婦人は僕がドアを開けるのを（じっと）見た。", "en": "The old woman watched me open the door."}, {"num": 19, "title": "原形不定詞・知覚", "ja": "あなたは家が揺れるのを感じましたか？", "en": "Did you feel the house shake?"}, {"num": 19, "title": "原形不定詞・知覚", "ja": "私たちは彼女が見事にピアノを弾くのを聴いた。", "en": "We listened to her play the piano beautifully."}, {"num": 19, "title": "原形不定詞・知覚", "ja": "僕はあの飛行機が離陸するのを見たい。", "en": "I want to see the plane take off."}, {"num": 19, "title": "原形不定詞・知覚", "ja": "彼女は弟が部屋を出る（去る）のに気づいた。", "en": "She noticed her brother leave the room."}, {"num": 19, "title": "原形不定詞・知覚", "ja": "鳥たちが歌うのを聴いてごらん。", "en": "Listen to the birds sing."}, {"num": 20, "title": "原形不定詞・使役", "ja": "彼の父は彼に毎日ドイツ語を勉強させた。", "en": "His father made him study German every day."}, {"num": 20, "title": "原形不定詞・使役", "ja": "君は彼女に君の宿題をさせたのかい？", "en": "Did you make her do your homework?"}, {"num": 20, "title": "原形不定詞・使役", "ja": "君におもしろい写真を見せてあげよう。", "en": "I will let you look at an interesting picture."}, {"num": 20, "title": "原形不定詞・使役", "ja": "彼女はなぜ彼らに自分の部屋を使わせてあげたのですか？", "en": "Why did she let them use her room?"}, {"num": 20, "title": "原形不定詞・使役", "ja": "彼は秘書に手紙をタイプしてもらった（タイプさせた）。", "en": "He had his secretary type the letter."}, {"num": 20, "title": "原形不定詞・使役", "ja": "彼女はウェイターに水を一杯持ってきてもらった（持ってこさせた）。", "en": "She had the waiter bring a glass of water."}, {"num": 20, "title": "原形不定詞・使役", "ja": "誰がピーターにそんなことをさせたんだ？", "en": "Who made Peter do such a thing?"}, {"num": 20, "title": "原形不定詞・使役", "ja": "彼は奥さんにコーヒーを入れてもらった（入れさせた）。", "en": "He had his wife make some coffee."}, {"num": 20, "title": "原形不定詞・使役", "ja": "あなたは息子さんを一人で外国に行かせてあげるつもりですか？", "en": "Are you going to let your son go abroad alone?"}, {"num": 20, "title": "原形不定詞・使役", "ja": "彼はその少年をそこで待たせた。", "en": "He made the boy wait there."}, {"num": 21, "title": "関係副詞・where", "ja": "あれは彼が生まれた村です。", "en": "That is the village where he was born."}, {"num": 21, "title": "関係副詞・where", "ja": "僕たちが泳いだ湖はとても美しかった。", "en": "The lake where we swam was very beautiful."}, {"num": 21, "title": "関係副詞・where", "ja": "彼らがよく野球をする公園は、この近くです。", "en": "The park where they often play baseball is near here."}, {"num": 21, "title": "関係副詞・where", "ja": "これが、彼らが勉強する部屋なのですか？", "en": "Is this the room where they study?"}, {"num": 21, "title": "関係副詞・where", "ja": "彼は雪がたくさん降る国で育った。", "en": "He grew up in a country where it snowed a lot."}, {"num": 21, "title": "関係副詞・where", "ja": "僕らが先週行った動物園はとても大きかった。", "en": "The zoo where we went last week was very big."}, {"num": 21, "title": "関係副詞・where", "ja": "彼女がその本を買った書店はどこにあるのですか？", "en": "Where is the bookstore where she bought the book?"}, {"num": 21, "title": "関係副詞・where", "ja": "あれは彼が数学を教えている学校ですか？", "en": "Is that the school where he teaches mathematics?"}, {"num": 21, "title": "関係副詞・where", "ja": "ここが、私がその絵を描いた場所です。", "en": "This is the place where I painted the picture."}, {"num": 21, "title": "関係副詞・where", "ja": "僕たちは何か食べるものを買える店に行きたい。", "en": "We want to go to a store where we can buy something to eat."}, {"num": 22, "title": "関係副詞・when", "ja": "6月は雨がたくさん降る月です。", "en": "June is the month when it rains a lot."}, {"num": 22, "title": "関係副詞・when", "ja": "水曜日は彼女がピアノを練習する日です。", "en": "Wednesday is the day when she practices the piano."}, {"num": 22, "title": "関係副詞・when", "ja": "彼がアメリカに行った年は1990年でした。", "en": "The year when he went to America was 1990."}, {"num": 22, "title": "関係副詞・when", "ja": "僕は彼に初めてあった日を覚えている。", "en": "I remember the day when I first met him."}, {"num": 22, "title": "関係副詞・when", "ja": "彼が毎年外国に行く季節は何ですか？", "en": "What is the season when he goes abroad every year?"}, {"num": 22, "title": "関係副詞・when", "ja": "彼女は初めて車を運転した日を決して忘れないでしょう。", "en": "She will never forget the day when she drove a car for the first time."}, {"num": 22, "title": "関係副詞・when", "ja": "4月は、日本で学校が始まる月です。", "en": "April is the month when schools begin in Japan."}, {"num": 22, "title": "関係副詞・when", "ja": "彼がここにやってくる時間を教えてくれますか？", "en": "Will you please tell me the time when he will come here?"}, {"num": 22, "title": "関係副詞・when", "ja": "彼のお父さんが釣りを楽しむ日は日曜日です。", "en": "The day when his father enjoys fishing is Sunday."}, {"num": 22, "title": "関係副詞・when", "ja": "飛行機が到着する時間を知っていますか？", "en": "Do you know the time when the plane will arrive?"}];
@@ -466,9 +448,9 @@ function getFilterItems(){
       return Object.entries(map).sort((a,b)=>+a[0]-+b[0])
         .map(([num,title])=>({key:`${prefix}-${num}`, num:+num, title, prefix, label:`${prefix.replace('c','中')}-${num}：${title}`}));
     };
-    items.push({group:'c1', label:'📘 中1（23項目）', items:getUnits(C1,'c1')});
-    items.push({group:'c2', label:'📗 中2（34項目）', items:getUnits(C2,'c2')});
-    items.push({group:'c3', label:'📙 中3（22項目）', items:getUnits(C3,'c3')});
+    items.push({group:'c1', label:'📘 中1', items:getUnits(C1,'c1')});
+    items.push({group:'c2', label:'📗 中2', items:getUnits(C2,'c2')});
+    items.push({group:'c3', label:'📙 中3', items:getUnits(C3,'c3')});
   } else if(curApp==='daitokku'){
     const allUnits=[...new Set(DAITOKKU.map(c=>c.unit))].sort((a,b)=>a-b);
     const groupSize=10;
@@ -565,11 +547,16 @@ function updateFilterCount(){
   document.getElementById('filterStartSeq').disabled = disabled;
   document.getElementById('filterStartRnd').disabled = disabled;
   
-  // 新設ボタンのdisabled属性同期
   const btnSmartSeq = document.getElementById('filterStartSmartSeq');
   const btnSmartRnd = document.getElementById('filterStartSmartRnd');
   if (btnSmartSeq) btnSmartSeq.disabled = disabled;
   if (btnSmartRnd) btnSmartRnd.disabled = disabled;
+
+  // Confidence Cap ボタンの有効無効同期
+  const btnConfSeq = document.getElementById('filterStartConfSeq');
+  const btnConfRnd = document.getElementById('filterStartConfRnd');
+  if (btnConfSeq) btnConfSeq.disabled = disabled;
+  if (btnConfRnd) btnConfRnd.disabled = disabled;
 }
 
 function getFilteredCards(){
@@ -620,34 +607,25 @@ function startCustomDeck(shuffle){
   startDeck(d);
 }
 
-// 【修正版】Smart Due 厳選自動抽出ロジック（タイ・バイアス解消版）
+// Smart Due 厳選ロジック
 function startSmartDueDeck(shuffle) {
   let cards = getFilteredCards();
   if (cards.length === 0) return;
 
-  // 1. 各カードに一意の暗号キーを動的割り当て
   cards.forEach(c => {
     c.key = c.key || makeCardKey(c);
   });
 
-  // 【★極めて重要な修正】
-  // ソート前に全体を1度シャッフルすることで、同じ重み「8」を持つ未学習カードの並び順の偏りを完全に破壊します
-  cards = shuf(cards);
-
-  // 2. 蓄積履歴の calcWeight（重み）に基づいて降順ソート
   cards.sort((a, b) => {
     return calcWeight(b.key) - calcWeight(a.key);
   });
 
-  // 3. Smart Cap Limit（抽出上限）の入力値を取得し、5〜1000枚の範囲でクランプ
   const limitInput = document.getElementById('smartCapInput');
   let limit = parseInt(limitInput ? limitInput.value : 50) || 50;
-  limit = Math.max(5, Math.min(limit, 1200));
+  limit = Math.max(5, Math.min(limit, 1000));
 
-  // 4. 最も復習の緊急性が高い「上位 N 枚」を厳選切り出し
   const slicedCards = cards.slice(0, limit);
 
-  // 5. 厳選抽出用のセッション情報を作成して再生
   const label = shuffle ? '🎯 Smart Due (シャッフル)' : '🎯 Smart Due (順)';
   const d = {
     key: 'custom_smart',
@@ -661,32 +639,109 @@ function startSmartDueDeck(shuffle) {
   startDeck(d);
 }
 
-  // 前置詞を検知してターゲット・スキャフォールディングを生成する関数
+// Confidence Cap セッション用ステート
+let isConfidenceCapSession = false;
+let sessionCurrentStreak = 0;
+let sessionMaxStreak = 0;
+
+// Confidence Cap 動的抽出・ブレンド出題ロジック
+function startConfidenceCapDeck(shuffle) {
+  let cards = getFilteredCards();
+  if (cards.length === 0) return;
+
+  cards.forEach(c => {
+    c.key = c.key || makeCardKey(c);
+  });
+
+  let layerA = []; // 弱点層 (Streak < 3 or 新規)
+  let layerB = []; // 確実層 (Streak >= 3)
+
+  cards.forEach(c => {
+    const h = historyCache[c.key];
+    const streak = (h && typeof h.streak !== 'undefined') ? h.streak : 0;
+    if (streak >= 3) {
+      layerB.push(c);
+    } else {
+      layerA.push(c);
+    }
+  });
+
+  const limitInput = document.getElementById('smartCapInput');
+  let limit = parseInt(limitInput ? limitInput.value : 50) || 50;
+  limit = Math.max(5, Math.min(limit, 1000));
+
+  // 目標分割数 (層A=30%, 層B=70%)
+  let targetACount = Math.round(limit * 0.3);
+  let targetBCount = limit - targetACount;
+
+  // 各層を論理ソート
+  layerA.sort((a, b) => calcWeight(b.key) - calcWeight(a.key));
+  layerB.sort((a, b) => {
+    const hA = historyCache[a.key] || { streak: 0 };
+    const hB = historyCache[b.key] || { streak: 0 };
+    return (hB.streak || 0) - (hA.streak || 0);
+  });
+
+  let selectedA = layerA.slice(0, targetACount);
+  let selectedB = layerB.slice(0, targetBCount);
+
+  // フォールバック（足りない方を自動補完）
+  if (selectedA.length < targetACount) {
+    let needed = targetACount - selectedA.length;
+    selectedB = layerB.slice(0, targetBCount + needed);
+  }
+  if (selectedB.length < targetBCount) {
+    let needed = targetBCount - selectedB.length;
+    selectedA = layerA.slice(0, targetACount + needed);
+  }
+
+  let finalDeck = [...selectedA, ...selectedB].slice(0, limit);
+
+  // Confidence Cap 統計初期化
+  isConfidenceCapSession = true;
+  sessionCurrentStreak = 0;
+  sessionMaxStreak = 0;
+
+  const widget = document.getElementById('confStreakWidget');
+  if (widget) widget.style.display = 'block';
+  updateConfStreakUI();
+
+  const label = shuffle ? '🛡️ Confidence Cap (シャッフル)' : '🛡️ Confidence Cap (順)';
+  const d = {
+    key: 'confidence_cap',
+    label,
+    sub: `層A: ${selectedA.length}枚 / 層B: ${selectedB.length}枚 (計: ${finalDeck.length}枚)`,
+    cards: finalDeck,
+    shuf: shuffle
+  };
+
+  hideFilter();
+  startDeck(d);
+}
+
+function updateConfStreakUI() {
+  const curEl = document.getElementById('currentConfStreak');
+  const maxEl = document.getElementById('maxConfStreak');
+  if (curEl) curEl.textContent = sessionCurrentStreak;
+  if (maxEl) maxEl.textContent = sessionMaxStreak;
+}
+
+// ターゲット・スキャフォールディングヒント
 function makeHintText(en) {
-  // お父様が躓きやすい英語の主要前置詞リスト
   const preps = ['to', 'with', 'of', 'for', 'in', 'on', 'at', 'by', 'about', 'from', 'as', 'into', 'through', 'during', 'under'];
   const words = en.split(' ');
   
   const hintWords = words.map(w => {
-    // 判定用に記号をトリミング
     const clean = w.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"");
-    
-    // 前置詞である場合は、マスクせずに大文字ブラケット [ ] で囲んで強調
     if (preps.includes(clean)) {
       return `[${w.toUpperCase()}]`;
     }
-    
-    // 2文字以下の極めて短い単語（a, is, it等）はそのまま表示
     if (clean.length <= 2) return w;
-    
-    // 一般単語は頭文字のみ残してアスタリスクで伏字（フェーディング）
     return w[0] + '_'.repeat(w.length - 1);
   });
-  
   return hintWords.join(' ');
 }
 
-// オンデマンドでカードにヒントを表示し、かつ化石化バグの注意喚起を連動させる関数
 function showCardHint() {
   if (revealed || isAuto) return;
   const c = deck[idx];
@@ -694,37 +749,30 @@ function showCardHint() {
   
   const hintTxt = document.getElementById('hintTxt');
   if (hintTxt) {
-    // 脳科学的ヒントテキストの生成・表示
     hintTxt.textContent = makeHintText(c.en);
     hintTxt.style.display = 'block';
     
-    // 【提案③連動】過去に❌（NG）判定がある脆弱なカードの場合のみ、
-    // ユニットの文法バグ特性に基づいた化石化事前警告をサブタイトルに割り込ませる
     const cardKey = c.key || makeCardKey(c);
     const h = historyCache[cardKey];
     if (h && (h.ng || 0) >= 1) {
       const subEl = document.getElementById('cSub');
       if (subEl) {
-        // カードオブジェクト(c)全体を渡して高精度に自動判定
         subEl.innerHTML = `<span style="color:var(--red); font-weight:bold;">⚠️ 化石化注意: ${getGrammarWarning(c)}</span>`;
       }
     }
   }
 }
 
-// 教材・Unit・単語番号から、日本人特有の「化石化バグ」を完全自動マッピングする極限辞書関数
+// 日本人特有の「化石化バグ」自動警告マッピング
 function getGrammarWarning(c) {
   if (!c) return "語順・前置詞の配置";
-  
   const tag = c.tag || "";
   const sub = c.sub || "";
   
-  // 1. どんどん話す（dondondo）の動的警告生成（c.subから自動マッピング）
   if (curApp === 'dondondo') {
     if (!sub) return "基礎語順の確認";
-    
     const trapMap = {
-      "this / that": "指示代名詞(this/that)と名詞の「単複不一致」に注意！",
+      "this / that": "指示代名詞(this/that)と名詞の「単補不一致」に注意！",
       "these / those": "複数代名詞(these/those)と複数形名詞[-s]の一致",
       "What is (are) ～?": "代名詞（It / They）の変換ラグ・主述の一致",
       "人称代名詞の主格": "主格代名詞の選定（He/She/They）ミスに注意！",
@@ -787,12 +835,9 @@ function getGrammarWarning(c) {
     return trapMap[sub] || `${sub}の文法構造`;
   }
   
-  // 2. 大特訓（daitokku）の動的警告生成（Unitごとの文法焦点を自動解析）
   if (curApp === 'daitokku') {
     if (!tag) return "ビジネスアドリブ表現";
     const unitNum = parseInt(tag.split('-')[0].replace(/[^0-9]/g, ''));
-    
-    // 大特訓のUnit別特異的ターゲット
     const daitokkuTraps = {
       1: "基本時制・疑問文の語順崩れに注意！",
       2: "SVC文型（looks/seemed + 形容詞）の語尾バグ",
@@ -821,30 +866,27 @@ function getGrammarWarning(c) {
       56: "比較級の応用（much more / more ... than）の修飾",
       57: "最上級の強調（the most... / one of the most...）"
     };
-    
     return daitokkuTraps[unitNum] || `Unit ${unitNum}：実践ビジネス構文と前置詞の結合`;
   }
   
-  // 3. 金フレ（kinfure）の動的警告生成（単語IDからレベル・Partを判定してターゲット提示）
   if (curApp === 'kinfure') {
     const id = c.cardId;
     if (!id) return "金フレ - 前置詞の適切なコロケーション結合";
-    
     if (id <= 400) {
-      return `金フレ [600点〜730点級] ➡ 基本動詞と前置詞（complain [ABOUT] / register [FOR] 等）のコロケーション結合！`;
+      return `金フレ [600点〜730点級] ➡ コロケーション結合！`;
     } else if (id >= 401 && id <= 500) {
-      return `金フレ [Part 1 写真描写] ➡ 空間配置・位置関係・動作状態（leaning [AGAINST] / stacked [ON] 等）の物理的結合！`;
+      return `金フレ [Part 1 写真描写] ➡ 空間配置・動作状態の物理的結合！`;
     } else if (id >= 501 && id <= 800) {
-      return `金フレ [860点級] ➡ エグゼクティブ意思決定・組織マネジメント必須動詞の結合価！`;
+      return `金フレ [860点級] ➡ 組織マネジメント必須動詞の結合！`;
     } else if (id >= 801 && id <= 1000) {
-      return `金フレ [990点級・多義語] ➡ 難関ビジネス連語・文脈に合わせた前置詞の瞬発選定！`;
+      return `金フレ [990点級・多義語] ➡ 難関連語・前置詞の瞬発選定！`;
     } else {
-      return `金フレ [難関語彙・交渉表現] ➡ C1交渉の盤面を支配する機能語・結合語彙の正確なアウトプット！`;
+      return `金フレ [難関語彙・交渉表現] ➡ 機能語・結合語彙の正確なアウトプット！`;
     }
   }
-
   return "語順・前置詞の配置";
 }
+
 function dondoDecks(){
   const WEEKS=[
     {key:'w1', label:'Week 1 / 中1 P1-6',       sub:'中1 Unit 1-6',   cards:c1u(r(1,6)),                    shuf:false},
@@ -909,8 +951,8 @@ function kinDecks(){
 let curApp=null,curKey=null;
 let deck=[],wrong=[],idx=0,okCnt=0,ngCnt=0,revealed=false;
 let isAuto=false,aTimer=null,cdTimer=null,cdTotal=0,cdLeft=0;
-let activeDeck=null; // 追加：現在の実行中デッキ情報を保持する変数
-let studyDirection='je'; // 追加：金フレの学習方向状態（je = 日→英、ej = 英→日）
+let activeDeck=null; 
+let studyDirection='je';
 
 function selApp(app){
   curApp=app;curKey=null;
@@ -930,15 +972,11 @@ function selApp(app){
   document.getElementById('kbdRow').className='kbd-row';
   stopAuto();
   
-stopAuto();
-  
-  // 【追加】金フレの時だけ方向トグルを出現させる
   const dirSel = document.getElementById('kinfureDirSelector');
   if (dirSel) {
     dirSel.style.display = (app === 'kinfure') ? 'flex' : 'none';
   }
   
-  // 【仕様改定】どんどん・大特訓の場合は選択時に自動でフィルターモーダルを展開
   if(app==='dondondo' || app==='daitokku'){
     showFilter();
   } else {
@@ -947,7 +985,6 @@ stopAuto();
   renderGrid();
 }
 
-// 【新規追加】学習方向切替制御関数
 function setDirection(dir) {
   studyDirection = dir;
   const btnJE = document.getElementById('dirJEBtn');
@@ -966,6 +1003,7 @@ function setDirection(dir) {
   buildFilterUI();
   renderGrid();
 }
+
 function renderGrid(){
   const g=document.getElementById('deckGrid');
   if(!g) return;
@@ -974,19 +1012,19 @@ function renderGrid(){
     const cb=document.createElement('button');
     cb.className='deck-btn'+(curKey==='custom'||curKey==='custom_smart'?' sel-b':'');
     cb.style.cssText='grid-column:1/-1;background:rgba(64,144,224,.08);border-color:#4090e0;color:#4090e0;text-align:center;padding:18px 10px;font-size:0.85rem;font-weight:bold;';
-    cb.innerHTML='🎯 カスタムフィルターを開く<span class="deck-badge" style="text-align:center;display:block;margin-top:6px;font-size:0.65rem;">Unit 1〜80から自由に絞り込んで学習を開始</span>';
+    cb.innerHTML='🎯 カスタムフィルターを開く<span class="deck-badge" style="text-align:center;display:block;margin-top:6px;font-size:0.65rem;">Unit 1〜80から絞り込んで学習を開始</span>';
     cb.onclick=showFilter;
     g.appendChild(cb);
   } else if(curApp==='dondondo'){
     const cb=document.createElement('button');
     cb.className='deck-btn'+(curKey==='custom'||curKey==='custom_smart'?' sel-b':'');
     cb.style.cssText='grid-column:1/-1;background:rgba(64,144,224,.08);border-color:#4090e0;color:#4090e0;text-align:center;padding:18px 10px;font-size:0.85rem;font-weight:bold;';
-    cb.innerHTML='🎯 カスタムフィルターを開く<span class="deck-badge" style="text-align:center;display:block;margin-top:6px;font-size:0.65rem;">中1全23項目 / 中2全34項目 / 中3全22項目から自由に選択</span>';
+    cb.innerHTML='🎯 カスタムフィルターを開く<span class="deck-badge" style="text-align:center;display:block;margin-top:6px;font-size:0.65rem;">文法項目から絞り込んで学習を開始</span>';
     cb.onclick=showFilter;
     g.appendChild(cb);
   } else {
     const kb=document.createElement('button');
-    kb.className='deck-btn'+(curKey==='custom'||curKey==='custom_smart'?' sel':'');
+    kb.className='deck-btn'+(curKey==='custom'||curKey==='custom_smart'||curKey==='confidence_cap'?' sel':'');
     kb.style.cssText='grid-column:1/-1;background:rgba(240,192,64,.08);border-color:var(--acc);color:var(--acc);text-align:center;padding:10px;';
     kb.innerHTML='🎯 カスタムフィルター（範囲を絞り込んで出題）<span class="deck-badge" style="text-align:center;display:block;margin-top:2px;">10枚単位で自由に選択（全1100枚対応）</span>';
     kb.onclick=showFilter;
@@ -994,6 +1032,7 @@ function renderGrid(){
     kinDecks().forEach(d=>g.appendChild(mkBtn(d)));
   }
 }
+
 function mkBtn(d){
   const b=document.createElement('button');
   const sel=d.key===curKey;
@@ -1003,7 +1042,7 @@ function mkBtn(d){
 }
 
 function startDeck(d){
-  activeDeck=d; // 現在のセッションオブジェクトをキャッシュ
+  activeDeck=d; 
   curKey=d.key;
   let rawCards;
   if(curApp==='daitokku'){
@@ -1015,7 +1054,19 @@ function startDeck(d){
   }
   rawCards.forEach(c=>{ c.key=makeCardKey(c); });
   
-  // 【修正】ログイン中、かつ「シャッフル」モード（d.shufがtrue）の時のみ忘却曲線の重み付けを発動
+  if (d.key === 'confidence_cap') {
+    isConfidenceCapSession = true;
+    sessionCurrentStreak = 0;
+    sessionMaxStreak = 0;
+    const widget = document.getElementById('confStreakWidget');
+    if (widget) widget.style.display = 'block';
+    updateConfStreakUI();
+  } else {
+    isConfidenceCapSession = false;
+    const widget = document.getElementById('confStreakWidget');
+    if (widget) widget.style.display = 'none';
+  }
+  
   if(currentUser && Object.keys(historyCache).length>0 && d.shuf){
     deck=weightedShuffle(rawCards);
   } else {
@@ -1037,6 +1088,7 @@ function startDeck(d){
   document.getElementById('kbdRow').className='kbd-row on';
   renderGrid(); renderCard();
 }
+
 function renderCard(){
   if(idx>=deck.length){showComplete();return;}
   SY.cancel();
@@ -1046,18 +1098,15 @@ function renderCard(){
   
   const isEJ = (curApp === 'kinfure' && studyDirection === 'ej');
   
-  // テキストの出し分け
   document.getElementById('jpTxt').textContent = isEJ ? c.en : c.ja;
   document.getElementById('enTxt').textContent = isEJ ? c.ja : c.en;
   
-  // ヒントボタンの非表示・表示（英→日はヒント不要なため非表示）
   document.getElementById('hintTxt').style.display='none';
   const hintBtn = document.getElementById('btnHint');
   if (hintBtn) {
     hintBtn.style.display = isEJ ? 'none' : 'inline-block';
   }
   
-  // タップ誘導ラベルの切り替え
   const hintLbl = document.querySelector('.hint-lbl');
   if (hintLbl) {
     hintLbl.textContent = isEJ ? '🇺🇸 → 🇯🇵　タップ or Space で答えを見る' : '🇯🇵 → 🇺🇸　タップ or Space で答えを見る';
@@ -1066,14 +1115,7 @@ function renderCard(){
   document.getElementById('cTag').textContent=c.tag;
   document.getElementById('cSub').textContent=c.sub;
   document.getElementById('enWrap').className='en-wrap';
-  // 質問フェーズにおけるスピーカーアイコンの表示切り替え（EJモード時は左右を反転）
-  if (isEJ) {
-    document.getElementById('spkJBtn').style.display = 'none';  // 日本語（答え）は非表示
-    document.getElementById('spkEBtn').style.display = 'block'; // 英語（問題）を右下に表示
-  } else {
-    document.getElementById('spkJBtn').style.display = 'block'; // 日本語（問題）を左下に表示
-    document.getElementById('spkEBtn').style.display = 'none';  // 英語（答え）は非表示
-  }
+  document.getElementById('spkEBtn').style.display='none';
   document.getElementById('mainCard').className='card';
   document.getElementById('mainCard').style.cursor='pointer';
   document.getElementById('btnRev').style.display=isAuto?'none':'block';
@@ -1082,14 +1124,13 @@ function renderCard(){
   updStats();
   if(bombOn&&!isAuto) startBomb();
 }
+
 function reveal(){
   if(revealed||isAuto)return;
   clearBomb();
   revealed=true;
   document.getElementById('enWrap').className='en-wrap on';
-  // 回答開示フェーズ：両方のスピーカーボタンを表示
-  document.getElementById('spkJBtn').style.display = 'block';
-  document.getElementById('spkEBtn').style.display = 'block';
+  document.getElementById('spkEBtn').style.display='block';
   document.getElementById('btnRev').style.display='none';
   document.getElementById('judgeRow').className='judge-row on';
   document.getElementById('btnReplay').className='btn-replay on';
@@ -1097,11 +1138,12 @@ function reveal(){
   
   const isEJ = (curApp === 'kinfure' && studyDirection === 'ej');
   if (isEJ) {
-    spkJ(); // 英→日時は、答えの日本語を読み上げる
+    spkJ(); 
   } else {
-    spkE(); // 日→英時は、答えの英語を読み上げる
+    spkE(); 
   }
 }
+
 function replay(){
   revealed=false;
   SY.cancel();
@@ -1115,6 +1157,7 @@ function replay(){
   clearBomb();
   if(bombOn&&!isAuto) startBomb();
 }
+
 function judge(ok){
   if(!revealed||isAuto)return;
   SY.cancel();
@@ -1126,10 +1169,24 @@ function judge(ok){
     saveHistoryToDb(card.key, h);
     updateHistSummary();
   }
+  
+  if (isConfidenceCapSession) {
+    if (ok) {
+      sessionCurrentStreak++;
+      if (sessionCurrentStreak > sessionMaxStreak) {
+        sessionMaxStreak = sessionCurrentStreak;
+      }
+    } else {
+      sessionCurrentStreak = 0;
+    }
+    updateConfStreakUI();
+  }
+
   if(ok){okCnt++;el.classList.add('fc');}
   else{ngCnt++;wrong.push(deck[idx]);el.classList.add('fw');}
   idx++; setTimeout(renderCard,280);
 }
+
 function updStats(){
   const t=deck.length,d=idx;
   document.getElementById('pNum').textContent=Math.min(d+1,t)+'/'+t;
@@ -1138,6 +1195,7 @@ function updStats(){
   document.getElementById('sWrg').textContent=ngCnt;
   document.getElementById('sRem').textContent=t-d;
 }
+
 function showComplete(){
   window.speechSynthesis.cancel();clearTimeout(aTimer);clearCD();clearBomb();
   isAuto=false;document.getElementById('autoTgl').checked=false;
@@ -1146,17 +1204,24 @@ function showComplete(){
   document.getElementById('cardWrap').style.display='none';
   document.getElementById('btnRev').style.display='none';
   document.getElementById('judgeRow').className='judge-row';
-  document.getElementById('cScore').textContent=`正解 ${okCnt} / ${t}`;
+  
+  if (isConfidenceCapSession) {
+    document.getElementById('cScore').innerHTML = `正解 ${okCnt} / ${t}<br><span style="color:var(--grn); font-size:0.85rem; font-weight:bold;">🔥 MAX STREAK: ${sessionMaxStreak}</span>`;
+  } else {
+    document.getElementById('cScore').textContent=`正解 ${okCnt} / ${t}`;
+  }
+  
   document.getElementById('cRate').textContent=rate+'%';
   document.getElementById('complete').className='complete on';
   document.getElementById('btnRetry').disabled=!wrong.length;
 }
+
 function restartDeck(){
-  // activeDeck（現在の設定情報）がキャッシュされていれば、その条件で完全に再構築してスタート
   if(activeDeck){
     startDeck(activeDeck);
   }
 }
+
 function retryWrong(){
   if(!wrong.length)return;
   deck=[...wrong];wrong=[];idx=0;okCnt=0;ngCnt=0;revealed=false;
@@ -1183,7 +1248,6 @@ function loadV(){
     ||v.find(x=>x.lang==='en-US')
     ||v.find(x=>x.lang==='en-GB')
     ||v.find(x=>x.lang.startsWith('en'));
-  console.log('JP voice:', vJ?.name, '/ EN voice:', vE?.name);
 }
 loadV();
 if(SY.onvoiceschanged!==undefined){
@@ -1257,12 +1321,7 @@ function spk(t,l,r,cb){
   if(cb) u.onend=cb;
   setTimeout(()=>SY.speak(u),50);
 }
-function spkJ(){
-  const c=deck[idx];if(!c)return;
-  document.getElementById('mainCard').classList.add('sj');
-  const r = parseFloat(document.getElementById('spRateJP')?.value || 1.0);
-  spk(c.ja,'ja-JP',r,()=>document.getElementById('mainCard').classList.remove('sj'));
-}
+function spkJ(){const c=deck[idx];if(!c)return;document.getElementById('mainCard').classList.add('sj');spk(c.ja,'ja-JP',1,()=>document.getElementById('mainCard').classList.remove('sj'));}
 function spkE(){
   const c=deck[idx];if(!c)return;
   document.getElementById('mainCard').classList.add('se');
@@ -1291,15 +1350,12 @@ function runAuto(){
   const dNx=parseFloat(document.getElementById('dNx').value)*1000;
   
   const isEJ = (curApp === 'kinfure' && studyDirection === 'ej');
-  const rJP = parseFloat(document.getElementById('spRateJP')?.value || 1.0);
 
   if (isEJ) {
-    // 【英→日 オートプレイ】
     document.getElementById('mainCard').classList.add('se');
     startCD(2500,'🇺🇸 英語読み上げ中...');
-    
-    // 英→日モード時の最初英語に Contrast Play（1.5x→1.0x）を適用
-    spkContrast(c.en, () => {
+    const r=parseFloat(document.getElementById('spRate').value);
+    spk(c.en,'en-US',r,()=>{
       document.getElementById('mainCard').classList.remove('se');
       if(!isAuto)return;
       startCD(dJE,`⏳ ${document.getElementById('dJE').value}秒後に日本語表示...`);
@@ -1310,9 +1366,7 @@ function runAuto(){
         document.getElementById('spkEBtn').style.display='block';
         document.getElementById('mainCard').classList.add('sj');
         startCD(3000,'🇯🇵 日本語読み上げ中...');
-        
-        // 日本語の再生速度をスライダーと動的同期
-        spk(c.ja,'ja-JP',rJP,()=>{
+        spk(c.ja,'ja-JP',1,()=>{
           document.getElementById('mainCard').classList.remove('sj');
           if(!isAuto)return;
           startCD(dNx,`⏭ ${document.getElementById('dNx').value}秒後に次へ...`);
@@ -1321,12 +1375,9 @@ function runAuto(){
       },dJE);
     });
   } else {
-    // 【日→英 オートプレイ】
     document.getElementById('mainCard').classList.add('sj');
     startCD(2500,'🇯🇵 日本語読み上げ中...');
-    
-    // 日本語の再生速度をスライダーと動的同期
-    spk(c.ja,'ja-JP',rJP,()=>{
+    spk(c.ja,'ja-JP',1,()=>{
       document.getElementById('mainCard').classList.remove('sj');
       if(!isAuto)return;
       startCD(dJE,`⏳ ${document.getElementById('dJE').value}秒後に英語表示...`);
@@ -1342,14 +1393,14 @@ function runAuto(){
           document.getElementById('mainCard').classList.remove('se');
           if(!isAuto)return;
           startCD(dNx,`⏭ ${document.getElementById('dNx').value}秒後に次へ...`);
-          aTimer=setTimeout(()=>{if(!isAuto)return;idx++;updStats();renderCard();runAuto();},dJE); // 最終行のウェイトバグも併せて微修正（dJE → dNx）
+          aTimer=setTimeout(()=>{if(!isAuto)return;idx++;updStats();renderCard();runAuto();},dNx);
         });
       },dJE);
     });
   }
 }
 
-// ===================== ② TIME BOMB =====================
+// TIME BOMB
 let bombOn=false, bombTimer=null, bombInterval=null;
 
 function toggleBomb(){
@@ -1384,11 +1435,15 @@ function startBomb(){
       const r=parseFloat(document.getElementById('spRate').value);
       const bombCard=deck[idx];
       
-      // 【追加・リアルタイム反映】時間切れの瞬間にローカルとFirestoreに「×（NG）」を即時反映
       if(bombCard && bombCard.key && currentUser){
         const h = updateHistoryLocal(bombCard.key, false);
         saveHistoryToDb(bombCard.key, h);
         updateHistSummary();
+      }
+
+      if (isConfidenceCapSession) {
+        sessionCurrentStreak = 0;
+        updateConfStreakUI();
       }
       
       setTimeout(()=>{
@@ -1414,7 +1469,9 @@ function startBomb(){
   } else {
     doStartTimer();
   }
-}function clearBomb(){
+}
+
+function clearBomb(){
   clearTimeout(bombTimer);
   clearInterval(bombInterval);
   const bw=document.getElementById('bombWrap');
@@ -1423,7 +1480,7 @@ function startBomb(){
   if(bb) bb.style.width='100%';
 }
 
-// ===================== ③ CONTRAST PLAY =====================
+// CONTRAST PLAY
 function spkContrast(text, onEnd){
   const r=parseFloat(document.getElementById('spRate').value);
   const useContrast=document.getElementById('contrastTgl').checked;
@@ -1443,7 +1500,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   });
 });
 
-// ===================== FIREBASE =====================
+// ===================== FIREBASE CONFIG =====================
 const firebaseConfig = {
   apiKey: "AIzaSyARvjWhmhykDZgFijIHUY68USiWw7fxk10",
   authDomain: "englishbootcamp-8f5d9.firebaseapp.com",
@@ -1545,7 +1602,6 @@ document.addEventListener('keydown', e=>{
 
 // ===================== HISTORY =====================
 function makeCardKey(card){
-  // アプリが金フレ（kinfure）の場合のみ、末尾に _je または _ej を自動付与してDBを物理隔離します
   const dirSuffix = curApp === 'kinfure' ? `_${studyDirection}` : '';
   const str=`${curApp}_${(card.ja||'').trim()}${dirSuffix}`;
   let h=5381;
@@ -1564,14 +1620,10 @@ async function loadHistory(){
   } catch(e){ console.warn('loadHistory error:',e); }
 }
 
-// 【更新】ローカル履歴の更新（自動マイグレーション対応版）
 function updateHistoryLocal(cardKey, isOk){
-  let h = getHistoryRecord(cardKey); // 旧キーからの救出をインターセプト
-  if(!h) h = {ok:0,ng:0,lastNg:null,streak:0};
-  
+  const h=historyCache[cardKey]||{ok:0,ng:0,lastNg:null,streak:0};
   if(isOk){ h.ok=(h.ok||0)+1; h.streak=(h.streak||0)+1; }
   else { h.ng=(h.ng||0)+1; h.lastNg=Date.now(); h.streak=0; }
-  
   historyCache[cardKey]=h;
   return h;
 }
@@ -1596,8 +1648,6 @@ async function confirmResetHistory(){
       alert('リセットする履歴はありません。');
       return;
     }
-    
-    // Firestore制限（500件）を安全に回避するためのバッチ分割処理
     const chunkSize = 400;
     for (let i = 0; i < docs.length; i += chunkSize) {
       const chunk = docs.slice(i, i + chunkSize);
@@ -1605,7 +1655,6 @@ async function confirmResetHistory(){
       chunk.forEach(doc => batch.delete(doc.ref));
       await batch.commit();
     }
-    
     updateHistSummary();
     alert('すべての学習履歴をリセットしました。');
   } catch(e){ 
@@ -1615,38 +1664,18 @@ async function confirmResetHistory(){
 }
 
 // ===================== WEIGHTED SHUFFLE =====================
-// 【新規追加】旧データ（_je なし）を検知し、新データ（_je あり）へ自動移行・救出する関数
-function getHistoryRecord(cardKey) {
-  if (historyCache[cardKey]) return historyCache[cardKey];
-  
-  // もし新キー（_jeあり）でデータが見つからず、旧キー（_jeなし）に履歴が存在する場合
-  if (cardKey.endsWith('_je')) {
-    const oldKey = cardKey.slice(0, -3); // '_je' を取り除く
-    if (historyCache[oldKey]) {
-      // データを新キーにシームレスに複製
-      historyCache[cardKey] = { ...historyCache[oldKey] };
-      // 旧キーを削除（クリーンアップ）
-      delete historyCache[oldKey];
-      return historyCache[cardKey];
-    }
-  }
-  return null;
-}
-
-// 【更新】重み計算ロジック（自動マイグレーション対応版）
 function calcWeight(cardKey){
-  const h = getHistoryRecord(cardKey); // 旧キーからの救出をインターセプト
-  
-  if(!h||(h.ok||0)+(h.ng||0)===0) return 8; // 未出題：中優先
+  const h=historyCache[cardKey];
+  if(!h||(h.ok||0)+(h.ng||0)===0) return 8; 
   const streak=h.streak||0;
-  if(streak>=5) return 0.3; // 連続○5回：極低
-  if(streak>=3) return 1.0; // 連続○3回：低
+  if(streak>=5) return 0.3; 
+  if(streak>=3) return 1.0; 
   let w=10+(h.ng||0)*1.5;
   if(h.lastNg){
     const hoursAgo=(Date.now()-h.lastNg)/3600000;
-    if(hoursAgo<24) w*=3;       // 24時間以内の×：3倍
-    else if(hoursAgo<72) w*=2;  // 3日以内：2倍
-    else if(hoursAgo<168) w*=1.5; // 7日以内：1.5倍
+    if(hoursAgo<24) w*=3;       
+    else if(hoursAgo<72) w*=2;  
+    else if(hoursAgo<168) w*=1.5; 
   }
   return Math.max(0.1,w);
 }
@@ -1660,11 +1689,11 @@ function weightedShuffle(cards){
   return mapped.map(x => x.card);
 }
 
-// ===================== KEYBOARD =====================
+// ===================== KEYBOARD CONTROL =====================
 document.addEventListener('keydown',e=>{
   if(e.target.tagName==='INPUT')return;
-if(e.code==='Space'){e.preventDefault();reveal();}
-  else if(e.code==='KeyH'){e.preventDefault();showCardHint();} // Hキーでヒント表示
+  if(e.code==='Space'){e.preventDefault();reveal();}
+  else if(e.code==='KeyH'){e.preventDefault();showCardHint();} 
   else if(e.code==='ArrowRight')judge(true);
   else if(e.code==='ArrowLeft')judge(false);
   else if(e.code==='ArrowUp'){e.preventDefault();replay();}
