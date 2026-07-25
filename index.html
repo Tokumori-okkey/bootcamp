@@ -653,7 +653,7 @@ function startConfidenceCapDeck(shuffle) {
     c.key = c.key || makeCardKey(c);
   });
 
-  let layerA = []; // 弱点層 (Streak < 3 or 新規)
+  let layerA = []; // 弱点層 (Streak < 3)
   let layerB = []; // 確実層 (Streak >= 3)
 
   cards.forEach(c => {
@@ -670,11 +670,9 @@ function startConfidenceCapDeck(shuffle) {
   let limit = parseInt(limitInput ? limitInput.value : 50) || 50;
   limit = Math.max(5, Math.min(limit, 1000));
 
-  // 目標分割数 (層A=30%, 層B=70%)
   let targetACount = Math.round(limit * 0.3);
   let targetBCount = limit - targetACount;
 
-  // 各層を論理ソート
   layerA.sort((a, b) => calcWeight(b.key) - calcWeight(a.key));
   layerB.sort((a, b) => {
     const hA = historyCache[a.key] || { streak: 0 };
@@ -685,7 +683,6 @@ function startConfidenceCapDeck(shuffle) {
   let selectedA = layerA.slice(0, targetACount);
   let selectedB = layerB.slice(0, targetBCount);
 
-  // フォールバック（足りない方を自動補完）
   if (selectedA.length < targetACount) {
     let needed = targetACount - selectedA.length;
     selectedB = layerB.slice(0, targetBCount + needed);
@@ -697,7 +694,6 @@ function startConfidenceCapDeck(shuffle) {
 
   let finalDeck = [...selectedA, ...selectedB].slice(0, limit);
 
-  // Confidence Cap 統計初期化
   isConfidenceCapSession = true;
   sessionCurrentStreak = 0;
   sessionMaxStreak = 0;
@@ -705,6 +701,15 @@ function startConfidenceCapDeck(shuffle) {
   const widget = document.getElementById('confStreakWidget');
   if (widget) widget.style.display = 'block';
   updateConfStreakUI();
+
+  // ★追加：開発監査用ログ（F12デベロッパーツールでリアルタイム確認可能）
+  console.log(`[Confidence Cap 監査] 選択範囲総数: ${cards.length}枚 | 分類A(弱点): ${layerA.length}枚 | 分類B(確実): ${layerB.length}枚`);
+  console.log(`[Confidence Cap 編成] 出題A(弱点): ${selectedA.length}枚 / 出題B(確実): ${selectedB.length}枚 (Limit: ${limit})`);
+
+  // ★追加：画面トースト表示（お父様がその場で出題内訳を目視確認可能）
+  setTimeout(() => {
+    toastMsg(`🛡️ 弱点層(A): ${selectedA.length}枚 / 確実層(B): ${selectedB.length}枚 で編成完了`);
+  }, 400);
 
   const label = shuffle ? '🛡️ Confidence Cap (シャッフル)' : '🛡️ Confidence Cap (順)';
   const d = {
@@ -1112,6 +1117,18 @@ function renderCard(){
     hintLbl.textContent = isEJ ? '🇺🇸 → 🇯🇵　タップ or Space で答えを見る' : '🇯🇵 → 🇺🇸　タップ or Space で答えを見る';
   }
   
+  // ★修正：問題表示中の左スピーカーボタンの音声を動的にスワップ
+  const spkLeftBtn = document.querySelector('.spk-j');
+  if (spkLeftBtn) {
+    if (isEJ) {
+      spkLeftBtn.onclick = (e) => { e.stopPropagation(); spkE(); };
+      spkLeftBtn.title = "英語";
+    } else {
+      spkLeftBtn.onclick = (e) => { e.stopPropagation(); spkJ(); };
+      spkLeftBtn.title = "日本語";
+    }
+  }
+
   document.getElementById('cTag').textContent=c.tag;
   document.getElementById('cSub').textContent=c.sub;
   document.getElementById('enWrap').className='en-wrap';
@@ -1137,10 +1154,23 @@ function reveal(){
   document.getElementById('mainCard').style.cursor='default';
   
   const isEJ = (curApp === 'kinfure' && studyDirection === 'ej');
+  
+  // ★修正：回答表示後の右スピーカーボタンの音声を動的にスワップ
+  const spkRightBtn = document.getElementById('spkEBtn');
+  if (spkRightBtn) {
+    if (isEJ) {
+      spkRightBtn.onclick = (e) => { e.stopPropagation(); spkJ(); };
+      spkRightBtn.title = "日本語";
+    } else {
+      spkRightBtn.onclick = (e) => { e.stopPropagation(); spkE(); };
+      spkRightBtn.title = "英語";
+    }
+  }
+
   if (isEJ) {
-    spkJ(); 
+    spkJ(); // EJモード時は答えの「日本語」を自動発音
   } else {
-    spkE(); 
+    spkE(); // JEモード時は答えの「英語」を自動発音
   }
 }
 
