@@ -194,6 +194,26 @@ kbd{background:var(--sur);border:1px solid var(--bdr);border-radius:4px;padding:
 @keyframes bomb-flash{0%,100%{background:var(--card);}50%{background:rgba(224,80,80,0.4);}}
 .card.bomb-explode{animation:bomb-flash 0.12s ease 4;}
 .contrast-info{font-family:"JetBrains Mono",monospace;font-size:.58rem;color:var(--blu);margin-top:4px;}
+
+  /* トースト（通知ポップアップ）のスタイル */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 120px;
+  transform: translateX(-50%);
+  background: #12121a;
+  border: 2px solid var(--bdr);
+  color: var(--txt);
+  padding: 10px 20px;
+  border-radius: 999px;
+  z-index: 2000;
+  display: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  border-color: var(--grn); /* 正常編成時はグリーンに光らせます */
+  animation: fi .25s ease;
+}
 </style>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
@@ -1226,6 +1246,18 @@ function updStats(){
   document.getElementById('sRem').textContent=t-d;
 }
 
+  // トーストメッセージ制御関数
+function toastMsg(t) {
+  const toast = document.getElementById('toast');
+  if (toast) {
+    toast.textContent = t;
+    toast.style.display = 'block';
+    setTimeout(() => {
+      toast.style.display = 'none';
+    }, 2500); // 2.5秒間表示したあと自動で消します
+  }
+}
+  
 function showComplete(){
   window.speechSynthesis.cancel();clearTimeout(aTimer);clearCD();clearBomb();
   isAuto=false;document.getElementById('autoTgl').checked=false;
@@ -1754,5 +1786,7 @@ document.addEventListener('keydown',e=>{
     <button class="btn-guest" onclick="hideAuthModal()">ゲストとして使う（履歴は保存されません）</button>
   </div>
 </div>
+  <!-- トースト表示用コンテナ -->
+<div class="toast" id="toast"></div>
 </body>
 </html>
